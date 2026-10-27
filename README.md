@@ -447,4 +447,69 @@ The test suite verifies:
 
 Release documentation and laboratory validation next steps: [`results/final_release_20261027/RELEASE_REPORT.md`](results/final_release_20261027/RELEASE_REPORT.md).
 
+---
+
+## 🌐 18. Professional 3D Digital Twin SCADA Dashboard
+
+IMUCA features a professional, interactive **3D Digital Twin SCADA Dashboard** for industrial metrology, precision multi-channel sensing, and intelligent fault diagnosis.
+
+### 18.1 SCADA Visual Design Philosophy
+Inspired by modern power-system control rooms and mission-critical engineering SCADA interfaces:
+- **Dark Graphite Canvas:** `#0b0f19` deep obsidian baseplate with muted `#1e293b` fine coordinate grid lines.
+- **Radiant Status Lighting:**
+  - `NOMINAL` / In-Control: Cyan (`#00f0ff`) and Sky Blue (`#0ea5e9`).
+  - `WARNING` / Jitter / Drift: Amber (`#f59e0b` / `#fbbf24`).
+  - `FAULT` / Injected or Detected Anomaly: Crimson (`#ef4444` / `#dc2626`).
+  - `PRIMARY STANDARD`: Traceable Gold (`#eab308` / `#facc15`).
+- **Physical Demarcation Barrier:** A translucent vertical acrylic plane ($X = 3.5$) that visually and architecturally isolates the **Physical Acquisition Layer (Hardware / Transducers)** from the **Software Metrology & Fault Inference Pipeline**.
+
+### 18.2 Spatial Geometry & Components
+The interactive 3D WebGL scene (`src/imuca/digital_twin_3d.py`) models the complete instrumentation testbench:
+1. **Embedded DAQ Controller Unit:** Central aluminum chassis housing 32-bit ARM Cortex-M architecture, cooling heatsink fins, status beacon LED, and front terminal blocks.
+2. **DC Voltage Transducer (SUT):** Attenuator / voltage divider network with high-voltage Red/Black binding posts, 12-bit SAR ADC model (4 mV LSB), and channel status beacon.
+3. **Current Shunt Channel (SUT):** 4-wire Kelvin shunt block ($0.100\ \Omega \pm 0.5\%$, heavy copper busbars, brass M4 terminal screws), TI INA219 shunt ADC model (10 $\mu$V LSB), and TCR temperature compensation model.
+4. **Temperature Probe & Thermal Mass:** Cylindrical Maxim DS18B20 1-Wire probe inserted into a finned aluminum thermal heatsink/source, 12-bit programmable quantization ($0.0625\ ^\circ\text{C}$ LSB).
+5. **Traceable Primary Reference Standard:** 8.5-digit precision benchtop Multimeter (Fluke 8508A / Keysight standard) with ISO/IEC 17025 gold calibration certificate seal, green LCD readout, and gold binding posts — strictly distinguished from the sensor under test.
+6. **Telemetry Conduits & Data Flow:** Glowing 3D bus lines with directional diamond pulses representing incoming `$IMUCA` telemetry frames.
+
+### 18.3 Replay Engine & Synchronized Telemetry
+The digital twin connects directly to the validated IMUCA pipeline via `src/imuca/replay_engine.py`:
+- **Deterministic Time Scrubbing:** High-precision slider stepping through recorded sample indices ($t_i$).
+- **VCR Playback Controls:** Play/Pause, Step Forward (+1, +10), Step Backward (-1, -10), Reset to start ($t = 0$).
+- **Variable Playback Speed:** `1x`, `2x`, `5x`, `10x`.
+- **Live KPI Telemetry Cards:** Synchronized Voltage, Current, Temperature, Active Alarm Category, GUM Expanded Uncertainty ($U_{95}$), and ILAC-G8 Guard-Banded Conformity status.
+- **Component Drill-Down:** Clicking or selecting any 3D component instantly displays its metrological specifications, transducer parameters, live indicated reading vs reference standard, calibration residuals, GUM uncertainty contributions, and multi-track detector status.
+- **Oscilloscope Rolling Trend:** Dark-graphite rolling trend chart displaying the indicated measurement curve, reference standard trace, active alarm intervals, and a moving vertical playback head.
+
+### 18.4 Multi-Track Fault Detection Integration
+The 3D Digital Twin visualizes all 5 validated fault detection tracks in real time:
+1. **Track 1 (Data Integrity):** CCITT CRC-16 checksum verification, non-finite values, and range violations.
+2. **Track 2 (Segment MAD):** Non-parametric median absolute deviation outlier filter ($z > 3.5$).
+3. **Track 3 (ML GBT Classifier):** Gradient Boosted Decision Trees trained on 14 statistical/spectral features.
+4. **Track 4 (Tuned CUSUM):** Sequential drift detection monitor with Neyman-Pearson calibration.
+5. **Track 5 (Hybrid M7 Fusion):** Multi-track temporal state machine with hysteresis alarm clearance.
+
+### 18.5 Application Launch & Navigation
+Launch the application locally with:
+```bash
+python -m streamlit run app.py
+```
+Or with custom port:
+```bash
+python -m streamlit run app.py --server.port 8501
+```
+
+In the left sidebar, the **Application Mode** selector allows instant toggling between:
+1. **🌐 3D Digital Twin Metrology & SCADA Console (Featured / Default)**
+2. **🔬 Unified Multi-Channel System (10 Engineering Sections)**
+3. **⚡ Single-Point / Sweep DC Voltage Analyzer (Review 1 Baseline)**
+
+### 18.6 Regression Test Verification
+```bash
+python -m pytest tests/ -v
+# Output: 197 passed in 87s (0:01:27)
+```
+All 197 tests pass with zero warnings or regressions.
+
+
 

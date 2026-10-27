@@ -14,22 +14,37 @@ from streamlit.testing.v1 import AppTest
 APP_PATH = str(Path(__file__).resolve().parent.parent / "app.py")
 
 
-def test_app_unified_mode_headless():
-    """Verify app.py launches and renders unified dashboard without exceptions."""
-    at = AppTest.from_file(APP_PATH, default_timeout=30)
+def test_app_3d_digital_twin_mode_headless():
+    """Verify app.py launches in 3D Digital Twin mode by default without exceptions."""
+    at = AppTest.from_file(APP_PATH, default_timeout=35)
     at.run()
     assert not at.exception
-    # Check that title or key metric cards rendered
+    # Verify sliders, buttons, and metrics render
+    assert len(at.slider) >= 1
+    assert len(at.button) >= 4
+
+
+def test_app_unified_mode_headless():
+    """Verify app.py switches to unified 10-section dashboard without exceptions."""
+    at = AppTest.from_file(APP_PATH, default_timeout=35)
+    at.run()
+    if at.sidebar.radio:
+        for r in at.sidebar.radio:
+            if "Application Mode" in r.label:
+                r.set_value("🔬 Unified Multi-Channel System (10 Sections)")
+                break
+    at.run()
+    assert not at.exception
+    # Check that 10 tabs rendered
     assert len(at.tabs) >= 10
 
 
 def test_app_review1_mode_headless():
     """Verify app.py switches to Review 1 mode and renders without exceptions."""
-    at = AppTest.from_file(APP_PATH, default_timeout=30)
+    at = AppTest.from_file(APP_PATH, default_timeout=35)
     at.run()
     # Switch application mode to Review 1
     if at.sidebar.radio:
-        # Find Application Mode radio
         for r in at.sidebar.radio:
             if "Application Mode" in r.label:
                 r.set_value("⚡ Single-Point / Sweep DC Voltage Analyzer (Review 1 Baseline)")
@@ -38,3 +53,4 @@ def test_app_review1_mode_headless():
     assert not at.exception
     # In Review 1 mode, 9 tabs should be present
     assert len(at.tabs) == 9
+

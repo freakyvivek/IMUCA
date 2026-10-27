@@ -146,6 +146,7 @@ st.markdown("""
 
 
 from src.imuca.unified_dashboard import render_unified_dashboard
+from src.imuca.digital_twin_dashboard import render_digital_twin_dashboard
 
 
 # =============================================================================
@@ -154,23 +155,37 @@ from src.imuca.unified_dashboard import render_unified_dashboard
 st.sidebar.markdown("### 🔬 IMUCA Controls")
 st.sidebar.markdown("**Intelligent Measurement Uncertainty & Calibration Analyzer**")
 
+APP_MODES = [
+    "🌐 3D Digital Twin Metrology & SCADA Console",
+    "🔬 Unified Multi-Channel System (10 Sections)",
+    "⚡ Single-Point / Sweep DC Voltage Analyzer (Review 1 Baseline)"
+]
+
 if "dashboard_mode" not in st.session_state:
-    st.session_state["dashboard_mode"] = "🔬 Unified Multi-Channel System (10 Sections)"
+    st.session_state["dashboard_mode"] = APP_MODES[0]
+
+cur_mode = st.session_state.get("dashboard_mode", APP_MODES[0])
+default_idx = 0
+for idx, m_opt in enumerate(APP_MODES):
+    if m_opt[:3] == cur_mode[:3]:
+        default_idx = idx
+        break
 
 dashboard_mode = st.sidebar.radio(
     "Application Mode",
-    [
-        "🔬 Unified Multi-Channel System (10 Sections)",
-        "⚡ Single-Point / Sweep DC Voltage Analyzer (Review 1 Baseline)"
-    ],
-    index=0 if st.session_state["dashboard_mode"].startswith("🔬") else 1,
-    help="Toggle between the Unified Multi-Channel Autonomous Dashboard and the Review 1 DC Voltage Baseline."
+    APP_MODES,
+    index=default_idx,
+    help="Toggle between the 3D Digital Twin SCADA Console, Unified Multi-Channel Dashboard, and Review 1 DC Baseline."
 )
 st.session_state["dashboard_mode"] = dashboard_mode
 
-if dashboard_mode.startswith("🔬"):
+if dashboard_mode.startswith("🌐"):
+    render_digital_twin_dashboard()
+    st.stop()
+elif dashboard_mode.startswith("🔬"):
     render_unified_dashboard()
     st.stop()
+
 
 # Preset selector buttons
 st.sidebar.markdown("#### ⚡ Quick Presets")

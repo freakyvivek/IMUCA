@@ -384,3 +384,167 @@ def plot_sampling_interval_jitter(df: pd.DataFrame) -> go.Figure:
         height=280
     )
     return fig
+
+
+def plot_digital_twin_rolling_timeseries(
+    df: pd.DataFrame,
+    measurand: str,
+    unit: str,
+    current_idx: int,
+    window_samples: int = 120,
+    alarm_mask: Optional[np.ndarray] = None,
+    ground_truth_mask: Optional[np.ndarray] = None
+) -> go.Figure:
+    """
+    Render a synchronized, dark-graphite oscilloscope rolling trend chart
+    for the 3D Digital Twin, showing indicated value, reference standard,
+    active alarm intervals, and a moving playback time cursor.
+    """
+    if df.empty or measurand not in df.columns:
+        fig = go.Figure()
+        fig.update_layout(
+            paper_bgcolor="#0b0f19",
+            plot_bgcolor="#0b0f19",
+            font=dict(color="#94a3b8"),
+            title="Awaiting telemetry stream..."
+        )
+        return fig
+
+    n_total = len(df)
+    cur_idx = max(0, min(current_idx, n_total - 1))
+
+    t_s = df["elapsed_ms"].to_numpy(dtype=float) / 1000.0 if "elapsed_ms" in df.columns else np.arange(n_total, dtype=float)
+    vals = df[measurand].to_numpy(dtype=float)
+
+    # Reference column detection
+    ref_col = None
+    for cand in [f"ref_{measurand}", f"reference_{measurand}", "Reference_V", "reference"]:
+        if cand in df.columns:
+            ref_col = cand
+            break
+    refs = df[ref_col].to_numpy(dtype=float) if ref_col is not None else None
+
+    # Rolling window slicing
+    start_idx = max(0, cur_idx - window_samples + 1)
+    end_idx = min(n_total, cur_idx + max(15, window_samples // 4))
+
+    win_t = t_s[start_idx:end_idx]
+    win_vals = vals[start_idx:end_idx]
+    win_refs = refs[start_idx:end_idx] if refs is not None else None
+
+    fig = go.Figure()
+
+    # Measurand Color Selection
+    color_map = {
+        "voltage": "#00f0ff",      # Radiant Cyan
+        "current": "#10b981",      # Emerald
+        "temperature": "#f59e0b"   # Amber
+    }
+    m_base = measurand.split("_")[0].lower()
+    line_color = color_map.get(m_base, "#00f0ff")
+
+    # 1. Reference Standard Line (Gold dashed)
+    if win_refs is not None:
+        fig.add_trace(go.Scatter(
+            x=win_t,
+            y=win_refs,
+            mode="lines",
+            name=f"Reference Standard ({unit})",
+            line=dict(color="#facc15", width=2.0, dash="dash"),
+            hoverinfo="x+y"
+        ))
+
+    # 2. Indicated Measurement Trace
+    fig.add_trace(go.Scatter(
+        x=win_t,
+        y=win_vals,
+        mode="lines+markers",
+        name=f"Indicated {measurand} ({unit})",
+        line=dict(color=line_color, width=2.5),
+        marker=dict(size=4, color=line_color),
+        hoverinfo="x+y"
+    ))
+
+    # 3. Active Alarm Overlay (Red markers/spans)
+    if alarm_mask is not None and len(alarm_mask) == n_total:
+        win_alarms = alarm_mask[start_idx:end_idx]
+        if np.any(win_alarms):
+            alarm_indices = np.flatnonzero(win_alarms)
+            fig.add_trace(go.Scatter(
+                x=win_t[alarm_indices],
+                y=win_vals[alarm_indices],
+                mode="markers",
+                name="Active Detector Alarm",
+                marker=dict(color="#ef4444", size=8, symbol="diamond-open", line=dict(width=2, color="#ef4444")),
+                hoverinfo="x+y"
+            ))
+
+    # 4. Optional Ground-Truth Injected Overlay (Purple)
+    if ground_truth_mask is not None and len(ground_truth_mask) == n_total:
+        win_gt = ground_truth_mask[start_idx:end_idx]
+        if np.any(win_gt):
+            gt_indices = np.flatnonzero(win_gt)
+            fig.add_trace(go.Scatter(
+                x=win_t[gt_indices],
+                y=win_vals[gt_indices],
+                mode="markers",
+                name="Injected Fault [Offline GT]",
+                marker=dict(color="#a855f7", size=6, symbol="cross"),
+                hoverinfo="x+y"
+            ))
+
+    # 5. Current Playback Time Cursor (Vertical glowing line)
+    cur_t = float(t_s[cur_idx])
+    cur_val = float(vals[cur_idx])
+    fig.add_vline(
+        x=cur_t,
+        line_width=2,
+        line_dash="solid",
+        line_color="#ffffff",
+        annotation_text=f"t = {cur_t:.3f} s",
+        annotation_position="top left",
+        annotation_font=dict(color="#ffffff", size=10, family="monospace")
+    )
+    fig.add_trace(go.Scatter(
+        x=[cur_t],
+        y=[cur_val],
+        mode="markers",
+        name="Current Playback Head",
+        marker=dict(size=10, color="#ffffff", line=dict(color="#00f0ff", width=2)),
+        hoverinfo="x+y"
+    ))
+
+    fig.update_layout(
+        title=dict(
+            text=f"<b>Live Oscilloscope Trend: {measurand} [{unit}] (t = {cur_t:.3f} s)</b>",
+            font=dict(color="#f8fafc", size=13),
+            x=0.02
+        ),
+        xaxis=dict(
+            title=dict(text="Elapsed Time (s)", font=dict(color="#94a3b8", size=11)),
+            gridcolor="#1e293b",
+            zerolinecolor="#334155",
+            tickfont=dict(color="#94a3b8")
+        ),
+        yaxis=dict(
+            title=dict(text=f"{measurand} ({unit})", font=dict(color="#94a3b8", size=11)),
+            gridcolor="#1e293b",
+            zerolinecolor="#334155",
+            tickfont=dict(color="#94a3b8")
+        ),
+        paper_bgcolor="#0b0f19",
+        plot_bgcolor="#0b0f19",
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1,
+            font=dict(color="#cbd5e1", size=10)
+        ),
+        margin=dict(l=50, r=30, t=50, b=40),
+        height=280
+    )
+
+    return fig
+
