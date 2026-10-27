@@ -1,0 +1,75 @@
+{
+  "MAL_zero_byte.csv": {
+    "description": "Zero-byte file.",
+    "expect_read_error": true,
+    "expect_valid": false
+  },
+  "MAL_header_only.csv": {
+    "description": "Header without records.",
+    "expect_valid": false,
+    "expect_issue_codes": [
+      "EMPTY_DATASET"
+    ]
+  },
+  "MAL_non_numeric_value.csv": {
+    "description": "Non-numeric measurand string.",
+    "expect_valid": false,
+    "expect_issue_codes": [
+      "NON_NUMERIC"
+    ]
+  },
+  "MAL_non_finite.csv": {
+    "description": "Infinite measurand values.",
+    "expect_valid": false,
+    "expect_issue_codes": [
+      "NON_FINITE"
+    ]
+  },
+  "MAL_backwards_time.csv": {
+    "description": "elapsed_ms decreases.",
+    "expect_valid": false,
+    "expect_issue_codes": [
+      "MONOTONICITY_VIOLATION"
+    ]
+  },
+  "MAL_duplicate_sequence.csv": {
+    "description": "Repeated sequence number.",
+    "expect_valid": false,
+    "expect_issue_codes": [
+      "DUPLICATE"
+    ]
+  },
+  "MAL_bad_timestamp.csv": {
+    "description": "Unparseable timestamp.",
+    "expect_valid": false,
+    "expect_issue_codes": [
+      "INVALID_TIMESTAMP"
+    ]
+  },
+  "MAL_out_of_range.csv": {
+    "description": "Physically implausible value.",
+    "expect_valid": false,
+    "expect_issue_codes": [
+      "OUT_OF_RANGE"
+    ]
+  },
+  "MAL_sequence_gap.csv": {
+    "description": "Sequence jump (warning, not rejection).",
+    "expect_valid": true,
+    "expect_issue_codes": [
+      "SEQUENCE_GAP"
+    ]
+  },
+  "MAL_invalid_status.csv": {
+    "description": "Non-OK status (warning at schema level).",
+    "expect_valid": true,
+    "expect_issue_codes": [
+      "SENSOR_STATUS_WARNING"
+    ]
+  },
+  "MAL_missing_sequence_column.csv": {
+    "description": "No sequence column (ingestion auto-generates and records it).",
+    "expect_valid": true,
+    "expect_auto_sequence": true
+  }
+}

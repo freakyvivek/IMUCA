@@ -1,0 +1,154 @@
+{
+  "spec_id": "IMUCA_ML_BENCHMARK_SPEC_V1",
+  "status": "SPECIFICATION ONLY - no models are trained or deployed in this milestone",
+  "dataset_suite": "IMUCA_SYNTH_SUITE_V2",
+  "column_role_policy": {
+    "allowed_feature_roles": ["observation", "time", "quality_flag"],
+    "conditionally_allowed_feature_roles": {
+      "reference_observation": "Only in tasks whose 'reference_access' is not 'none', and only causally (values at or before the prediction time, at the documented availability schedule)."
+    },
+    "forbidden_feature_roles": ["ground_truth", "derived_error", "label", "partition", "provenance", "identifier", "protocol"],
+    "grouping_columns_not_features": ["experiment_id", "scenario_id", "device_id", "run_id"],
+    "notes": "Protocol columns (operating_condition_id, setpoint_index, protocol_phase) are excluded as features because in simulation the planned set-point equals the true value. dq_flags (role quality_flag) is derived from observable fields only and may be used as a feature or as a pre-filter."
+  },
+  "split_policy": {
+    "unit": "experiment_id (run)",
+    "train": "calibration",
+    "model_selection": "validation",
+    "final_evaluation": "test",
+    "rules": [
+      "No experiment_id may contribute rows to more than one partition.",
+      "Scalers, encoders, thresholds and feature statistics are fitted on the calibration partition only.",
+      "Hyper-parameters are chosen on the validation partition only.",
+      "The test partition is evaluated once per frozen model; results on it must not feed back into model or feature choices.",
+      "Within-run random splitting is forbidden (adjacent samples are correlated through dwell, lag and thermal state).",
+      "All window features are causal: they use only samples with elapsed_ms <= the prediction time."
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "R1_VOLTAGE_RESIDUAL_CORRECTION",
+      "type": "regression",
+      "datasets": ["VOLT_SWEEP_LINEAR", "VOLT_SWEEP_NONLINEAR"],
+      "unit_of_prediction": "single record",
+      "target": {"name": "reference_correction", "definition": "reference_voltage_V - voltage_V", "source_columns": ["reference_voltage_V", "voltage_V"]},
+      "evaluation_targets": ["true_voltage_V - corrected_voltage", "reference_voltage_V - corrected_voltage"],
+      "reference_access": "target_only",
+      "features": ["voltage_V", "environmental_temperature_C"],
+      "derived_features": [],
+      "model_scope": "one model per device_id",
+      "row_filter": "status == 'OK' and voltage_V finite",
+      "baselines": ["identity (uncalibrated)", "CalibrationEngine.fit_linear", "CalibrationEngine.select_best_model (F-test + BIC, degree <= 3)"],
+      "candidate_models": ["ridge regression on polynomial features", "Gaussian-process regression (gives predictive uncertainty)", "gradient-boosted trees (shallow, monotone constraint on voltage_V)"],
+      "metrics": ["bias", "MAE", "RMSE", "max |error|", "per operating_condition_id breakdown (grid_A, grid_B_interleaved, extrapolation_above_cal_range)", "empirical coverage of stated prediction interval vs true value"]
+    },
+    {
+      "task_id": "R2_CURRENT_RESIDUAL_CORRECTION",
+      "type": "regression",
+      "datasets": ["CURR_SWEEP_AMBIENT", "CURR_SWEEP_SELFHEAT", "CURR_LOAD_STEPS"],
+      "unit_of_prediction": "single record",
+      "target": {"name": "reference_correction", "definition": "reference_current_mA - current_mA", "source_columns": ["reference_current_mA", "current_mA"]},
+      "evaluation_targets": ["true_current_mA - corrected_current", "reference_current_mA - corrected_current"],
+      "reference_access": "target_only",
+      "features": ["current_mA", "shunt_voltage_mV", "environmental_temperature_C"],
+      "derived_features": [
+        {"name": "ewm_current_squared_tau45", "definition": "causal exponentially weighted mean of current_mA^2 with time constant 45 s", "source_columns": ["current_mA", "elapsed_ms"]},
+        {"name": "ewm_current_squared_tau180", "definition": "causal exponentially weighted mean of current_mA^2 with time constant 180 s", "source_columns": ["current_mA", "elapsed_ms"]},
+        {"name": "seconds_since_last_level_change", "definition": "causal time since |delta current_mA| last exceeded 50 mA", "source_columns": ["current_mA", "elapsed_ms"]}
+      ],
+      "model_scope": "one model per device_id; ambient held-out test condition reported separately",
+      "row_filter": "status == 'OK' and current_mA finite",
+      "baselines": ["identity (uncalibrated)", "CalibrationEngine.fit_linear", "CalibrationEngine.select_best_model (degree <= 3)"],
+      "candidate_models": ["ridge regression with load-history features", "gradient-boosted trees with load-history features", "small first-order thermal grey-box model (physics-informed) fitted on calibration runs"],
+      "metrics": ["bias", "MAE", "RMSE", "max |error|", "error during first 3 thermal time constants after a load step", "per operating_condition_id breakdown (incl. _ambient30C, _descending)"]
+    },
+    {
+      "task_id": "R3_TEMPERATURE_DRIFT_PREDICTION",
+      "type": "regression / forecasting",
+      "datasets": ["TEMP_DRIFT", "FD_TEMP_GRADUAL_DRIFT", "FD_TEMP_NONE"],
+      "unit_of_prediction": "record at time t, forecasting the drift component at t + horizon (horizons 0 s, 300 s, 600 s)",
+      "target": {"name": "drift_component", "definition": "true_drift_component at t + horizon", "source_columns": ["true_drift_component"]},
+      "evaluation_targets": ["true_drift_component"],
+      "reference_access": "sparse_causal_checkpoints",
+      "reference_schedule": "one reference comparison every 300 s; the feature value is the most recent (temperature_C - reference_temperature_C) at or before t",
+      "features": ["temperature_C", "environmental_temperature_C", "elapsed_ms"],
+      "derived_features": [
+        {"name": "last_checkpoint_error", "definition": "temperature_C - reference_temperature_C at the most recent 300 s checkpoint <= t", "source_columns": ["temperature_C", "reference_temperature_C", "elapsed_ms"]},
+        {"name": "checkpoint_error_slope", "definition": "least-squares slope of past checkpoint errors (<= t)", "source_columns": ["temperature_C", "reference_temperature_C", "elapsed_ms"]}
+      ],
+      "model_scope": "pooled across runs of DUT_T01",
+      "oracle_note": "true_drift_component is a simulation-only target. In a physical deployment the target would be the reference-based error at a later checkpoint; drift is not separable from a true process change without a reference.",
+      "row_filter": "status == 'OK' and temperature_C finite",
+      "baselines": ["analyze_temporal_drift linear slope extrapolation on checkpoint errors", "last checkpoint error carried forward"],
+      "candidate_models": ["Kalman filter / local linear trend state-space model", "Gaussian-process regression on checkpoint errors"],
+      "metrics": ["MAE and RMSE of predicted drift component per horizon", "drift-rate estimation error", "calibration of prediction intervals"]
+    },
+    {
+      "task_id": "C1_FAULT_DETECTION",
+      "type": "binary classification (per record) + event detection",
+      "datasets": ["FD_*", "VOLT_INTEGRITY", "CURR_INTEGRITY", "TEMP_INTEGRITY"],
+      "unit_of_prediction": "record (online, causal)",
+      "target": {"name": "is_injected_fault", "definition": "is_injected_fault", "source_columns": ["is_injected_fault"]},
+      "evaluation_targets": ["is_injected_fault", "label_fault_event_id (event-level)"],
+      "reference_access": "none",
+      "tracks": {"C1a_signal_only": "reference columns forbidden", "C1b_with_reference": "reference_* allowed causally (same-record value) - reported separately"},
+      "features": ["voltage_V", "current_mA", "temperature_C", "shunt_voltage_mV", "status", "sequence_number", "elapsed_ms", "environmental_temperature_C", "dq_flags"],
+      "derived_features": [
+        {"name": "delta_value", "definition": "value[k] - value[k-1]", "source_columns": ["voltage_V", "current_mA", "temperature_C"]},
+        {"name": "causal_rolling_median_dev", "definition": "|value - rolling median of previous 31 samples| / rolling MAD", "source_columns": ["voltage_V", "current_mA", "temperature_C"]},
+        {"name": "run_length_identical", "definition": "number of consecutive identical readings ending at k", "source_columns": ["voltage_V", "current_mA", "temperature_C"]},
+        {"name": "delta_sequence", "definition": "sequence_number[k] - sequence_number[k-1]", "source_columns": ["sequence_number"]},
+        {"name": "delta_time_s", "definition": "(elapsed_ms[k] - elapsed_ms[k-1]) / 1000", "source_columns": ["elapsed_ms"]}
+      ],
+      "model_scope": "per measurand",
+      "row_filter": "none (faulty records are the positives)",
+      "baselines": ["DataQualityAssessor (whole run)", "DataQualityAssessor applied per protocol segment"],
+      "candidate_models": ["gradient-boosted trees on causal window features", "isolation forest trained on fault-free calibration runs", "one-class model per measurand", "temporal convolutional network (only if validation shows benefit over trees)"],
+      "metrics": ["precision", "recall", "F1", "false-alarm rate", "missed-detection rate", "event-level recall", "detection delay (samples)", "false alarms per hour on FD_*_NONE runs", "per-class recall"]
+    },
+    {
+      "task_id": "C2_DRIFT_DETECTION",
+      "type": "online change detection (run level)",
+      "datasets": ["VOLT_DRIFT", "CURR_DRIFT", "TEMP_DRIFT", "FD_VOLT_GRADUAL_DRIFT", "FD_CURR_GRADUAL_DRIFT", "FD_TEMP_GRADUAL_DRIFT", "FD_VOLT_NONE", "FD_CURR_NONE", "FD_TEMP_NONE"],
+      "unit_of_prediction": "alarm time per run",
+      "target": {"name": "drift_onset", "definition": "onset_elapsed_ms of the gradual_drift event (metadata fault_events); runs without such an event are negatives", "source_columns": ["label_fault_type"]},
+      "evaluation_targets": ["drift onset time", "drift rate"],
+      "reference_access": "sparse_causal_checkpoints",
+      "reference_schedule": "one reference comparison every 300 s",
+      "features": ["voltage_V", "current_mA", "temperature_C", "elapsed_ms", "status"],
+      "derived_features": [
+        {"name": "last_checkpoint_error", "definition": "observed - reference at the most recent 300 s checkpoint <= t", "source_columns": ["voltage_V", "current_mA", "temperature_C", "reference_voltage_V", "reference_current_mA", "reference_temperature_C", "elapsed_ms"]}
+      ],
+      "model_scope": "per measurand",
+      "row_filter": "status == 'OK' and value finite",
+      "baselines": ["analyze_temporal_drift (regression significance + CUSUM)"],
+      "candidate_models": ["Bayesian online change-point detection", "Page-Hinkley / tuned CUSUM on checkpoint errors", "state-space local-linear-trend with likelihood-ratio alarm"],
+      "metrics": ["run-level detection rate", "false-alarm rate on control runs", "detection delay (s)", "drift-rate estimation error"]
+    },
+    {
+      "task_id": "C3_ABNORMAL_MEASUREMENT_IDENTIFICATION",
+      "type": "multi-class classification (per record)",
+      "datasets": ["FD_*", "VOLT_INTEGRITY", "CURR_INTEGRITY", "TEMP_INTEGRITY"],
+      "unit_of_prediction": "record",
+      "target": {"name": "fault_class", "definition": "label_fault_type ('none' or fault class; multi-label when ';'-joined)", "source_columns": ["label_fault_type"]},
+      "evaluation_targets": ["label_fault_type"],
+      "reference_access": "none",
+      "features": ["voltage_V", "current_mA", "temperature_C", "shunt_voltage_mV", "status", "sequence_number", "elapsed_ms", "dq_flags"],
+      "derived_features": [
+        {"name": "same as C1_FAULT_DETECTION", "definition": "causal window features of C1", "source_columns": ["voltage_V", "current_mA", "temperature_C", "sequence_number", "elapsed_ms"]}
+      ],
+      "model_scope": "per measurand",
+      "row_filter": "none",
+      "baselines": ["rule mapping of DataQualityAssessor flags to classes (DUPLICATE_SEQ->duplicate_sequence, SEQ_GAP->communication_gap, STATUS->invalid_status, MISSING->missing_samples, NON_FINITE->non_finite, OUTLIER/ABRUPT_CHANGE->isolated_spike)"],
+      "candidate_models": ["gradient-boosted trees (multi-class)", "hierarchical classifier: observable-record faults by rules, signal faults by learned model"],
+      "metrics": ["macro-F1", "per-class precision/recall", "confusion matrix", "explicit report on the ambiguous classes (offset_shift, gain_change, gradual_drift, abrupt_change)"]
+    }
+  ],
+  "reproducibility": [
+    "Record dataset suite manifest SHA-256 of every CSV used.",
+    "Fix and record all model random seeds; report mean and spread over at least 5 seeds.",
+    "Record library versions (numpy, pandas, scipy, scikit-learn if used).",
+    "Store feature definitions as code under version control; no manual feature edits.",
+    "Report the conventional baseline from scripts/run_synthetic_benchmark.py alongside every ML result."
+  ]
+}

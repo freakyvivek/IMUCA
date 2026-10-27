@@ -1,0 +1,229 @@
+{
+  "current_mA": {
+    "calibration_models": {
+      "DUT_I11": {
+        "coefficients": [
+          -0.4128789932139689,
+          0.9965560310299848
+        ],
+        "type": "linear"
+      },
+      "DUT_I12": {
+        "coefficients": [
+          0.18896550723503935,
+          1.0010613448550454
+        ],
+        "type": "linear"
+      },
+      "DUT_I13": {
+        "coefficients": [
+          -0.7336525949850667,
+          1.0000006518749913,
+          -1.5675073551463278e-06
+        ],
+        "type": "polynomial_deg2"
+      }
+    },
+    "cusum": {
+      "h": 10,
+      "k": 1.0,
+      "mode": "segment",
+      "transition_exclusion": 135
+    },
+    "feature_floor": 0.07862673853403368,
+    "gbt_all": {
+      "params": {
+        "l2_regularization": 1.0,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "max_iter": 300
+      },
+      "threshold": 0.8685799122741177
+    },
+    "hybrid_settings": {
+      "cusum_baseline_fraction": 0.1,
+      "cusum_h": 10,
+      "cusum_k": 1.0,
+      "cusum_min_baseline": 30,
+      "cusum_min_series": 60,
+      "cusum_mode": "segment",
+      "episode_gap": 2,
+      "explain_window": 10,
+      "gbt_threshold": 0.9838174431417036,
+      "rebaseline_gap": 5,
+      "segment_mad_threshold": 7.0,
+      "segment_mode": "setpoint_blocks",
+      "stuck_alpha": 0.0001,
+      "stuck_mode": "rule",
+      "transition_exclusion": 135
+    },
+    "iforest": {
+      "params": {
+        "max_features": 1.0,
+        "max_samples": 256,
+        "n_estimators": 300
+      },
+      "threshold": 0.654010149912823
+    },
+    "targeted_gbt": {
+      "params": {
+        "l2_regularization": 1.0,
+        "learning_rate": 0.1,
+        "max_depth": 3,
+        "max_iter": 300
+      },
+      "threshold": 0.9838174431417036
+    }
+  },
+  "temperature_C": {
+    "calibration_models": {
+      "DUT_T11": {
+        "coefficients": [
+          -0.20603305679799688,
+          0.9980397283709627
+        ],
+        "type": "linear"
+      },
+      "DUT_T12": {
+        "coefficients": [
+          -0.30354760420042803,
+          0.9960281108134827
+        ],
+        "type": "linear"
+      },
+      "DUT_T13": {
+        "coefficients": [
+          0.14315264599672883,
+          0.997121396124628
+        ],
+        "type": "linear"
+      }
+    },
+    "cusum": {
+      "h": 10,
+      "k": 0.75,
+      "mode": "run",
+      "transition_exclusion": 120
+    },
+    "feature_floor": 0.016380570527924614,
+    "gbt_all": {
+      "params": {
+        "l2_regularization": 1.0,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "max_iter": 300
+      },
+      "threshold": 0.9230974471525721
+    },
+    "hybrid_settings": {
+      "cusum_baseline_fraction": 0.1,
+      "cusum_h": 10,
+      "cusum_k": 0.75,
+      "cusum_min_baseline": 30,
+      "cusum_min_series": 60,
+      "cusum_mode": "run",
+      "episode_gap": 2,
+      "explain_window": 10,
+      "gbt_threshold": 0.854291763554327,
+      "rebaseline_gap": 5,
+      "segment_mad_threshold": 7.0,
+      "segment_mode": "phase_blocks_stationary_only",
+      "stuck_alpha": 0.0001,
+      "stuck_mode": "gbt",
+      "transition_exclusion": 120
+    },
+    "iforest": {
+      "params": {
+        "max_features": 1.0,
+        "max_samples": 2048,
+        "n_estimators": 300
+      },
+      "threshold": 0.6130429214642394
+    },
+    "targeted_gbt": {
+      "params": {
+        "l2_regularization": 1.0,
+        "learning_rate": 0.1,
+        "max_depth": 3,
+        "max_iter": 300
+      },
+      "threshold": 0.854291763554327
+    }
+  },
+  "voltage_V": {
+    "calibration_models": {
+      "DUT_V11": {
+        "coefficients": [
+          -0.006163276873486362,
+          0.9979693579932085
+        ],
+        "type": "linear"
+      },
+      "DUT_V12": {
+        "coefficients": [
+          0.009828863259632642,
+          1.0017977067231532,
+          4.368114260386389e-05
+        ],
+        "type": "polynomial_deg2"
+      },
+      "DUT_V13": {
+        "coefficients": [
+          -0.015062428435491687,
+          0.9959742134466751
+        ],
+        "type": "linear"
+      }
+    },
+    "cusum": {
+      "h": 15,
+      "k": 0.5,
+      "mode": "segment",
+      "transition_exclusion": 5
+    },
+    "feature_floor": 0.0005241782568937627,
+    "gbt_all": {
+      "params": {
+        "l2_regularization": 1.0,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "max_iter": 300
+      },
+      "threshold": 0.9399698992615952
+    },
+    "hybrid_settings": {
+      "cusum_baseline_fraction": 0.1,
+      "cusum_h": 15,
+      "cusum_k": 0.5,
+      "cusum_min_baseline": 30,
+      "cusum_min_series": 60,
+      "cusum_mode": "segment",
+      "episode_gap": 2,
+      "explain_window": 10,
+      "gbt_threshold": 0.9830280256902346,
+      "rebaseline_gap": 5,
+      "segment_mad_threshold": 5.0,
+      "segment_mode": "phase_blocks",
+      "stuck_alpha": 0.0001,
+      "stuck_mode": "gbt",
+      "transition_exclusion": 5
+    },
+    "iforest": {
+      "params": {
+        "max_features": 1.0,
+        "max_samples": 256,
+        "n_estimators": 300
+      },
+      "threshold": 0.6440383347861777
+    },
+    "targeted_gbt": {
+      "params": {
+        "l2_regularization": 1.0,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "max_iter": 300
+      },
+      "threshold": 0.9830280256902346
+    }
+  }
+}

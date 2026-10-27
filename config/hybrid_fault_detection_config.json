@@ -1,0 +1,177 @@
+{
+  "experiment_id": "IMUCA_HYBRID_FAULT_DETECTION_V1",
+  "description": "Hybrid fault detector (integrity rules + segment-aware transient detector + targeted GBT / stuck rule + tuned CUSUM) compared with each component and the Milestone-4 detectors on the fresh v3 synthetic suite.",
+  "dataset_root": "data/synthetic_v3",
+  "dataset_config": "config/synthetic_suite_v3_config.json",
+  "random_seed": 20261208,
+  "measurands": [
+    "voltage_V",
+    "current_mA",
+    "temperature_C"
+  ],
+  "splits": {
+    "train": "calibration",
+    "selection": "validation",
+    "final_evaluation": "test (scored once, after settings are frozen)"
+  },
+  "transient_tolerance_samples": 2,
+  "persistent_event_window_samples": 60,
+  "episode_gap_samples": 2,
+  "true_alarm_tolerance_samples": 2,
+  "post_event_transient_samples": {
+    "voltage_V": 5,
+    "current_mA": 135,
+    "temperature_C": 210
+  },
+  "post_fault_aftermath_samples": 30,
+  "cusum_transition_exclusion_samples": {
+    "voltage_V": [
+      5
+    ],
+    "current_mA": [
+      45,
+      135
+    ],
+    "temperature_C": [
+      60,
+      120,
+      210
+    ]
+  },
+  "context_note": "Context windows for false-alarm reporting are fixed per measurand (temperature: 6 x the slowest assumed probe time constant of 35 s; current: 3 x the 45 s shunt thermal time constant). CUSUM transition-exclusion windows are candidates tuned on calibration+validation runs; they apply after protocol set-point changes into segments without an explicit settling phase. Neither uses device-specific simulation parameters.",
+  "individual_far_target": 0.005,
+  "gbt_all_grid": [
+    {
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    }
+  ],
+  "iforest_grid": [
+    {
+      "n_estimators": 300,
+      "max_samples": 256,
+      "max_features": 1.0
+    },
+    {
+      "n_estimators": 300,
+      "max_samples": 2048,
+      "max_features": 1.0
+    }
+  ],
+  "gbt_persistent": {
+    "grid": [
+      {
+        "max_depth": 3,
+        "learning_rate": 0.1,
+        "max_iter": 300,
+        "l2_regularization": 1.0
+      },
+      {
+        "max_depth": 6,
+        "learning_rate": 0.05,
+        "max_iter": 300,
+        "l2_regularization": 1.0
+      }
+    ],
+    "target_types": [
+      "offset_shift",
+      "gain_change",
+      "stuck_signal"
+    ],
+    "excluded_types": [
+      "isolated_spike",
+      "abrupt_change",
+      "gradual_drift"
+    ],
+    "persistent_types": [
+      "offset_shift",
+      "gain_change"
+    ],
+    "onset_window_samples": 30,
+    "monotone_increasing": [
+      "f_identical_run"
+    ],
+    "far_targets": [
+      0.001,
+      0.002,
+      0.005
+    ]
+  },
+  "stuck_rule_alpha": 0.0001,
+  "segment_modes": [
+    "setpoint_blocks",
+    "phase_blocks",
+    "phase_blocks_stationary_only"
+  ],
+  "stuck_modes": [
+    "gbt",
+    "rule",
+    "gbt_or_rule"
+  ],
+  "cusum": {
+    "k_grid": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "h_grid": [
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      15,
+      20
+    ],
+    "baseline_fraction": 0.1,
+    "min_baseline": 30,
+    "min_series": 60,
+    "min_arl0_multiple_of_longest_series": 10,
+    "selection_rule": "calibration+validation runs only: ARL0 (Siegmund) >= 10 x longest error series, zero alarms on signal-fault-free runs, zero pre-onset alarms on drift runs; then most drift runs detected, then lowest median delay, then largest ARL0. If no configuration has zero false alarms, the fewest false alarms wins first.",
+    "modes": [
+      "run",
+      "segment"
+    ]
+  },
+  "hybrid_selection_rule": "per measurand, on validation runs: maximise event-level F1 = harmonic mean of macro timely event recall (over signal fault classes) and alarm-episode precision; ties broken by fewer false-alarm episodes per hour",
+  "bootstrap_resamples": 2000,
+  "plot_palette": {
+    "hybrid": "#2a78d6",
+    "segment_setpoint": "#eb6834",
+    "gbt_all": "#1baf7a",
+    "cusum": "#eda100",
+    "surface": "#fcfcfb",
+    "text": "#0b0b0b",
+    "muted": "#52514e",
+    "grid": "#e4e3df"
+  },
+  "static_calibration": "CalibrationEngine.select_best_model (F-test + BIC, degree <= 3) on each device's calibration sweep (calibration partition)",
+  "segment_mad_thresholds": [
+    3.5,
+    5.0,
+    7.0
+  ],
+  "segment_mad_note": "Modified-z threshold of the existing DataQualityAssessor inside the hybrid's transient component (3.5 = existing default). Quantisation makes the MAD collapse to the quantisation step for low-noise channels, so 3.5 can correspond to ~2.6 sigma; the threshold is selected on validation runs. The stand-alone existing detector keeps 3.5."
+}

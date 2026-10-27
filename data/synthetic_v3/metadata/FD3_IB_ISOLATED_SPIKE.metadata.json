@@ -1,0 +1,908 @@
+{
+  "dataset_id": "FD3_IB_ISOLATED_SPIKE",
+  "suite_id": "IMUCA_SYNTH_SUITE_V3_HYBRID",
+  "group": "fault_detection",
+  "measurand": "current_mA",
+  "measurand_unit": "mA",
+  "description": "Fault-detection benchmark, current_mA: individually labelled 'isolated_spike' faults.",
+  "analysis": {
+    "type": "fault_detection",
+    "fault_class": "isolated_spike"
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings. Parameters are documented simulation assumptions and are not verified specifications of the INA219, DS18B20 or any other physical device.",
+  "generator": {
+    "name": "IMUCA Synthetic Benchmark Suite Generator",
+    "module": "src/imuca/synthetic_suite.py",
+    "version": "2.0.0",
+    "config_file": "config/synthetic_suite_v3_config.json",
+    "config_sha256": "0fd8bd58a0980820a9be92b289557384ae76d041aee865930081a48a82576ebc",
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5"
+  },
+  "generation_timestamp_utc": "2026-10-26T05:34:52.773839+00:00",
+  "random_seeds": {
+    "seed_roots": {
+      "calibration": 31012027,
+      "validation": 41022027,
+      "test": 59033027
+    },
+    "derivation": "run_seed = SeedSequence(entropy=seed_roots[partition], spawn_key=(crc32(scenario_id), run_number)).generate_state(1)[0]; the run seed is spawned into 5 independent streams: profile, ambient, DUT noise, reference noise, fault placement.",
+    "reference_realization_seed": 27182,
+    "runs": {
+      "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01": 620250537,
+      "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01": 2968292301,
+      "SYN2-FD3_IB_ISOLATED_SPIKE-TST01": 754357337,
+      "SYN2-FD3_IB_ISOLATED_SPIKE-TST02": 1925832221
+    }
+  },
+  "record_count": 2400,
+  "run_count": 4,
+  "runs": [
+    {
+      "experiment_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01",
+      "run_id": "CAL01",
+      "partition": "calibration",
+      "generation_seed": 620250537,
+      "seed_root": 31012027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_300_1800_900_2600mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_300_1800_900_2600mA",
+        "levels": [
+          {
+            "value": 300.0,
+            "samples": 150
+          },
+          {
+            "value": 1800.0,
+            "samples": 150
+          },
+          {
+            "value": 900.0,
+            "samples": 150
+          },
+          {
+            "value": 2600.0,
+            "samples": 150
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 5,
+          "magnitude": [
+            1.0,
+            10.0
+          ],
+          "type": "isolated_spike"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F01",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F02",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F03",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F04",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F05"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01",
+      "run_id": "VAL01",
+      "partition": "validation",
+      "generation_seed": 2968292301,
+      "seed_root": 41022027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_300_1800_900_2600mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_300_1800_900_2600mA",
+        "levels": [
+          {
+            "value": 300.0,
+            "samples": 150
+          },
+          {
+            "value": 1800.0,
+            "samples": 150
+          },
+          {
+            "value": 900.0,
+            "samples": 150
+          },
+          {
+            "value": 2600.0,
+            "samples": 150
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 5,
+          "magnitude": [
+            1.0,
+            10.0
+          ],
+          "type": "isolated_spike"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F01",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F02",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F03",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F04",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F05"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01",
+      "run_id": "TST01",
+      "partition": "test",
+      "generation_seed": 754357337,
+      "seed_root": 59033027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_300_1800_900_2600mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_300_1800_900_2600mA",
+        "levels": [
+          {
+            "value": 300.0,
+            "samples": 150
+          },
+          {
+            "value": 1800.0,
+            "samples": 150
+          },
+          {
+            "value": 900.0,
+            "samples": 150
+          },
+          {
+            "value": 2600.0,
+            "samples": 150
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 5,
+          "magnitude": [
+            1.0,
+            10.0
+          ],
+          "type": "isolated_spike"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F01",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F02",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F03",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F04",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F05"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02",
+      "run_id": "TST02",
+      "partition": "test",
+      "generation_seed": 1925832221,
+      "seed_root": 59033027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_300_1800_900_2600mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_300_1800_900_2600mA",
+        "levels": [
+          {
+            "value": 300.0,
+            "samples": 150
+          },
+          {
+            "value": 1800.0,
+            "samples": 150
+          },
+          {
+            "value": 900.0,
+            "samples": 150
+          },
+          {
+            "value": 2600.0,
+            "samples": 150
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 5,
+          "magnitude": [
+            1.0,
+            10.0
+          ],
+          "type": "isolated_spike"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F01",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F02",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F03",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F04",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F05"
+      ]
+    }
+  ],
+  "partitions": {
+    "calibration": {
+      "experiment_ids": [
+        "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01"
+      ],
+      "record_count": 600
+    },
+    "validation": {
+      "experiment_ids": [
+        "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01"
+      ],
+      "record_count": 600
+    },
+    "test": {
+      "experiment_ids": [
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST01",
+        "SYN2-FD3_IB_ISOLATED_SPIKE-TST02"
+      ],
+      "record_count": 1200
+    }
+  },
+  "columns": [
+    {
+      "name": "scenario_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Scenario (dataset) identifier; spans partitions."
+    },
+    {
+      "name": "experiment_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Unique acquisition session (run); the unit of partitioning."
+    },
+    {
+      "name": "run_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Run label within the scenario (CALnn / VALnn / TSTnn)."
+    },
+    {
+      "name": "partition",
+      "unit": "",
+      "dtype": "string",
+      "role": "partition",
+      "description": "calibration | validation | test (assigned per run)."
+    },
+    {
+      "name": "generation_seed",
+      "unit": "",
+      "dtype": "int",
+      "role": "provenance",
+      "description": "Integer seed of the run's random streams."
+    },
+    {
+      "name": "device_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Simulated device-under-test instance."
+    },
+    {
+      "name": "data_source",
+      "unit": "",
+      "dtype": "string",
+      "role": "provenance",
+      "description": "Provenance tag (synthetic_suite_v2)."
+    },
+    {
+      "name": "operating_condition_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned operating-condition group (e.g. grid_A, grid_B_interleaved, extrapolation_above_cal_range). Never encodes fault presence."
+    },
+    {
+      "name": "setpoint_index",
+      "unit": "",
+      "dtype": "int",
+      "role": "protocol",
+      "description": "Index of the planned set-point/plateau in run order (-1 during ramps)."
+    },
+    {
+      "name": "protocol_phase",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned protocol phase (dwell, steady, ramp, plateau_settling, plateau_stable, ...)."
+    },
+    {
+      "name": "timestamp_utc",
+      "unit": "ISO 8601",
+      "dtype": "string",
+      "role": "time",
+      "description": "Simulated acquisition timestamp (UTC)."
+    },
+    {
+      "name": "sequence_number",
+      "unit": "count",
+      "dtype": "int",
+      "role": "time",
+      "description": "Record counter as transmitted (duplicates/gaps reflect injected record faults)."
+    },
+    {
+      "name": "elapsed_ms",
+      "unit": "ms",
+      "dtype": "float",
+      "role": "time",
+      "description": "Milliseconds since run start."
+    },
+    {
+      "name": "current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "observation",
+      "description": "DUT observed (digitised) reading. May be NaN (missing) or +/-inf (non-finite fault)."
+    },
+    {
+      "name": "shunt_voltage_mV",
+      "unit": "mV",
+      "dtype": "float",
+      "role": "observation",
+      "description": "DUT digitised shunt voltage; current_mA = shunt_voltage_mV / r_shunt_nominal_ohm."
+    },
+    {
+      "name": "status",
+      "unit": "",
+      "dtype": "string",
+      "role": "observation",
+      "description": "Sensor status code (OK or injected invalid-status code)."
+    },
+    {
+      "name": "environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "observation",
+      "description": "Simulated ambient-temperature sensor reading."
+    },
+    {
+      "name": "reference_current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Simulated independent reference-instrument reading (has its own error model)."
+    },
+    {
+      "name": "reference_expanded_uncertainty_k2",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Stated expanded uncertainty (k=2) of the reference reading."
+    },
+    {
+      "name": "true_current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated measurand value (not a measurement)."
+    },
+    {
+      "name": "true_environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated ambient temperature."
+    },
+    {
+      "name": "true_shunt_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent shunt-resistor temperature."
+    },
+    {
+      "name": "true_shunt_resistance_ohm",
+      "unit": "Ohm",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent actual shunt resistance."
+    },
+    {
+      "name": "true_shunt_voltage_mV",
+      "unit": "mV",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent true shunt voltage = true_current_mA * true_shunt_resistance_ohm."
+    },
+    {
+      "name": "true_drift_component",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Injected gradual-drift contribution to the DUT reading (pre-quantisation)."
+    },
+    {
+      "name": "true_injected_error_component",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Sum of all injected value-domain fault contributions (spike, offset, gain, drift, abrupt)."
+    },
+    {
+      "name": "error_vs_true",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus ground truth."
+    },
+    {
+      "name": "error_vs_reference",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus reference reading."
+    },
+    {
+      "name": "is_injected_fault",
+      "unit": "",
+      "dtype": "bool",
+      "role": "label",
+      "description": "True when any injected fault affects this record (compatible with DataQualityAssessor ground_truth_fault_col)."
+    },
+    {
+      "name": "label_fault_type",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined injected fault types active on this record, or 'none'."
+    },
+    {
+      "name": "label_fault_event_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined fault event ids (see metadata fault_events), or 'none'."
+    },
+    {
+      "name": "label_process_event",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "Genuine (non-fault) process events: setpoint_change, load_step, true_step, ramp_start, or 'none'."
+    },
+    {
+      "name": "dq_flags",
+      "unit": "",
+      "dtype": "string",
+      "role": "quality_flag",
+      "description": "Flags derivable from observable fields only: MISSING_VALUE, NON_FINITE, STATUS_<code>, DUPLICATE_SEQ, SEQ_GAP_<n>, or NONE."
+    }
+  ],
+  "ground_truth_definitions": {
+    "true_current_mA": "Value of the measurand imposed by the simulation (e.g. calibrator set-point or bath temperature). It is a simulation construct and is never presented as an instrument reading.",
+    "reference_current_mA": "Reading of a simulated reference instrument with its own offset, gain, noise, resolution and (temperature only) lag. Use it as a laboratory reference, not as truth.",
+    "error_vs_true": "Total DUT error including all modelled effects and injected faults.",
+    "error_vs_reference": "Observable calibration error; differs from error_vs_true by the reference error.",
+    "true_shunt_resistance_ohm": "Actual shunt resistance including tolerance, TCR and (if modelled) self-heating; the instrument always divides by the nominal value."
+  },
+  "sensor_error_model": {
+    "device_id": "DUT_I12",
+    "measurand": "current_mA",
+    "parameters": {
+      "measurand": "current_mA",
+      "model": "shunt",
+      "description": "Shunt channel, no self-heating.",
+      "r_shunt_nominal_ohm": 0.1,
+      "r_shunt_actual_deviation": -0.003,
+      "r_shunt_tcr_per_C": 0.0001,
+      "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 0.0,
+      "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": -0.02,
+      "adc_gain_error": 0.002,
+      "adc_noise_std_mV": 0.02,
+      "adc_quantization_mV": 0.01
+    },
+    "equation": "R(t) = R_nom*(1+r_shunt_actual_deviation)*(1 + tcr*(T_sh(t) - T_ref)); T_sh[k] = T_sh[k-1] + (1-exp(-dt/tau_th))*(T_amb[k] + R_th*I[k]^2*R[k-1] - T_sh[k-1]), T_sh[0]=T_amb[0] (cold start); V_true = I*R; V_obs = Q( adc_offset_mV + (1+adc_gain_error)*V_true + R_nom*faults + N(0, adc_noise_std_mV) ; adc_quantization_mV ); I_obs = V_obs / R_nom  (mV / Ohm = mA)",
+    "noise_distribution": "independent Gaussian, zero mean",
+    "quantisation": "round-to-nearest",
+    "fault_magnitude_semantics": {
+      "isolated_spike": "additive value in measurand units, applied to one sample",
+      "offset_shift": "additive value in measurand units, persistent from onset",
+      "gain_change": "relative gain change (dimensionless), persistent from onset",
+      "gradual_drift": "drift rate in measurand units per second, persistent from onset",
+      "abrupt_change": "additive value in measurand units, applied for 'duration' samples",
+      "stuck_signal": "no magnitude; the digitised reading is frozen at the last value before onset",
+      "missing_samples": "no magnitude; value field is empty (NaN)",
+      "duplicate_sequence": "no magnitude; an exact copy of the record is inserted after it",
+      "communication_gap": "no magnitude; 'duration' records are dropped",
+      "invalid_status": "no magnitude; status field set to a non-OK code",
+      "non_finite": "value replaced by +inf or -inf"
+    },
+    "parameter_status": "Simulation assumptions chosen for benchmark coverage. Not verified specifications of any physical sensor."
+  },
+  "reference_error_model": {
+    "instrument_id": "SIM_REF_AMMETER_01",
+    "enabled": true,
+    "offset_std": 0.1,
+    "gain_std": 5e-05,
+    "noise_std": 0.05,
+    "resolution": 0.01,
+    "time_constant_s": 0.0,
+    "coverage_k": 2.0,
+    "realized_offset": -0.003049695750888941,
+    "realized_gain_error": 4.8614754902141536e-05,
+    "unit": "mA",
+    "equation": "reference = realized_offset + (1 + realized_gain_error) * lag(true, time_constant_s) + N(0, noise_std), quantised to resolution",
+    "stated_uncertainty": "reference_expanded_uncertainty_k2 = coverage_k * sqrt(offset_std^2 + (gain_std*|reading|)^2 + noise_std^2 + resolution^2/12); steady-state only, excludes dynamic (lag) error",
+    "note": "The reference is a simulated instrument with its own errors; it is NOT ground truth. realized_* values are simulation ground truth about the reference and would be unknown in a real laboratory."
+  },
+  "ambient_model": {
+    "default_mean_C": 23.0,
+    "sinusoid_amplitude_C": 0.2,
+    "sinusoid_period_s": 3600.0,
+    "sensor_noise_std_C": 0.05,
+    "sensor_resolution_C": 0.01
+  },
+  "fault_events": [
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F01",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 439,
+      "duration_samples": 1,
+      "magnitude": 9.384850901448672,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 440,
+      "onset_elapsed_ms": 439000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F02",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 105,
+      "duration_samples": 1,
+      "magnitude": 4.160811146766534,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 106,
+      "onset_elapsed_ms": 105000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F03",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 415,
+      "duration_samples": 1,
+      "magnitude": 9.886120033124483,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 416,
+      "onset_elapsed_ms": 415000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F04",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 100,
+      "duration_samples": 1,
+      "magnitude": 7.3092478732281,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 101,
+      "onset_elapsed_ms": 100000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01-F05",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 476,
+      "duration_samples": 1,
+      "magnitude": 7.67098158160483,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 477,
+      "onset_elapsed_ms": 476000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F01",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 197,
+      "duration_samples": 1,
+      "magnitude": 2.941227184692866,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 198,
+      "onset_elapsed_ms": 197000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F02",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 207,
+      "duration_samples": 1,
+      "magnitude": 4.654834234018855,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 208,
+      "onset_elapsed_ms": 207000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F03",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 175,
+      "duration_samples": 1,
+      "magnitude": 7.194244339484712,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 176,
+      "onset_elapsed_ms": 175000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F04",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 94,
+      "duration_samples": 1,
+      "magnitude": 8.786255562184378,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 95,
+      "onset_elapsed_ms": 94000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01-F05",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 114,
+      "duration_samples": 1,
+      "magnitude": 3.965099316797302,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 115,
+      "onset_elapsed_ms": 114000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F01",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 123,
+      "duration_samples": 1,
+      "magnitude": -8.00973479705759,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 124,
+      "onset_elapsed_ms": 123000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F02",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 253,
+      "duration_samples": 1,
+      "magnitude": 7.926540109759566,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 254,
+      "onset_elapsed_ms": 253000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F03",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 401,
+      "duration_samples": 1,
+      "magnitude": 4.805145605345401,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 402,
+      "onset_elapsed_ms": 401000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F04",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 74,
+      "duration_samples": 1,
+      "magnitude": 2.5113154457293274,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 75,
+      "onset_elapsed_ms": 74000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01-F05",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 275,
+      "duration_samples": 1,
+      "magnitude": -9.603074086851862,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 276,
+      "onset_elapsed_ms": 275000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F01",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 530,
+      "duration_samples": 1,
+      "magnitude": 9.993059813652856,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 531,
+      "onset_elapsed_ms": 530000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F02",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 256,
+      "duration_samples": 1,
+      "magnitude": 5.666550908211348,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 257,
+      "onset_elapsed_ms": 256000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F03",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 170,
+      "duration_samples": 1,
+      "magnitude": 3.005237655206261,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 171,
+      "onset_elapsed_ms": 170000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F04",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 504,
+      "duration_samples": 1,
+      "magnitude": -2.5380345220698164,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 505,
+      "onset_elapsed_ms": 504000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02-F05",
+      "run_id": "SYN2-FD3_IB_ISOLATED_SPIKE-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 301,
+      "duration_samples": 1,
+      "magnitude": 9.769979841325561,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 302,
+      "onset_elapsed_ms": 301000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    }
+  ],
+  "fault_prevalence": {
+    "fault_row_count": 20,
+    "fault_row_fraction": 0.008333333333333333,
+    "rows_by_fault_type": {
+      "isolated_spike": 20
+    },
+    "events_by_fault_type": {
+      "isolated_spike": 20
+    }
+  },
+  "missing_data": {
+    "nan_observation_rows": 0,
+    "non_finite_observation_rows": 0,
+    "missing_rate": 0.0,
+    "dropped_records_communication_gap": 0,
+    "dropped_rate": 0.0
+  },
+  "process_events": {
+    "setpoint_change": 12
+  },
+  "split_strategy": {
+    "unit_of_partitioning": "experiment run (experiment_id); every run belongs to exactly one partition",
+    "calibration": "fit calibration / tune detector thresholds / train ML models",
+    "validation": "model selection and hyper-parameter choice",
+    "test": "final evaluation only; generated from an independent seed root and, where configured, held-out operating conditions",
+    "chronology": "run start times are ordered calibration -> validation -> test (one simulated day apart)",
+    "within_run_split": "not permitted: adjacent samples are correlated (dwell, lag, thermal state)"
+  },
+  "known_limitations": [
+    "Synthetic data only; no physical sensor behaviour is claimed.",
+    "Noise is white Gaussian; no 1/f noise, interference, or correlated noise between DUT and reference.",
+    "Sampling is perfectly periodic (no clock jitter); only injected record faults perturb timing.",
+    "The calibrator/source is ideal: the true value equals the planned set-point exactly.",
+    "Reference stated uncertainty covers steady-state errors only.",
+    "Fault magnitudes and placements are drawn from documented ranges and may not reflect real fault statistics.",
+    "Shunt TCR and thermal resistance/time constant are assumed scenario parameters, not measured values.",
+    "Self-heating model is first-order and lumped; no PCB heat spreading or airflow effects."
+  ],
+  "csv_file": "fault_detection/FD3_IB_ISOLATED_SPIKE.csv",
+  "csv_sha256": "2541474cbf3d0c52a6570f6300a75d85f707badf31381047b9af26b3e7adc8c3"
+}

@@ -1,0 +1,41 @@
+{
+  "generator": "IMUCA Synthetic Data Generator",
+  "version": "1.0.0",
+  "generated_at_utc": "2026-10-25T06:49:02.570254+00:00",
+  "scenario": {
+    "scenario_name": "temperature_drift_scenario",
+    "description": "Temperature measurement with gradual linear sensor aging drift (+0.02 degC/s) and ambient variation.",
+    "measurand": "temperature_C",
+    "num_samples": 200,
+    "sampling_period_s": 1.0,
+    "random_seed": 103,
+    "profile_type": "constant",
+    "nominal_min": 45.0,
+    "nominal_max": 45.0,
+    "num_steps": 10,
+    "dwell_per_step": 10,
+    "offset": 0.0,
+    "gain_error": 0.0,
+    "quantization_step": 0.0625,
+    "noise_std": 0.0625,
+    "drift_rate_per_s": 0.015,
+    "temp_coefficient": 0.05,
+    "nominal_env_temp_c": 23.0,
+    "outlier_indices": [],
+    "outlier_magnitudes": [],
+    "missing_sample_indices": [],
+    "duplicate_seq_indices": [],
+    "gap_after_indices": [],
+    "gap_sizes": [],
+    "sensor_fault_indices": [],
+    "fault_status_value": "ERROR_COMM_TIMEOUT"
+  },
+  "summary_statistics": {
+    "sample_count": 200,
+    "injected_fault_count": 0,
+    "true_mean": 45.0,
+    "observed_mean": 46.4928125,
+    "reference_mean": 45.00007535230146
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings."
+}

@@ -1,0 +1,62 @@
+{
+  "generator": "IMUCA Synthetic Data Generator",
+  "version": "1.0.0",
+  "generated_at_utc": "2026-10-25T06:49:02.899737+00:00",
+  "scenario": {
+    "scenario_name": "fault_stress_scenario",
+    "description": "Voltage measurement containing injected anomalies: extreme outliers, NaN gaps, duplicates, and timeouts.",
+    "measurand": "voltage_V",
+    "num_samples": 150,
+    "sampling_period_s": 1.0,
+    "random_seed": 104,
+    "profile_type": "ramp",
+    "nominal_min": 1.0,
+    "nominal_max": 10.0,
+    "num_steps": 10,
+    "dwell_per_step": 10,
+    "offset": 0.0,
+    "gain_error": 0.0,
+    "quantization_step": null,
+    "noise_std": 0.002,
+    "drift_rate_per_s": 0.0,
+    "temp_coefficient": 0.0,
+    "nominal_env_temp_c": 23.0,
+    "outlier_indices": [
+      25,
+      80,
+      120
+    ],
+    "outlier_magnitudes": [
+      3.5,
+      -4.0,
+      8.0
+    ],
+    "missing_sample_indices": [
+      40,
+      41,
+      95
+    ],
+    "duplicate_seq_indices": [
+      60
+    ],
+    "gap_after_indices": [
+      110
+    ],
+    "gap_sizes": [
+      5
+    ],
+    "sensor_fault_indices": [
+      135,
+      136
+    ],
+    "fault_status_value": "ERROR_COMM_TIMEOUT"
+  },
+  "summary_statistics": {
+    "sample_count": 150,
+    "injected_fault_count": 10,
+    "true_mean": 5.499999999999999,
+    "observed_mean": 5.57039640223365,
+    "reference_mean": 5.500021868818534
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings."
+}

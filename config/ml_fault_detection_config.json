@@ -1,0 +1,142 @@
+{
+  "experiment_id": "IMUCA_ML_FAULT_DETECTION_V1",
+  "description": "Signal-level fault detection (GBT, Isolation Forest vs conventional per-segment detector), deterministic integrity track, and CUSUM tuning. Synthetic data only.",
+  "random_seed": 20261027,
+  "measurands": [
+    "voltage_V",
+    "current_mA",
+    "temperature_C"
+  ],
+  "splits": {
+    "train": "calibration",
+    "model_selection_and_threshold": "validation",
+    "final_evaluation": "test"
+  },
+  "target_false_alarm_rate": 0.005,
+  "persistent_event_window_samples": 60,
+  "feature_floor_fraction": 0.25,
+  "post_event_transient_samples": {
+    "voltage_V": 5,
+    "current_mA": 135,
+    "temperature_C": 100
+  },
+  "post_event_transient_note": "Evaluation-only context windows: voltage ~instantaneous; current 3 x 45 s shunt thermal time constant; temperature 5 x 20 s sensor time constant (simulation parameters).",
+  "post_fault_aftermath_samples": 30,
+  "posthoc_spike_latency_tolerance_samples": 2,
+  "posthoc_note": "Evaluation-only diagnostics computed after the single test evaluation; they do not change models, features or thresholds.",
+  "gbt_grid": [
+    {
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    }
+  ],
+  "iforest_grid": [
+    {
+      "n_estimators": 300,
+      "max_samples": 256,
+      "max_features": 1.0
+    },
+    {
+      "n_estimators": 300,
+      "max_samples": 256,
+      "max_features": 0.5
+    },
+    {
+      "n_estimators": 300,
+      "max_samples": 2048,
+      "max_features": 1.0
+    },
+    {
+      "n_estimators": 300,
+      "max_samples": 2048,
+      "max_features": 0.5
+    }
+  ],
+  "selection_rule": "maximise validation macro event recall over signal fault classes at the validation-tuned threshold (FAR <= target on validation negatives); tie-break by validation record-level F1",
+  "baseline": {
+    "name": "DataQualityAssessor per protocol segment",
+    "notes": "Uses config/default_config.json range limits, max_rate_of_change and MAD threshold. Non-causal within a segment (MAD uses the whole segment) and uses operator protocol information (segment boundaries) that the ML detectors do not receive."
+  },
+  "cusum": {
+    "k_grid": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "h_grid": [
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      15
+    ],
+    "baseline_fraction": 0.1,
+    "min_arl0_multiple_of_longest_run": 10,
+    "selection_rule": "on calibration+validation runs only: require ARL0 (Siegmund) >= 10 x longest run, zero alarms on control runs and zero pre-onset alarms on drift runs; then maximise detected drift runs, then minimise median delay, then prefer larger ARL0",
+    "error_series": "static-calibrated DUT reading minus reference reading, integrity-clean records only; temperature restricted to protocol steady / plateau_stable phases",
+    "calibration_sources": {
+      "DUT_V01": "VOLT_SWEEP_LINEAR",
+      "DUT_I01": "CURR_SWEEP_AMBIENT",
+      "DUT_T01": "TEMP_PLATEAUS"
+    },
+    "drift_scenarios": [
+      "VOLT_DRIFT",
+      "CURR_DRIFT",
+      "TEMP_DRIFT",
+      "FD_VOLT_GRADUAL_DRIFT",
+      "FD_CURR_GRADUAL_DRIFT",
+      "FD_TEMP_GRADUAL_DRIFT"
+    ],
+    "extra_control_scenarios": [
+      "FD_VOLT_NONE",
+      "FD_CURR_NONE",
+      "FD_TEMP_NONE",
+      "FD_VOLT_MISSING_SAMPLES",
+      "FD_VOLT_DUPLICATE_SEQUENCE",
+      "FD_VOLT_COMMUNICATION_GAP",
+      "FD_VOLT_INVALID_STATUS",
+      "FD_VOLT_NON_FINITE",
+      "FD_CURR_MISSING_SAMPLES",
+      "FD_CURR_DUPLICATE_SEQUENCE",
+      "FD_CURR_COMMUNICATION_GAP",
+      "FD_CURR_INVALID_STATUS",
+      "FD_CURR_NON_FINITE",
+      "FD_TEMP_MISSING_SAMPLES",
+      "FD_TEMP_DUPLICATE_SEQUENCE",
+      "FD_TEMP_COMMUNICATION_GAP",
+      "FD_TEMP_INVALID_STATUS",
+      "FD_TEMP_NON_FINITE"
+    ]
+  },
+  "plot_palette": {
+    "gbt": "#2a78d6",
+    "iforest": "#eb6834",
+    "baseline": "#1baf7a",
+    "surface": "#fcfcfb",
+    "text": "#0b0b0b",
+    "muted": "#52514e"
+  }
+}

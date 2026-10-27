@@ -1,0 +1,1171 @@
+{
+  "dataset_id": "CURR_INTEGRITY",
+  "suite_id": "IMUCA_SYNTH_SUITE_V2",
+  "group": "current",
+  "measurand": "current_mA",
+  "measurand_unit": "mA",
+  "description": "Stepped current levels with outliers, an abrupt transient shift, missing observations, invalid sensor states and communication gaps.",
+  "analysis": {
+    "type": "integrity"
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings. Parameters are documented simulation assumptions and are not verified specifications of the INA219, DS18B20 or any other physical device.",
+  "generator": {
+    "name": "IMUCA Synthetic Benchmark Suite Generator",
+    "module": "src/imuca/synthetic_suite.py",
+    "version": "2.0.0",
+    "config_file": "config/synthetic_suite_config.json",
+    "config_sha256": "b43b1815bf29495fb7c84bafaac4ee397dfd6d88cc7b5bc88643f53fa0b38ead",
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5"
+  },
+  "generation_timestamp_utc": "2026-10-26T04:11:43.164867+00:00",
+  "random_seeds": {
+    "seed_roots": {
+      "calibration": 20261101,
+      "validation": 20261102,
+      "test": 77031119
+    },
+    "derivation": "run_seed = SeedSequence(entropy=seed_roots[partition], spawn_key=(crc32(scenario_id), run_number)).generate_state(1)[0]; the run seed is spawned into 5 independent streams: profile, ambient, DUT noise, reference noise, fault placement.",
+    "reference_realization_seed": 31415,
+    "runs": {
+      "SYN2-CURR_INTEGRITY-CAL01": 2774333669,
+      "SYN2-CURR_INTEGRITY-VAL01": 3734559731,
+      "SYN2-CURR_INTEGRITY-TST01": 79711764
+    }
+  },
+  "record_count": 2669,
+  "run_count": 3,
+  "runs": [
+    {
+      "experiment_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "run_id": "CAL01",
+      "partition": "calibration",
+      "generation_seed": 2774333669,
+      "seed_root": 20261101,
+      "record_count": 892,
+      "operating_conditions": [
+        "levels_500_1500_2500mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_500_1500_2500mA",
+        "levels": [
+          {
+            "value": 500.0,
+            "samples": 300
+          },
+          {
+            "value": 1500.0,
+            "samples": 300
+          },
+          {
+            "value": 2500.0,
+            "samples": 300
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "type": "isolated_spike",
+          "count": 4,
+          "magnitude": [
+            5.0,
+            30.0
+          ]
+        },
+        {
+          "type": "abrupt_change",
+          "count": 1,
+          "magnitude": [
+            10.0,
+            40.0
+          ],
+          "duration": [
+            20,
+            40
+          ]
+        },
+        {
+          "type": "missing_samples",
+          "count": 2,
+          "duration": [
+            1,
+            4
+          ]
+        },
+        {
+          "type": "invalid_status",
+          "count": 2,
+          "duration": [
+            1,
+            3
+          ]
+        },
+        {
+          "type": "communication_gap",
+          "count": 2,
+          "duration": [
+            3,
+            15
+          ]
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-CURR_INTEGRITY-CAL01-F01",
+        "SYN2-CURR_INTEGRITY-CAL01-F02",
+        "SYN2-CURR_INTEGRITY-CAL01-F03",
+        "SYN2-CURR_INTEGRITY-CAL01-F04",
+        "SYN2-CURR_INTEGRITY-CAL01-F05",
+        "SYN2-CURR_INTEGRITY-CAL01-F06",
+        "SYN2-CURR_INTEGRITY-CAL01-F07",
+        "SYN2-CURR_INTEGRITY-CAL01-F08",
+        "SYN2-CURR_INTEGRITY-CAL01-F09",
+        "SYN2-CURR_INTEGRITY-CAL01-F10",
+        "SYN2-CURR_INTEGRITY-CAL01-F11"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "run_id": "VAL01",
+      "partition": "validation",
+      "generation_seed": 3734559731,
+      "seed_root": 20261102,
+      "record_count": 883,
+      "operating_conditions": [
+        "levels_500_1500_2500mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_500_1500_2500mA",
+        "levels": [
+          {
+            "value": 500.0,
+            "samples": 300
+          },
+          {
+            "value": 1500.0,
+            "samples": 300
+          },
+          {
+            "value": 2500.0,
+            "samples": 300
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "type": "isolated_spike",
+          "count": 4,
+          "magnitude": [
+            5.0,
+            30.0
+          ]
+        },
+        {
+          "type": "abrupt_change",
+          "count": 1,
+          "magnitude": [
+            10.0,
+            40.0
+          ],
+          "duration": [
+            20,
+            40
+          ]
+        },
+        {
+          "type": "missing_samples",
+          "count": 2,
+          "duration": [
+            1,
+            4
+          ]
+        },
+        {
+          "type": "invalid_status",
+          "count": 2,
+          "duration": [
+            1,
+            3
+          ]
+        },
+        {
+          "type": "communication_gap",
+          "count": 2,
+          "duration": [
+            3,
+            15
+          ]
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-CURR_INTEGRITY-VAL01-F01",
+        "SYN2-CURR_INTEGRITY-VAL01-F02",
+        "SYN2-CURR_INTEGRITY-VAL01-F03",
+        "SYN2-CURR_INTEGRITY-VAL01-F04",
+        "SYN2-CURR_INTEGRITY-VAL01-F05",
+        "SYN2-CURR_INTEGRITY-VAL01-F06",
+        "SYN2-CURR_INTEGRITY-VAL01-F07",
+        "SYN2-CURR_INTEGRITY-VAL01-F08",
+        "SYN2-CURR_INTEGRITY-VAL01-F09",
+        "SYN2-CURR_INTEGRITY-VAL01-F10",
+        "SYN2-CURR_INTEGRITY-VAL01-F11"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-CURR_INTEGRITY-TST01",
+      "run_id": "TST01",
+      "partition": "test",
+      "generation_seed": 79711764,
+      "seed_root": 77031119,
+      "record_count": 894,
+      "operating_conditions": [
+        "levels_500_1500_2500mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_500_1500_2500mA",
+        "levels": [
+          {
+            "value": 500.0,
+            "samples": 300
+          },
+          {
+            "value": 1500.0,
+            "samples": 300
+          },
+          {
+            "value": 2500.0,
+            "samples": 300
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "type": "isolated_spike",
+          "count": 4,
+          "magnitude": [
+            5.0,
+            30.0
+          ]
+        },
+        {
+          "type": "abrupt_change",
+          "count": 1,
+          "magnitude": [
+            10.0,
+            40.0
+          ],
+          "duration": [
+            20,
+            40
+          ]
+        },
+        {
+          "type": "missing_samples",
+          "count": 2,
+          "duration": [
+            1,
+            4
+          ]
+        },
+        {
+          "type": "invalid_status",
+          "count": 2,
+          "duration": [
+            1,
+            3
+          ]
+        },
+        {
+          "type": "communication_gap",
+          "count": 2,
+          "duration": [
+            3,
+            15
+          ]
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-CURR_INTEGRITY-TST01-F01",
+        "SYN2-CURR_INTEGRITY-TST01-F02",
+        "SYN2-CURR_INTEGRITY-TST01-F03",
+        "SYN2-CURR_INTEGRITY-TST01-F04",
+        "SYN2-CURR_INTEGRITY-TST01-F05",
+        "SYN2-CURR_INTEGRITY-TST01-F06",
+        "SYN2-CURR_INTEGRITY-TST01-F07",
+        "SYN2-CURR_INTEGRITY-TST01-F08",
+        "SYN2-CURR_INTEGRITY-TST01-F09",
+        "SYN2-CURR_INTEGRITY-TST01-F10",
+        "SYN2-CURR_INTEGRITY-TST01-F11"
+      ]
+    }
+  ],
+  "partitions": {
+    "calibration": {
+      "experiment_ids": [
+        "SYN2-CURR_INTEGRITY-CAL01"
+      ],
+      "record_count": 892
+    },
+    "validation": {
+      "experiment_ids": [
+        "SYN2-CURR_INTEGRITY-VAL01"
+      ],
+      "record_count": 883
+    },
+    "test": {
+      "experiment_ids": [
+        "SYN2-CURR_INTEGRITY-TST01"
+      ],
+      "record_count": 894
+    }
+  },
+  "columns": [
+    {
+      "name": "scenario_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Scenario (dataset) identifier; spans partitions."
+    },
+    {
+      "name": "experiment_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Unique acquisition session (run); the unit of partitioning."
+    },
+    {
+      "name": "run_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Run label within the scenario (CALnn / VALnn / TSTnn)."
+    },
+    {
+      "name": "partition",
+      "unit": "",
+      "dtype": "string",
+      "role": "partition",
+      "description": "calibration | validation | test (assigned per run)."
+    },
+    {
+      "name": "generation_seed",
+      "unit": "",
+      "dtype": "int",
+      "role": "provenance",
+      "description": "Integer seed of the run's random streams."
+    },
+    {
+      "name": "device_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Simulated device-under-test instance."
+    },
+    {
+      "name": "data_source",
+      "unit": "",
+      "dtype": "string",
+      "role": "provenance",
+      "description": "Provenance tag (synthetic_suite_v2)."
+    },
+    {
+      "name": "operating_condition_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned operating-condition group (e.g. grid_A, grid_B_interleaved, extrapolation_above_cal_range). Never encodes fault presence."
+    },
+    {
+      "name": "setpoint_index",
+      "unit": "",
+      "dtype": "int",
+      "role": "protocol",
+      "description": "Index of the planned set-point/plateau in run order (-1 during ramps)."
+    },
+    {
+      "name": "protocol_phase",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned protocol phase (dwell, steady, ramp, plateau_settling, plateau_stable, ...)."
+    },
+    {
+      "name": "timestamp_utc",
+      "unit": "ISO 8601",
+      "dtype": "string",
+      "role": "time",
+      "description": "Simulated acquisition timestamp (UTC)."
+    },
+    {
+      "name": "sequence_number",
+      "unit": "count",
+      "dtype": "int",
+      "role": "time",
+      "description": "Record counter as transmitted (duplicates/gaps reflect injected record faults)."
+    },
+    {
+      "name": "elapsed_ms",
+      "unit": "ms",
+      "dtype": "float",
+      "role": "time",
+      "description": "Milliseconds since run start."
+    },
+    {
+      "name": "current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "observation",
+      "description": "DUT observed (digitised) reading. May be NaN (missing) or +/-inf (non-finite fault)."
+    },
+    {
+      "name": "shunt_voltage_mV",
+      "unit": "mV",
+      "dtype": "float",
+      "role": "observation",
+      "description": "DUT digitised shunt voltage; current_mA = shunt_voltage_mV / r_shunt_nominal_ohm."
+    },
+    {
+      "name": "status",
+      "unit": "",
+      "dtype": "string",
+      "role": "observation",
+      "description": "Sensor status code (OK or injected invalid-status code)."
+    },
+    {
+      "name": "environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "observation",
+      "description": "Simulated ambient-temperature sensor reading."
+    },
+    {
+      "name": "reference_current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Simulated independent reference-instrument reading (has its own error model)."
+    },
+    {
+      "name": "reference_expanded_uncertainty_k2",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Stated expanded uncertainty (k=2) of the reference reading."
+    },
+    {
+      "name": "true_current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated measurand value (not a measurement)."
+    },
+    {
+      "name": "true_environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated ambient temperature."
+    },
+    {
+      "name": "true_shunt_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent shunt-resistor temperature."
+    },
+    {
+      "name": "true_shunt_resistance_ohm",
+      "unit": "Ohm",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent actual shunt resistance."
+    },
+    {
+      "name": "true_shunt_voltage_mV",
+      "unit": "mV",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent true shunt voltage = true_current_mA * true_shunt_resistance_ohm."
+    },
+    {
+      "name": "true_drift_component",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Injected gradual-drift contribution to the DUT reading (pre-quantisation)."
+    },
+    {
+      "name": "true_injected_error_component",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Sum of all injected value-domain fault contributions (spike, offset, gain, drift, abrupt)."
+    },
+    {
+      "name": "error_vs_true",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus ground truth."
+    },
+    {
+      "name": "error_vs_reference",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus reference reading."
+    },
+    {
+      "name": "is_injected_fault",
+      "unit": "",
+      "dtype": "bool",
+      "role": "label",
+      "description": "True when any injected fault affects this record (compatible with DataQualityAssessor ground_truth_fault_col)."
+    },
+    {
+      "name": "label_fault_type",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined injected fault types active on this record, or 'none'."
+    },
+    {
+      "name": "label_fault_event_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined fault event ids (see metadata fault_events), or 'none'."
+    },
+    {
+      "name": "label_process_event",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "Genuine (non-fault) process events: setpoint_change, load_step, true_step, ramp_start, or 'none'."
+    },
+    {
+      "name": "dq_flags",
+      "unit": "",
+      "dtype": "string",
+      "role": "quality_flag",
+      "description": "Flags derivable from observable fields only: MISSING_VALUE, NON_FINITE, STATUS_<code>, DUPLICATE_SEQ, SEQ_GAP_<n>, or NONE."
+    }
+  ],
+  "ground_truth_definitions": {
+    "true_current_mA": "Value of the measurand imposed by the simulation (e.g. calibrator set-point or bath temperature). It is a simulation construct and is never presented as an instrument reading.",
+    "reference_current_mA": "Reading of a simulated reference instrument with its own offset, gain, noise, resolution and (temperature only) lag. Use it as a laboratory reference, not as truth.",
+    "error_vs_true": "Total DUT error including all modelled effects and injected faults.",
+    "error_vs_reference": "Observable calibration error; differs from error_vs_true by the reference error.",
+    "true_shunt_resistance_ohm": "Actual shunt resistance including tolerance, TCR and (if modelled) self-heating; the instrument always divides by the nominal value."
+  },
+  "sensor_error_model": {
+    "device_id": "DUT_I01",
+    "measurand": "current_mA",
+    "parameters": {
+      "measurand": "current_mA",
+      "model": "shunt",
+      "description": "Simulated shunt current channel; self-heating NOT modelled (thermal resistance 0).",
+      "r_shunt_nominal_ohm": 0.1,
+      "r_shunt_actual_deviation": 0.003,
+      "r_shunt_tcr_per_C": 0.0001,
+      "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 0.0,
+      "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": 0.05,
+      "adc_gain_error": 0.002,
+      "adc_noise_std_mV": 0.02,
+      "adc_quantization_mV": 0.01
+    },
+    "equation": "R(t) = R_nom*(1+r_shunt_actual_deviation)*(1 + tcr*(T_sh(t) - T_ref)); T_sh[k] = T_sh[k-1] + (1-exp(-dt/tau_th))*(T_amb[k] + R_th*I[k]^2*R[k-1] - T_sh[k-1]), T_sh[0]=T_amb[0] (cold start); V_true = I*R; V_obs = Q( adc_offset_mV + (1+adc_gain_error)*V_true + R_nom*faults + N(0, adc_noise_std_mV) ; adc_quantization_mV ); I_obs = V_obs / R_nom  (mV / Ohm = mA)",
+    "noise_distribution": "independent Gaussian, zero mean",
+    "quantisation": "round-to-nearest",
+    "fault_magnitude_semantics": {
+      "isolated_spike": "additive value in measurand units, applied to one sample",
+      "offset_shift": "additive value in measurand units, persistent from onset",
+      "gain_change": "relative gain change (dimensionless), persistent from onset",
+      "gradual_drift": "drift rate in measurand units per second, persistent from onset",
+      "abrupt_change": "additive value in measurand units, applied for 'duration' samples",
+      "stuck_signal": "no magnitude; the digitised reading is frozen at the last value before onset",
+      "missing_samples": "no magnitude; value field is empty (NaN)",
+      "duplicate_sequence": "no magnitude; an exact copy of the record is inserted after it",
+      "communication_gap": "no magnitude; 'duration' records are dropped",
+      "invalid_status": "no magnitude; status field set to a non-OK code",
+      "non_finite": "value replaced by +inf or -inf"
+    },
+    "parameter_status": "Simulation assumptions chosen for benchmark coverage. Not verified specifications of any physical sensor."
+  },
+  "reference_error_model": {
+    "instrument_id": "SIM_REF_AMMETER_01",
+    "enabled": true,
+    "offset_std": 0.1,
+    "gain_std": 5e-05,
+    "noise_std": 0.05,
+    "resolution": 0.01,
+    "time_constant_s": 0.0,
+    "coverage_k": 2.0,
+    "realized_offset": -0.08423462020092479,
+    "realized_gain_error": -6.82846561062187e-05,
+    "unit": "mA",
+    "equation": "reference = realized_offset + (1 + realized_gain_error) * lag(true, time_constant_s) + N(0, noise_std), quantised to resolution",
+    "stated_uncertainty": "reference_expanded_uncertainty_k2 = coverage_k * sqrt(offset_std^2 + (gain_std*|reading|)^2 + noise_std^2 + resolution^2/12); steady-state only, excludes dynamic (lag) error",
+    "note": "The reference is a simulated instrument with its own errors; it is NOT ground truth. realized_* values are simulation ground truth about the reference and would be unknown in a real laboratory."
+  },
+  "ambient_model": {
+    "default_mean_C": 23.0,
+    "sinusoid_amplitude_C": 0.2,
+    "sinusoid_period_s": 3600.0,
+    "sensor_noise_std_C": 0.05,
+    "sensor_resolution_C": 0.01
+  },
+  "fault_events": [
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F01",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 457,
+      "duration_samples": 1,
+      "magnitude": -14.403360683679107,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 458,
+      "onset_elapsed_ms": 457000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F02",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 663,
+      "duration_samples": 1,
+      "magnitude": -22.70283122504022,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 664,
+      "onset_elapsed_ms": 663000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F03",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 278,
+      "duration_samples": 1,
+      "magnitude": 19.206515898446675,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 279,
+      "onset_elapsed_ms": 278000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F04",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 302,
+      "duration_samples": 1,
+      "magnitude": -5.214697023544979,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 303,
+      "onset_elapsed_ms": 302000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F05",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "abrupt_change",
+      "onset_index": 518,
+      "duration_samples": 35,
+      "magnitude": 33.041398517748426,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 519,
+      "onset_elapsed_ms": 518000.0,
+      "labelled_row_count": 35,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F06",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "missing_samples",
+      "onset_index": 167,
+      "duration_samples": 3,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 168,
+      "onset_elapsed_ms": 167000.0,
+      "labelled_row_count": 3,
+      "observability": "Observable from the record (empty value field)."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F07",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "missing_samples",
+      "onset_index": 254,
+      "duration_samples": 3,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 255,
+      "onset_elapsed_ms": 254000.0,
+      "labelled_row_count": 3,
+      "observability": "Observable from the record (empty value field)."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F08",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "invalid_status",
+      "onset_index": 747,
+      "duration_samples": 2,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": "ERR_CRC",
+      "non_finite_value": null,
+      "onset_sequence_number": 748,
+      "onset_elapsed_ms": 747000.0,
+      "labelled_row_count": 2,
+      "observability": "Observable from the status field; the accompanying value may look plausible."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F09",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "invalid_status",
+      "onset_index": 205,
+      "duration_samples": 2,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": "ERR_OVERRANGE",
+      "non_finite_value": null,
+      "onset_sequence_number": 206,
+      "onset_elapsed_ms": 205000.0,
+      "labelled_row_count": 2,
+      "observability": "Observable from the status field; the accompanying value may look plausible."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F10",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "communication_gap",
+      "onset_index": 421,
+      "duration_samples": 3,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 422,
+      "onset_elapsed_ms": 421000.0,
+      "labelled_row_count": 1,
+      "observability": "Observable from record metadata (sequence and time jump). The dropped records do not exist, so the label is attached to the first record after the gap."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-CAL01-F11",
+      "run_id": "SYN2-CURR_INTEGRITY-CAL01",
+      "fault_type": "communication_gap",
+      "onset_index": 343,
+      "duration_samples": 5,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 344,
+      "onset_elapsed_ms": 343000.0,
+      "labelled_row_count": 1,
+      "observability": "Observable from record metadata (sequence and time jump). The dropped records do not exist, so the label is attached to the first record after the gap."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F01",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 806,
+      "duration_samples": 1,
+      "magnitude": 25.840992585141375,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 807,
+      "onset_elapsed_ms": 806000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F02",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 694,
+      "duration_samples": 1,
+      "magnitude": 20.85511687580395,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 695,
+      "onset_elapsed_ms": 694000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F03",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 587,
+      "duration_samples": 1,
+      "magnitude": 18.11540694492416,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 588,
+      "onset_elapsed_ms": 587000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F04",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "isolated_spike",
+      "onset_index": 616,
+      "duration_samples": 1,
+      "magnitude": 13.405321437226421,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 617,
+      "onset_elapsed_ms": 616000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F05",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "abrupt_change",
+      "onset_index": 738,
+      "duration_samples": 34,
+      "magnitude": -17.562881464525788,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 739,
+      "onset_elapsed_ms": 738000.0,
+      "labelled_row_count": 34,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F06",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "missing_samples",
+      "onset_index": 462,
+      "duration_samples": 4,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 463,
+      "onset_elapsed_ms": 462000.0,
+      "labelled_row_count": 4,
+      "observability": "Observable from the record (empty value field)."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F07",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "missing_samples",
+      "onset_index": 338,
+      "duration_samples": 2,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 339,
+      "onset_elapsed_ms": 338000.0,
+      "labelled_row_count": 2,
+      "observability": "Observable from the record (empty value field)."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F08",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "invalid_status",
+      "onset_index": 605,
+      "duration_samples": 2,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": "ERR_SENSOR_INVALID",
+      "non_finite_value": null,
+      "onset_sequence_number": 606,
+      "onset_elapsed_ms": 605000.0,
+      "labelled_row_count": 2,
+      "observability": "Observable from the status field; the accompanying value may look plausible."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F09",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "invalid_status",
+      "onset_index": 490,
+      "duration_samples": 2,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": "ERR_SENSOR_INVALID",
+      "non_finite_value": null,
+      "onset_sequence_number": 491,
+      "onset_elapsed_ms": 490000.0,
+      "labelled_row_count": 2,
+      "observability": "Observable from the status field; the accompanying value may look plausible."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F10",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "communication_gap",
+      "onset_index": 363,
+      "duration_samples": 11,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 364,
+      "onset_elapsed_ms": 363000.0,
+      "labelled_row_count": 1,
+      "observability": "Observable from record metadata (sequence and time jump). The dropped records do not exist, so the label is attached to the first record after the gap."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-VAL01-F11",
+      "run_id": "SYN2-CURR_INTEGRITY-VAL01",
+      "fault_type": "communication_gap",
+      "onset_index": 125,
+      "duration_samples": 6,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 126,
+      "onset_elapsed_ms": 125000.0,
+      "labelled_row_count": 1,
+      "observability": "Observable from record metadata (sequence and time jump). The dropped records do not exist, so the label is attached to the first record after the gap."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F01",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 467,
+      "duration_samples": 1,
+      "magnitude": 23.979366069601838,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 468,
+      "onset_elapsed_ms": 467000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F02",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 278,
+      "duration_samples": 1,
+      "magnitude": 5.636983253363052,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 279,
+      "onset_elapsed_ms": 278000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F03",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 379,
+      "duration_samples": 1,
+      "magnitude": -13.190353903397943,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 380,
+      "onset_elapsed_ms": 379000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F04",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 723,
+      "duration_samples": 1,
+      "magnitude": 10.51624262440567,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 724,
+      "onset_elapsed_ms": 723000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F05",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "abrupt_change",
+      "onset_index": 189,
+      "duration_samples": 38,
+      "magnitude": 35.78835254036443,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 190,
+      "onset_elapsed_ms": 189000.0,
+      "labelled_row_count": 38,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F06",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "missing_samples",
+      "onset_index": 457,
+      "duration_samples": 4,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 458,
+      "onset_elapsed_ms": 457000.0,
+      "labelled_row_count": 4,
+      "observability": "Observable from the record (empty value field)."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F07",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "missing_samples",
+      "onset_index": 331,
+      "duration_samples": 4,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 332,
+      "onset_elapsed_ms": 331000.0,
+      "labelled_row_count": 4,
+      "observability": "Observable from the record (empty value field)."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F08",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "invalid_status",
+      "onset_index": 367,
+      "duration_samples": 3,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": "ERR_SENSOR_INVALID",
+      "non_finite_value": null,
+      "onset_sequence_number": 368,
+      "onset_elapsed_ms": 367000.0,
+      "labelled_row_count": 3,
+      "observability": "Observable from the status field; the accompanying value may look plausible."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F09",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "invalid_status",
+      "onset_index": 151,
+      "duration_samples": 1,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": "ERR_SENSOR_INVALID",
+      "non_finite_value": null,
+      "onset_sequence_number": 152,
+      "onset_elapsed_ms": 151000.0,
+      "labelled_row_count": 1,
+      "observability": "Observable from the status field; the accompanying value may look plausible."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F10",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "communication_gap",
+      "onset_index": 562,
+      "duration_samples": 3,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 563,
+      "onset_elapsed_ms": 562000.0,
+      "labelled_row_count": 1,
+      "observability": "Observable from record metadata (sequence and time jump). The dropped records do not exist, so the label is attached to the first record after the gap."
+    },
+    {
+      "event_id": "SYN2-CURR_INTEGRITY-TST01-F11",
+      "run_id": "SYN2-CURR_INTEGRITY-TST01",
+      "fault_type": "communication_gap",
+      "onset_index": 618,
+      "duration_samples": 3,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 619,
+      "onset_elapsed_ms": 618000.0,
+      "labelled_row_count": 1,
+      "observability": "Observable from record metadata (sequence and time jump). The dropped records do not exist, so the label is attached to the first record after the gap."
+    }
+  ],
+  "fault_prevalence": {
+    "fault_row_count": 157,
+    "fault_row_fraction": 0.058823529411764705,
+    "rows_by_fault_type": {
+      "missing_samples": 20,
+      "invalid_status": 12,
+      "isolated_spike": 12,
+      "communication_gap": 6,
+      "abrupt_change": 107
+    },
+    "events_by_fault_type": {
+      "abrupt_change": 3,
+      "communication_gap": 6,
+      "invalid_status": 6,
+      "isolated_spike": 12,
+      "missing_samples": 6
+    }
+  },
+  "missing_data": {
+    "nan_observation_rows": 20,
+    "non_finite_observation_rows": 0,
+    "missing_rate": 0.007493443237167478,
+    "dropped_records_communication_gap": 31,
+    "dropped_rate": 0.011481481481481481
+  },
+  "process_events": {
+    "setpoint_change": 6
+  },
+  "split_strategy": {
+    "unit_of_partitioning": "experiment run (experiment_id); every run belongs to exactly one partition",
+    "calibration": "fit calibration / tune detector thresholds / train ML models",
+    "validation": "model selection and hyper-parameter choice",
+    "test": "final evaluation only; generated from an independent seed root and, where configured, held-out operating conditions",
+    "chronology": "run start times are ordered calibration -> validation -> test (one simulated day apart)",
+    "within_run_split": "not permitted: adjacent samples are correlated (dwell, lag, thermal state)"
+  },
+  "known_limitations": [
+    "Synthetic data only; no physical sensor behaviour is claimed.",
+    "Noise is white Gaussian; no 1/f noise, interference, or correlated noise between DUT and reference.",
+    "Sampling is perfectly periodic (no clock jitter); only injected record faults perturb timing.",
+    "The calibrator/source is ideal: the true value equals the planned set-point exactly.",
+    "Reference stated uncertainty covers steady-state errors only.",
+    "Fault magnitudes and placements are drawn from documented ranges and may not reflect real fault statistics.",
+    "Shunt TCR and thermal resistance/time constant are assumed scenario parameters, not measured values.",
+    "Self-heating model is first-order and lumped; no PCB heat spreading or airflow effects."
+  ],
+  "csv_file": "current/CURR_INTEGRITY.csv",
+  "csv_sha256": "3d7548e99b652ff4328d9454380e59417a95766f56be2c4fd7e162b4338b3fce"
+}

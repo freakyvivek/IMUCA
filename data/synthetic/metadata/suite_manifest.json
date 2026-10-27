@@ -1,0 +1,1435 @@
+{
+  "suite_id": "IMUCA_SYNTH_SUITE_V2",
+  "generator": "IMUCA Synthetic Benchmark Suite Generator",
+  "generator_version": "2.0.0",
+  "config_file": "config/synthetic_suite_config.json",
+  "config_sha256": "b43b1815bf29495fb7c84bafaac4ee397dfd6d88cc7b5bc88643f53fa0b38ead",
+  "seed_roots": {
+    "calibration": 20261101,
+    "validation": 20261102,
+    "test": 77031119
+  },
+  "reference_realization_seed": 31415,
+  "manifest_written_utc": "2026-10-26T05:33:07.191550+00:00",
+  "total_records": 147865,
+  "scenario_count": 50,
+  "files": [
+    {
+      "scenario_id": "VOLT_SWEEP_LINEAR",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "voltage/VOLT_SWEEP_LINEAR.csv",
+      "metadata_file": "metadata/VOLT_SWEEP_LINEAR.metadata.json",
+      "csv_sha256": "79258df05bce5c60e5a55c7881b60503de4c328731b1d0c95b1c6b9ae4da951a",
+      "record_count": 1800,
+      "run_count": 8,
+      "partition_records": {
+        "calibration": 660,
+        "validation": 440,
+        "test": 700
+      },
+      "run_seeds": {
+        "SYN2-VOLT_SWEEP_LINEAR-CAL01": 531752089,
+        "SYN2-VOLT_SWEEP_LINEAR-CAL02": 1031697757,
+        "SYN2-VOLT_SWEEP_LINEAR-CAL03": 3704180489,
+        "SYN2-VOLT_SWEEP_LINEAR-VAL01": 1840248834,
+        "SYN2-VOLT_SWEEP_LINEAR-VAL02": 3915545812,
+        "SYN2-VOLT_SWEEP_LINEAR-TST01": 625164124,
+        "SYN2-VOLT_SWEEP_LINEAR-TST02": 2131944032,
+        "SYN2-VOLT_SWEEP_LINEAR-TST03": 2598424215
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Multi-point DC voltage calibration sweep, linear device (offset, gain, repeatability noise, quantisation). Test partition adds held-out interleaved and extrapolated set-points.",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.220352+00:00"
+    },
+    {
+      "scenario_id": "VOLT_SWEEP_NONLINEAR",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V02",
+      "csv_file": "voltage/VOLT_SWEEP_NONLINEAR.csv",
+      "metadata_file": "metadata/VOLT_SWEEP_NONLINEAR.metadata.json",
+      "csv_sha256": "bd4013a2d797c95d5ace96f5182ba5694b44d5acb817bfc58341b11a93b3edcd",
+      "record_count": 1800,
+      "run_count": 8,
+      "partition_records": {
+        "calibration": 660,
+        "validation": 440,
+        "test": 700
+      },
+      "run_seeds": {
+        "SYN2-VOLT_SWEEP_NONLINEAR-CAL01": 3634158929,
+        "SYN2-VOLT_SWEEP_NONLINEAR-CAL02": 843077297,
+        "SYN2-VOLT_SWEEP_NONLINEAR-CAL03": 3186754958,
+        "SYN2-VOLT_SWEEP_NONLINEAR-VAL01": 654496124,
+        "SYN2-VOLT_SWEEP_NONLINEAR-VAL02": 3620889113,
+        "SYN2-VOLT_SWEEP_NONLINEAR-TST01": 462712503,
+        "SYN2-VOLT_SWEEP_NONLINEAR-TST02": 716134851,
+        "SYN2-VOLT_SWEEP_NONLINEAR-TST03": 929045675
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Multi-point DC voltage calibration sweep for a device with an explicitly modelled parabolic INL bow (justifies a polynomial-calibration comparison).",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.291406+00:00"
+    },
+    {
+      "scenario_id": "VOLT_REPEATABILITY",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "voltage/VOLT_REPEATABILITY.csv",
+      "metadata_file": "metadata/VOLT_REPEATABILITY.metadata.json",
+      "csv_sha256": "b88f5d7d6361e223abf0825cbddb420e700dbd98b417ede352bba5900cbb2294",
+      "record_count": 900,
+      "run_count": 3,
+      "partition_records": {
+        "calibration": 300,
+        "validation": 300,
+        "test": 300
+      },
+      "run_seeds": {
+        "SYN2-VOLT_REPEATABILITY-CAL01": 2740600605,
+        "SYN2-VOLT_REPEATABILITY-VAL01": 3813089493,
+        "SYN2-VOLT_REPEATABILITY-TST01": 4278071174
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Repeated observations at a constant 5 V input for Type A repeatability evaluation.",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.336187+00:00"
+    },
+    {
+      "scenario_id": "VOLT_DRIFT",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "voltage/VOLT_DRIFT.csv",
+      "metadata_file": "metadata/VOLT_DRIFT.metadata.json",
+      "csv_sha256": "57de1df4609141e3166040cdbf53b366e3b5c03e9d6778af6655bbc52e525531",
+      "record_count": 6000,
+      "run_count": 5,
+      "partition_records": {
+        "calibration": 1200,
+        "validation": 2400,
+        "test": 2400
+      },
+      "run_seeds": {
+        "SYN2-VOLT_DRIFT-CAL01": 2593106232,
+        "SYN2-VOLT_DRIFT-VAL01": 2996765859,
+        "SYN2-VOLT_DRIFT-VAL02": 2259842988,
+        "SYN2-VOLT_DRIFT-TST01": 3315596695,
+        "SYN2-VOLT_DRIFT-TST02": 11467635
+      },
+      "fault_row_fraction": 0.25,
+      "fault_events": 2,
+      "missing_rate": 0.0,
+      "description": "Constant 12 V input; some runs contain a gradual sensor drift with known onset and rate, others are drift-free controls.",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.430605+00:00"
+    },
+    {
+      "scenario_id": "VOLT_INTEGRITY",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "voltage/VOLT_INTEGRITY.csv",
+      "metadata_file": "metadata/VOLT_INTEGRITY.metadata.json",
+      "csv_sha256": "2a3fc9a53616345f49c9c37ff0c7eed8edc928a5d906b1d06bef25f285de3449",
+      "record_count": 2700,
+      "run_count": 3,
+      "partition_records": {
+        "calibration": 900,
+        "validation": 900,
+        "test": 900
+      },
+      "run_seeds": {
+        "SYN2-VOLT_INTEGRITY-CAL01": 1275345309,
+        "SYN2-VOLT_INTEGRITY-VAL01": 912882629,
+        "SYN2-VOLT_INTEGRITY-TST01": 737593977
+      },
+      "fault_row_fraction": 0.04925925925925926,
+      "fault_events": 27,
+      "missing_rate": 0.0077777777777777776,
+      "description": "Stepped voltage levels with isolated outliers, an abrupt transient level shift, missing samples and invalid sensor states.",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.547981+00:00"
+    },
+    {
+      "scenario_id": "CURR_SWEEP_AMBIENT",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "current/CURR_SWEEP_AMBIENT.csv",
+      "metadata_file": "metadata/CURR_SWEEP_AMBIENT.metadata.json",
+      "csv_sha256": "e80f4ef995dc131b3bde942ac767e46556ce4529336b65a82613ba758140bfc3",
+      "record_count": 1600,
+      "run_count": 8,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 400,
+        "test": 600
+      },
+      "run_seeds": {
+        "SYN2-CURR_SWEEP_AMBIENT-CAL01": 2126691811,
+        "SYN2-CURR_SWEEP_AMBIENT-CAL02": 2231163537,
+        "SYN2-CURR_SWEEP_AMBIENT-CAL03": 1508207495,
+        "SYN2-CURR_SWEEP_AMBIENT-VAL01": 2936720394,
+        "SYN2-CURR_SWEEP_AMBIENT-VAL02": 3419346992,
+        "SYN2-CURR_SWEEP_AMBIENT-TST01": 3080952885,
+        "SYN2-CURR_SWEEP_AMBIENT-TST02": 2327869347,
+        "SYN2-CURR_SWEEP_AMBIENT-TST03": 4043941863
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Multi-point DC current calibration sweep through a shunt model (tolerance + assumed TCR, no self-heating). Test adds held-out set-points and a held-out ambient temperature.",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.631484+00:00"
+    },
+    {
+      "scenario_id": "CURR_SWEEP_SELFHEAT",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I02",
+      "csv_file": "current/CURR_SWEEP_SELFHEAT.csv",
+      "metadata_file": "metadata/CURR_SWEEP_SELFHEAT.metadata.json",
+      "csv_sha256": "fabbcceae1d9ed1c44ffcbe95188724932590bcd7415647c7b326db65875cb2b",
+      "record_count": 4800,
+      "run_count": 8,
+      "partition_records": {
+        "calibration": 1800,
+        "validation": 1200,
+        "test": 1800
+      },
+      "run_seeds": {
+        "SYN2-CURR_SWEEP_SELFHEAT-CAL01": 3689915225,
+        "SYN2-CURR_SWEEP_SELFHEAT-CAL02": 3244708011,
+        "SYN2-CURR_SWEEP_SELFHEAT-CAL03": 1758128532,
+        "SYN2-CURR_SWEEP_SELFHEAT-VAL01": 469469296,
+        "SYN2-CURR_SWEEP_SELFHEAT-VAL02": 2636435636,
+        "SYN2-CURR_SWEEP_SELFHEAT-TST01": 3372334311,
+        "SYN2-CURR_SWEEP_SELFHEAT-TST02": 2915155233,
+        "SYN2-CURR_SWEEP_SELFHEAT-TST03": 3716549091
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "DC current sweep with explicitly modelled shunt self-heating (load-dependent resistance via TCR). Test adds held-out set-points and a descending sweep (different thermal history).",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.731801+00:00"
+    },
+    {
+      "scenario_id": "CURR_LOAD_STEPS",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I02",
+      "csv_file": "current/CURR_LOAD_STEPS.csv",
+      "metadata_file": "metadata/CURR_LOAD_STEPS.metadata.json",
+      "csv_sha256": "0a9cf1fe136dc35bf190aab71ea83b21471c2ade97c030c7067e5edd9c434fdf",
+      "record_count": 5400,
+      "run_count": 3,
+      "partition_records": {
+        "calibration": 1800,
+        "validation": 1800,
+        "test": 1800
+      },
+      "run_seeds": {
+        "SYN2-CURR_LOAD_STEPS-CAL01": 3609972729,
+        "SYN2-CURR_LOAD_STEPS-VAL01": 476572828,
+        "SYN2-CURR_LOAD_STEPS-TST01": 496908231
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Random load steps between 200 mA and 2500 mA with shunt self-heating transients (load-history-dependent error).",
+      "generation_timestamp_utc": "2026-10-26T04:11:42.870132+00:00"
+    },
+    {
+      "scenario_id": "CURR_DRIFT",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "current/CURR_DRIFT.csv",
+      "metadata_file": "metadata/CURR_DRIFT.metadata.json",
+      "csv_sha256": "d24fe22ea45967fdff72c74059b69c49e8f48aa883386d52769b0db44cbc5b9c",
+      "record_count": 6000,
+      "run_count": 5,
+      "partition_records": {
+        "calibration": 1200,
+        "validation": 2400,
+        "test": 2400
+      },
+      "run_seeds": {
+        "SYN2-CURR_DRIFT-CAL01": 1451344171,
+        "SYN2-CURR_DRIFT-VAL01": 2237305614,
+        "SYN2-CURR_DRIFT-VAL02": 2971409055,
+        "SYN2-CURR_DRIFT-TST01": 664276537,
+        "SYN2-CURR_DRIFT-TST02": 2338854109
+      },
+      "fault_row_fraction": 0.25,
+      "fault_events": 2,
+      "missing_rate": 0.0,
+      "description": "Constant 1500 mA load; drift runs contain a gradual sensor drift with known onset and rate, others are drift-free controls.",
+      "generation_timestamp_utc": "2026-10-26T04:11:43.034387+00:00"
+    },
+    {
+      "scenario_id": "CURR_INTEGRITY",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "current/CURR_INTEGRITY.csv",
+      "metadata_file": "metadata/CURR_INTEGRITY.metadata.json",
+      "csv_sha256": "3d7548e99b652ff4328d9454380e59417a95766f56be2c4fd7e162b4338b3fce",
+      "record_count": 2669,
+      "run_count": 3,
+      "partition_records": {
+        "calibration": 892,
+        "validation": 883,
+        "test": 894
+      },
+      "run_seeds": {
+        "SYN2-CURR_INTEGRITY-CAL01": 2774333669,
+        "SYN2-CURR_INTEGRITY-VAL01": 3734559731,
+        "SYN2-CURR_INTEGRITY-TST01": 79711764
+      },
+      "fault_row_fraction": 0.058823529411764705,
+      "fault_events": 33,
+      "missing_rate": 0.007493443237167478,
+      "description": "Stepped current levels with outliers, an abrupt transient shift, missing observations, invalid sensor states and communication gaps.",
+      "generation_timestamp_utc": "2026-10-26T04:11:43.164867+00:00"
+    },
+    {
+      "scenario_id": "TEMP_PLATEAUS",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "temperature/TEMP_PLATEAUS.csv",
+      "metadata_file": "metadata/TEMP_PLATEAUS.metadata.json",
+      "csv_sha256": "c17203b27627da01db2942c067e8071ad2f525a21efa4e9b5b20f1b03a088dee",
+      "record_count": 9025,
+      "run_count": 5,
+      "partition_records": {
+        "calibration": 3600,
+        "validation": 1800,
+        "test": 3625
+      },
+      "run_seeds": {
+        "SYN2-TEMP_PLATEAUS-CAL01": 3333590041,
+        "SYN2-TEMP_PLATEAUS-CAL02": 4134866419,
+        "SYN2-TEMP_PLATEAUS-VAL01": 3544959156,
+        "SYN2-TEMP_PLATEAUS-TST01": 462767817,
+        "SYN2-TEMP_PLATEAUS-TST02": 3074232746
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Stable temperature plateaus joined by 0.1 degC/s ramps; calibration uses only the protocol-stable part of each plateau. Test adds held-out and extrapolated plateaus.",
+      "generation_timestamp_utc": "2026-10-26T04:11:43.308501+00:00"
+    },
+    {
+      "scenario_id": "TEMP_RAMPS",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "temperature/TEMP_RAMPS.csv",
+      "metadata_file": "metadata/TEMP_RAMPS.metadata.json",
+      "csv_sha256": "b5c4d153a0e96db55d9b638ba847ec80897a368ceb781296a00bb95394e7be2f",
+      "record_count": 6608,
+      "run_count": 3,
+      "partition_records": {
+        "calibration": 2440,
+        "validation": 2440,
+        "test": 1728
+      },
+      "run_seeds": {
+        "SYN2-TEMP_RAMPS-CAL01": 2616920269,
+        "SYN2-TEMP_RAMPS-VAL01": 578908247,
+        "SYN2-TEMP_RAMPS-TST01": 1363210345
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Heating and cooling ramps (25 -> 75 -> 30 degC) exposing first-order sensor lag; test uses a held-out faster ramp rate.",
+      "generation_timestamp_utc": "2026-10-26T04:11:43.483561+00:00"
+    },
+    {
+      "scenario_id": "TEMP_DRIFT",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "temperature/TEMP_DRIFT.csv",
+      "metadata_file": "metadata/TEMP_DRIFT.metadata.json",
+      "csv_sha256": "695a4a99e7fd650737c04c5184f6b22408f5d2a59ee8cd4b110f8cf0ce9210a5",
+      "record_count": 9000,
+      "run_count": 5,
+      "partition_records": {
+        "calibration": 1800,
+        "validation": 3600,
+        "test": 3600
+      },
+      "run_seeds": {
+        "SYN2-TEMP_DRIFT-CAL01": 656981030,
+        "SYN2-TEMP_DRIFT-VAL01": 1167898489,
+        "SYN2-TEMP_DRIFT-VAL02": 724132135,
+        "SYN2-TEMP_DRIFT-TST01": 680118473,
+        "SYN2-TEMP_DRIFT-TST02": 1591700825
+      },
+      "fault_row_fraction": 0.26666666666666666,
+      "fault_events": 2,
+      "missing_rate": 0.0,
+      "description": "Stable 45 degC plateau; drift runs contain slow sensor drift (+0.5 degC/h validation, -0.8 degC/h test) with known onset; others are controls.",
+      "generation_timestamp_utc": "2026-10-26T04:11:43.680585+00:00"
+    },
+    {
+      "scenario_id": "TEMP_INTEGRITY",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "temperature/TEMP_INTEGRITY.csv",
+      "metadata_file": "metadata/TEMP_INTEGRITY.metadata.json",
+      "csv_sha256": "7506f76078bb93f6621640dbbd564c2cdd767ef2c2642d2350ab60bac3ae4f77",
+      "record_count": 3499,
+      "run_count": 3,
+      "partition_records": {
+        "calibration": 1162,
+        "validation": 1158,
+        "test": 1179
+      },
+      "run_seeds": {
+        "SYN2-TEMP_INTEGRITY-CAL01": 948530865,
+        "SYN2-TEMP_INTEGRITY-VAL01": 3178429183,
+        "SYN2-TEMP_INTEGRITY-TST01": 3489526281
+      },
+      "fault_row_fraction": 0.015147184909974278,
+      "fault_events": 30,
+      "missing_rate": 0.006573306659045442,
+      "description": "Abrupt true temperature changes (bath transfers, labelled as process events, not faults) with outliers, missing observations, invalid status and communication gaps.",
+      "generation_timestamp_utc": "2026-10-26T04:11:43.846619+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_NONE",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_NONE.csv",
+      "metadata_file": "metadata/FD_VOLT_NONE.metadata.json",
+      "csv_sha256": "127bafe9414c7ab7d14a49a970b0829cbd324422274740308ee1326dfcc0062f",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_NONE-CAL01": 2651181780,
+        "SYN2-FD_VOLT_NONE-VAL01": 3699701544,
+        "SYN2-FD_VOLT_NONE-TST01": 2684969948,
+        "SYN2-FD_VOLT_NONE-TST02": 4260728108
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: fault-free control runs.",
+      "generation_timestamp_utc": "2026-10-26T04:11:43.936773+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_ISOLATED_SPIKE",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_ISOLATED_SPIKE.csv",
+      "metadata_file": "metadata/FD_VOLT_ISOLATED_SPIKE.metadata.json",
+      "csv_sha256": "a287fb56840c39c21d3917efef51cce21fa00d152be2219f93c9978260fb0d2d",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_ISOLATED_SPIKE-CAL01": 684906160,
+        "SYN2-FD_VOLT_ISOLATED_SPIKE-VAL01": 908610530,
+        "SYN2-FD_VOLT_ISOLATED_SPIKE-TST01": 3125137924,
+        "SYN2-FD_VOLT_ISOLATED_SPIKE-TST02": 1514558330
+      },
+      "fault_row_fraction": 0.008333333333333333,
+      "fault_events": 20,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'isolated_spike' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.003764+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_OFFSET_SHIFT",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_OFFSET_SHIFT.csv",
+      "metadata_file": "metadata/FD_VOLT_OFFSET_SHIFT.metadata.json",
+      "csv_sha256": "1254de99bd157fc5a9e13eaf1b4f83766d0cee14f2aecad69109ddc6f00e9eaa",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_OFFSET_SHIFT-CAL01": 3786782250,
+        "SYN2-FD_VOLT_OFFSET_SHIFT-VAL01": 1881358938,
+        "SYN2-FD_VOLT_OFFSET_SHIFT-TST01": 2891548534,
+        "SYN2-FD_VOLT_OFFSET_SHIFT-TST02": 1186134150
+      },
+      "fault_row_fraction": 0.5479166666666667,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'offset_shift' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.071916+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_GAIN_CHANGE",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_GAIN_CHANGE.csv",
+      "metadata_file": "metadata/FD_VOLT_GAIN_CHANGE.metadata.json",
+      "csv_sha256": "fb2722eadff77adb5befa2b61c0dec8d1900f5b4d581f998a06ad49b778f68dc",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_GAIN_CHANGE-CAL01": 171434175,
+        "SYN2-FD_VOLT_GAIN_CHANGE-VAL01": 3377486326,
+        "SYN2-FD_VOLT_GAIN_CHANGE-TST01": 3917101979,
+        "SYN2-FD_VOLT_GAIN_CHANGE-TST02": 4202028675
+      },
+      "fault_row_fraction": 0.39458333333333334,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'gain_change' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.135032+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_GRADUAL_DRIFT",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_GRADUAL_DRIFT.csv",
+      "metadata_file": "metadata/FD_VOLT_GRADUAL_DRIFT.metadata.json",
+      "csv_sha256": "5330d97d01f7e315ad1f63156e65363ff968fcfee69344ae7e411a50f7e03786",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_GRADUAL_DRIFT-CAL01": 3461817688,
+        "SYN2-FD_VOLT_GRADUAL_DRIFT-VAL01": 3226014619,
+        "SYN2-FD_VOLT_GRADUAL_DRIFT-TST01": 506911044,
+        "SYN2-FD_VOLT_GRADUAL_DRIFT-TST02": 4199666822
+      },
+      "fault_row_fraction": 0.38458333333333333,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'gradual_drift' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.201897+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_ABRUPT_CHANGE",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_ABRUPT_CHANGE.csv",
+      "metadata_file": "metadata/FD_VOLT_ABRUPT_CHANGE.metadata.json",
+      "csv_sha256": "93ac1b1f315426359f1b9979bdcf64267e7c7867a17319a603ac9af0bbe218c7",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_ABRUPT_CHANGE-CAL01": 3396298145,
+        "SYN2-FD_VOLT_ABRUPT_CHANGE-VAL01": 3961630931,
+        "SYN2-FD_VOLT_ABRUPT_CHANGE-TST01": 1302113899,
+        "SYN2-FD_VOLT_ABRUPT_CHANGE-TST02": 3291012194
+      },
+      "fault_row_fraction": 0.07625,
+      "fault_events": 8,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'abrupt_change' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.276357+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_STUCK_SIGNAL",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_STUCK_SIGNAL.csv",
+      "metadata_file": "metadata/FD_VOLT_STUCK_SIGNAL.metadata.json",
+      "csv_sha256": "e091b5ce488fa9f5c73a1cf1203566bffd2f7a36f22ff7088ee9fe27b0727b6a",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_STUCK_SIGNAL-CAL01": 2388197478,
+        "SYN2-FD_VOLT_STUCK_SIGNAL-VAL01": 519925965,
+        "SYN2-FD_VOLT_STUCK_SIGNAL-TST01": 1214422907,
+        "SYN2-FD_VOLT_STUCK_SIGNAL-TST02": 2715789586
+      },
+      "fault_row_fraction": 0.10458333333333333,
+      "fault_events": 8,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'stuck_signal' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.342959+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_MISSING_SAMPLES",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_MISSING_SAMPLES.csv",
+      "metadata_file": "metadata/FD_VOLT_MISSING_SAMPLES.metadata.json",
+      "csv_sha256": "567e9d4d842d65f85b626715f6a9829f584f8f22496d4228d3312d8c30ad6040",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_MISSING_SAMPLES-CAL01": 3175226098,
+        "SYN2-FD_VOLT_MISSING_SAMPLES-VAL01": 533210891,
+        "SYN2-FD_VOLT_MISSING_SAMPLES-TST01": 816819982,
+        "SYN2-FD_VOLT_MISSING_SAMPLES-TST02": 2696869699
+      },
+      "fault_row_fraction": 0.015833333333333335,
+      "fault_events": 12,
+      "missing_rate": 0.015833333333333335,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'missing_samples' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.415853+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_DUPLICATE_SEQUENCE",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_DUPLICATE_SEQUENCE.csv",
+      "metadata_file": "metadata/FD_VOLT_DUPLICATE_SEQUENCE.metadata.json",
+      "csv_sha256": "74389da67138a4392e97e6e29cc756c4a8908807e3cdc61ec7dbbf1ffe3e4380",
+      "record_count": 2416,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 604,
+        "validation": 604,
+        "test": 1208
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_DUPLICATE_SEQUENCE-CAL01": 1164450989,
+        "SYN2-FD_VOLT_DUPLICATE_SEQUENCE-VAL01": 231577569,
+        "SYN2-FD_VOLT_DUPLICATE_SEQUENCE-TST01": 2447535158,
+        "SYN2-FD_VOLT_DUPLICATE_SEQUENCE-TST02": 2858453995
+      },
+      "fault_row_fraction": 0.006622516556291391,
+      "fault_events": 16,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'duplicate_sequence' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.486568+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_COMMUNICATION_GAP",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_COMMUNICATION_GAP.csv",
+      "metadata_file": "metadata/FD_VOLT_COMMUNICATION_GAP.metadata.json",
+      "csv_sha256": "d861b1cfba777918d9bb70791eb130f743a460d9017d96dd189b16dad78449db",
+      "record_count": 2272,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 564,
+        "validation": 563,
+        "test": 1145
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_COMMUNICATION_GAP-CAL01": 3515010913,
+        "SYN2-FD_VOLT_COMMUNICATION_GAP-VAL01": 2108118361,
+        "SYN2-FD_VOLT_COMMUNICATION_GAP-TST01": 3888633151,
+        "SYN2-FD_VOLT_COMMUNICATION_GAP-TST02": 3632902654
+      },
+      "fault_row_fraction": 0.00528169014084507,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'communication_gap' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.554770+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_INVALID_STATUS",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_INVALID_STATUS.csv",
+      "metadata_file": "metadata/FD_VOLT_INVALID_STATUS.metadata.json",
+      "csv_sha256": "323ebd4a564a5cfcab7d5a4d3cc98dd27820efb267ebffaabe16731d9e34faf2",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_INVALID_STATUS-CAL01": 278361566,
+        "SYN2-FD_VOLT_INVALID_STATUS-VAL01": 3228457836,
+        "SYN2-FD_VOLT_INVALID_STATUS-TST01": 556055254,
+        "SYN2-FD_VOLT_INVALID_STATUS-TST02": 3904203530
+      },
+      "fault_row_fraction": 0.012083333333333333,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'invalid_status' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.623362+00:00"
+    },
+    {
+      "scenario_id": "FD_VOLT_NON_FINITE",
+      "group": "fault_detection",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V01",
+      "csv_file": "fault_detection/FD_VOLT_NON_FINITE.csv",
+      "metadata_file": "metadata/FD_VOLT_NON_FINITE.metadata.json",
+      "csv_sha256": "37cb678174d21773938369ef40767133c5085fb619b70879d76b0aab49153d4e",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_VOLT_NON_FINITE-CAL01": 3712013171,
+        "SYN2-FD_VOLT_NON_FINITE-VAL01": 639336178,
+        "SYN2-FD_VOLT_NON_FINITE-TST01": 3908189039,
+        "SYN2-FD_VOLT_NON_FINITE-TST02": 2093621978
+      },
+      "fault_row_fraction": 0.005,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, voltage_V: individually labelled 'non_finite' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.686999+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_NONE",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_NONE.csv",
+      "metadata_file": "metadata/FD_CURR_NONE.metadata.json",
+      "csv_sha256": "cfba00aa8c94c52e07b100ec949d16af3a50cbb4965c736407330630ffb8b5d9",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_NONE-CAL01": 2508561402,
+        "SYN2-FD_CURR_NONE-VAL01": 49463368,
+        "SYN2-FD_CURR_NONE-TST01": 1583371673,
+        "SYN2-FD_CURR_NONE-TST02": 4115525931
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: fault-free control runs.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.765425+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_ISOLATED_SPIKE",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_ISOLATED_SPIKE.csv",
+      "metadata_file": "metadata/FD_CURR_ISOLATED_SPIKE.metadata.json",
+      "csv_sha256": "5c9ba5c1bc7eaa00a5d1da3f383cc296fd06c63106e0b83572ca7ef7ba983402",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_ISOLATED_SPIKE-CAL01": 2031188232,
+        "SYN2-FD_CURR_ISOLATED_SPIKE-VAL01": 2426722416,
+        "SYN2-FD_CURR_ISOLATED_SPIKE-TST01": 33674450,
+        "SYN2-FD_CURR_ISOLATED_SPIKE-TST02": 1711697328
+      },
+      "fault_row_fraction": 0.008333333333333333,
+      "fault_events": 20,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'isolated_spike' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.839812+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_OFFSET_SHIFT",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_OFFSET_SHIFT.csv",
+      "metadata_file": "metadata/FD_CURR_OFFSET_SHIFT.metadata.json",
+      "csv_sha256": "ff4953f7dfbb062e356b495a5084e5b6936393f83321ba7b0973a6b39464d833",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_OFFSET_SHIFT-CAL01": 1033812642,
+        "SYN2-FD_CURR_OFFSET_SHIFT-VAL01": 4141058989,
+        "SYN2-FD_CURR_OFFSET_SHIFT-TST01": 2327796247,
+        "SYN2-FD_CURR_OFFSET_SHIFT-TST02": 1803331122
+      },
+      "fault_row_fraction": 0.6995833333333333,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'offset_shift' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.913999+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_GAIN_CHANGE",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_GAIN_CHANGE.csv",
+      "metadata_file": "metadata/FD_CURR_GAIN_CHANGE.metadata.json",
+      "csv_sha256": "115f65fa6408da00fc09a4eb641b39b4dd62c87821f105a1bbc68b32cdb14f2c",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_GAIN_CHANGE-CAL01": 1976795665,
+        "SYN2-FD_CURR_GAIN_CHANGE-VAL01": 3306464807,
+        "SYN2-FD_CURR_GAIN_CHANGE-TST01": 1859916217,
+        "SYN2-FD_CURR_GAIN_CHANGE-TST02": 334553310
+      },
+      "fault_row_fraction": 0.5733333333333334,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'gain_change' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:44.998520+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_GRADUAL_DRIFT",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_GRADUAL_DRIFT.csv",
+      "metadata_file": "metadata/FD_CURR_GRADUAL_DRIFT.metadata.json",
+      "csv_sha256": "f69a784955b819d85c5056a7ed3a1c67c5ba162832593b807300e75bd6264142",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_GRADUAL_DRIFT-CAL01": 1434154906,
+        "SYN2-FD_CURR_GRADUAL_DRIFT-VAL01": 707309629,
+        "SYN2-FD_CURR_GRADUAL_DRIFT-TST01": 2809442988,
+        "SYN2-FD_CURR_GRADUAL_DRIFT-TST02": 1642475889
+      },
+      "fault_row_fraction": 0.51375,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'gradual_drift' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.078780+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_ABRUPT_CHANGE",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_ABRUPT_CHANGE.csv",
+      "metadata_file": "metadata/FD_CURR_ABRUPT_CHANGE.metadata.json",
+      "csv_sha256": "ea553d68d74856a344627c08f4c6e5b7ed4db056bc4ffcfe0d294601100018ea",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_ABRUPT_CHANGE-CAL01": 3759041465,
+        "SYN2-FD_CURR_ABRUPT_CHANGE-VAL01": 3814401881,
+        "SYN2-FD_CURR_ABRUPT_CHANGE-TST01": 2124496181,
+        "SYN2-FD_CURR_ABRUPT_CHANGE-TST02": 1540312484
+      },
+      "fault_row_fraction": 0.12333333333333334,
+      "fault_events": 8,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'abrupt_change' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.171371+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_STUCK_SIGNAL",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_STUCK_SIGNAL.csv",
+      "metadata_file": "metadata/FD_CURR_STUCK_SIGNAL.metadata.json",
+      "csv_sha256": "96a93b21c6b344b1d85fe5f19bf8828ff4aa8dcf708406f695049b9f48fc6d31",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_STUCK_SIGNAL-CAL01": 1853575788,
+        "SYN2-FD_CURR_STUCK_SIGNAL-VAL01": 2757000516,
+        "SYN2-FD_CURR_STUCK_SIGNAL-TST01": 2913745255,
+        "SYN2-FD_CURR_STUCK_SIGNAL-TST02": 2907328237
+      },
+      "fault_row_fraction": 0.08041666666666666,
+      "fault_events": 8,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'stuck_signal' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.255104+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_MISSING_SAMPLES",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_MISSING_SAMPLES.csv",
+      "metadata_file": "metadata/FD_CURR_MISSING_SAMPLES.metadata.json",
+      "csv_sha256": "d0f09d47b690682e7f0d6e1b126094573908b0aacdce0db4243e8c0cbef1279a",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_MISSING_SAMPLES-CAL01": 3753884889,
+        "SYN2-FD_CURR_MISSING_SAMPLES-VAL01": 3851757826,
+        "SYN2-FD_CURR_MISSING_SAMPLES-TST01": 1872333146,
+        "SYN2-FD_CURR_MISSING_SAMPLES-TST02": 1987244612
+      },
+      "fault_row_fraction": 0.014583333333333334,
+      "fault_events": 12,
+      "missing_rate": 0.014583333333333334,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'missing_samples' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.339193+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_DUPLICATE_SEQUENCE",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_DUPLICATE_SEQUENCE.csv",
+      "metadata_file": "metadata/FD_CURR_DUPLICATE_SEQUENCE.metadata.json",
+      "csv_sha256": "cff686f5d51f27661adcd5990e6a66ec7d1566e9b65c794fe58ea407902e47fd",
+      "record_count": 2416,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 604,
+        "validation": 604,
+        "test": 1208
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_DUPLICATE_SEQUENCE-CAL01": 3789178186,
+        "SYN2-FD_CURR_DUPLICATE_SEQUENCE-VAL01": 517425610,
+        "SYN2-FD_CURR_DUPLICATE_SEQUENCE-TST01": 1624127910,
+        "SYN2-FD_CURR_DUPLICATE_SEQUENCE-TST02": 2581155838
+      },
+      "fault_row_fraction": 0.006622516556291391,
+      "fault_events": 16,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'duplicate_sequence' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.416253+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_COMMUNICATION_GAP",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_COMMUNICATION_GAP.csv",
+      "metadata_file": "metadata/FD_CURR_COMMUNICATION_GAP.metadata.json",
+      "csv_sha256": "6700eaf9dfd4c330e6783233e6a4a2972afd2185d1c794f898425ca29f7b76ca",
+      "record_count": 2262,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 573,
+        "validation": 573,
+        "test": 1116
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_COMMUNICATION_GAP-CAL01": 2940527174,
+        "SYN2-FD_CURR_COMMUNICATION_GAP-VAL01": 3502386079,
+        "SYN2-FD_CURR_COMMUNICATION_GAP-TST01": 3888596512,
+        "SYN2-FD_CURR_COMMUNICATION_GAP-TST02": 1533209038
+      },
+      "fault_row_fraction": 0.005305039787798408,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'communication_gap' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.497356+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_INVALID_STATUS",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_INVALID_STATUS.csv",
+      "metadata_file": "metadata/FD_CURR_INVALID_STATUS.metadata.json",
+      "csv_sha256": "9735e14cc267992660bf0263556a9f854a7b575c3e41c2084525e97c74930500",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_INVALID_STATUS-CAL01": 2986888742,
+        "SYN2-FD_CURR_INVALID_STATUS-VAL01": 2329777821,
+        "SYN2-FD_CURR_INVALID_STATUS-TST01": 3040380350,
+        "SYN2-FD_CURR_INVALID_STATUS-TST02": 3328996277
+      },
+      "fault_row_fraction": 0.01,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'invalid_status' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.569543+00:00"
+    },
+    {
+      "scenario_id": "FD_CURR_NON_FINITE",
+      "group": "fault_detection",
+      "measurand": "current_mA",
+      "device_id": "DUT_I01",
+      "csv_file": "fault_detection/FD_CURR_NON_FINITE.csv",
+      "metadata_file": "metadata/FD_CURR_NON_FINITE.metadata.json",
+      "csv_sha256": "6fa9414f3a0751207f30dfb8e06767927315e6f6976b7a2e6903f38569f8af6b",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_CURR_NON_FINITE-CAL01": 3866132544,
+        "SYN2-FD_CURR_NON_FINITE-VAL01": 2617694954,
+        "SYN2-FD_CURR_NON_FINITE-TST01": 3000807836,
+        "SYN2-FD_CURR_NON_FINITE-TST02": 1611908342
+      },
+      "fault_row_fraction": 0.005,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, current_mA: individually labelled 'non_finite' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.645809+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_NONE",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_NONE.csv",
+      "metadata_file": "metadata/FD_TEMP_NONE.metadata.json",
+      "csv_sha256": "814f0754c596158b5190f4b0a5aa96d5224a85cf22344939eab6c4230e2740e7",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_NONE-CAL01": 1876870062,
+        "SYN2-FD_TEMP_NONE-VAL01": 3888467148,
+        "SYN2-FD_TEMP_NONE-TST01": 3679706786,
+        "SYN2-FD_TEMP_NONE-TST02": 2727293289
+      },
+      "fault_row_fraction": 0.0,
+      "fault_events": 0,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: fault-free control runs.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.726045+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_ISOLATED_SPIKE",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_ISOLATED_SPIKE.csv",
+      "metadata_file": "metadata/FD_TEMP_ISOLATED_SPIKE.metadata.json",
+      "csv_sha256": "98a859a1ea4b6574023f26c1109de55986d9c82a9874038c568d2621985d97c1",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_ISOLATED_SPIKE-CAL01": 3171834556,
+        "SYN2-FD_TEMP_ISOLATED_SPIKE-VAL01": 2078269709,
+        "SYN2-FD_TEMP_ISOLATED_SPIKE-TST01": 4199284357,
+        "SYN2-FD_TEMP_ISOLATED_SPIKE-TST02": 3597917654
+      },
+      "fault_row_fraction": 0.008333333333333333,
+      "fault_events": 20,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'isolated_spike' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.797386+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_OFFSET_SHIFT",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_OFFSET_SHIFT.csv",
+      "metadata_file": "metadata/FD_TEMP_OFFSET_SHIFT.metadata.json",
+      "csv_sha256": "bf66bfee1bc17db18edb596e7d864454f827971c04e1a1453d330e6d9c7f306b",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_OFFSET_SHIFT-CAL01": 1346506501,
+        "SYN2-FD_TEMP_OFFSET_SHIFT-VAL01": 2949286367,
+        "SYN2-FD_TEMP_OFFSET_SHIFT-TST01": 925291997,
+        "SYN2-FD_TEMP_OFFSET_SHIFT-TST02": 3687193158
+      },
+      "fault_row_fraction": 0.58375,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'offset_shift' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.869638+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_GAIN_CHANGE",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_GAIN_CHANGE.csv",
+      "metadata_file": "metadata/FD_TEMP_GAIN_CHANGE.metadata.json",
+      "csv_sha256": "6f631ae78c3867e68cf2c41ac2951f4ca3ec81acecacd103d4e7fea6597e0549",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_GAIN_CHANGE-CAL01": 3970072681,
+        "SYN2-FD_TEMP_GAIN_CHANGE-VAL01": 1987866137,
+        "SYN2-FD_TEMP_GAIN_CHANGE-TST01": 1221689637,
+        "SYN2-FD_TEMP_GAIN_CHANGE-TST02": 2176504661
+      },
+      "fault_row_fraction": 0.43416666666666665,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'gain_change' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:45.943750+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_GRADUAL_DRIFT",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_GRADUAL_DRIFT.csv",
+      "metadata_file": "metadata/FD_TEMP_GRADUAL_DRIFT.metadata.json",
+      "csv_sha256": "93c8b16526e9bfc054452c1a1be43189a2405dc623306f3f3ed4b614180c7674",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_GRADUAL_DRIFT-CAL01": 1004505998,
+        "SYN2-FD_TEMP_GRADUAL_DRIFT-VAL01": 1258604979,
+        "SYN2-FD_TEMP_GRADUAL_DRIFT-TST01": 3230622633,
+        "SYN2-FD_TEMP_GRADUAL_DRIFT-TST02": 2552422719
+      },
+      "fault_row_fraction": 0.4870833333333333,
+      "fault_events": 4,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'gradual_drift' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.009061+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_ABRUPT_CHANGE",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_ABRUPT_CHANGE.csv",
+      "metadata_file": "metadata/FD_TEMP_ABRUPT_CHANGE.metadata.json",
+      "csv_sha256": "a1dca50d8d82038bebb12954df272bc384b770a032cf9716c5c431ddf12ae81c",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_ABRUPT_CHANGE-CAL01": 518089925,
+        "SYN2-FD_TEMP_ABRUPT_CHANGE-VAL01": 4273688035,
+        "SYN2-FD_TEMP_ABRUPT_CHANGE-TST01": 1162311150,
+        "SYN2-FD_TEMP_ABRUPT_CHANGE-TST02": 1704429491
+      },
+      "fault_row_fraction": 0.09333333333333334,
+      "fault_events": 8,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'abrupt_change' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.096853+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_STUCK_SIGNAL",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_STUCK_SIGNAL.csv",
+      "metadata_file": "metadata/FD_TEMP_STUCK_SIGNAL.metadata.json",
+      "csv_sha256": "1f3cf39c3f0ad002639d905d95f322fa09be620c54d5c8acccc085cda571e7a4",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_STUCK_SIGNAL-CAL01": 871542376,
+        "SYN2-FD_TEMP_STUCK_SIGNAL-VAL01": 4057252849,
+        "SYN2-FD_TEMP_STUCK_SIGNAL-TST01": 211525524,
+        "SYN2-FD_TEMP_STUCK_SIGNAL-TST02": 4042407657
+      },
+      "fault_row_fraction": 0.11166666666666666,
+      "fault_events": 8,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'stuck_signal' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.176769+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_MISSING_SAMPLES",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_MISSING_SAMPLES.csv",
+      "metadata_file": "metadata/FD_TEMP_MISSING_SAMPLES.metadata.json",
+      "csv_sha256": "f85cb162ba682f83c95cb33330cfc029456dc6003e36eb96f69e89255d442378",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_MISSING_SAMPLES-CAL01": 2018288546,
+        "SYN2-FD_TEMP_MISSING_SAMPLES-VAL01": 3343850222,
+        "SYN2-FD_TEMP_MISSING_SAMPLES-TST01": 4046678060,
+        "SYN2-FD_TEMP_MISSING_SAMPLES-TST02": 1722330448
+      },
+      "fault_row_fraction": 0.01375,
+      "fault_events": 12,
+      "missing_rate": 0.01375,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'missing_samples' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.247156+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_DUPLICATE_SEQUENCE",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_DUPLICATE_SEQUENCE.csv",
+      "metadata_file": "metadata/FD_TEMP_DUPLICATE_SEQUENCE.metadata.json",
+      "csv_sha256": "2dac530f8902bcac02536c4e7b339ac88d4b685c502598f9652c6051c4a63b8a",
+      "record_count": 2416,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 604,
+        "validation": 604,
+        "test": 1208
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_DUPLICATE_SEQUENCE-CAL01": 1606998649,
+        "SYN2-FD_TEMP_DUPLICATE_SEQUENCE-VAL01": 3484063631,
+        "SYN2-FD_TEMP_DUPLICATE_SEQUENCE-TST01": 264089598,
+        "SYN2-FD_TEMP_DUPLICATE_SEQUENCE-TST02": 311343462
+      },
+      "fault_row_fraction": 0.006622516556291391,
+      "fault_events": 16,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'duplicate_sequence' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.319047+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_COMMUNICATION_GAP",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_COMMUNICATION_GAP.csv",
+      "metadata_file": "metadata/FD_TEMP_COMMUNICATION_GAP.metadata.json",
+      "csv_sha256": "4647db8b59912f90d8d90f1397745dfae39efc720c59213d13b2f39e3bb792fb",
+      "record_count": 2282,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 565,
+        "validation": 578,
+        "test": 1139
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_COMMUNICATION_GAP-CAL01": 2317412007,
+        "SYN2-FD_TEMP_COMMUNICATION_GAP-VAL01": 703141552,
+        "SYN2-FD_TEMP_COMMUNICATION_GAP-TST01": 2734811341,
+        "SYN2-FD_TEMP_COMMUNICATION_GAP-TST02": 3165769951
+      },
+      "fault_row_fraction": 0.0052585451358457495,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'communication_gap' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.403617+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_INVALID_STATUS",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_INVALID_STATUS.csv",
+      "metadata_file": "metadata/FD_TEMP_INVALID_STATUS.metadata.json",
+      "csv_sha256": "a45cb6383081739f6abb7216af13159910e88110db825a7345089d72fc14c8ab",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_INVALID_STATUS-CAL01": 3845321611,
+        "SYN2-FD_TEMP_INVALID_STATUS-VAL01": 3955345373,
+        "SYN2-FD_TEMP_INVALID_STATUS-TST01": 1096440331,
+        "SYN2-FD_TEMP_INVALID_STATUS-TST02": 1945094122
+      },
+      "fault_row_fraction": 0.010416666666666666,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'invalid_status' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.473867+00:00"
+    },
+    {
+      "scenario_id": "FD_TEMP_NON_FINITE",
+      "group": "fault_detection",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T01",
+      "csv_file": "fault_detection/FD_TEMP_NON_FINITE.csv",
+      "metadata_file": "metadata/FD_TEMP_NON_FINITE.metadata.json",
+      "csv_sha256": "6823d00397c64f1cf5b7decf65fe6cf61abe16b64f5872bd4999a42b886d927a",
+      "record_count": 2400,
+      "run_count": 4,
+      "partition_records": {
+        "calibration": 600,
+        "validation": 600,
+        "test": 1200
+      },
+      "run_seeds": {
+        "SYN2-FD_TEMP_NON_FINITE-CAL01": 2638279697,
+        "SYN2-FD_TEMP_NON_FINITE-VAL01": 3689587042,
+        "SYN2-FD_TEMP_NON_FINITE-TST01": 622147331,
+        "SYN2-FD_TEMP_NON_FINITE-TST02": 1322043351
+      },
+      "fault_row_fraction": 0.005,
+      "fault_events": 12,
+      "missing_rate": 0.0,
+      "description": "Fault-detection benchmark, temperature_C: individually labelled 'non_finite' faults.",
+      "generation_timestamp_utc": "2026-10-26T04:11:46.545452+00:00"
+    }
+  ],
+  "file_status": {
+    "VOLT_SWEEP_LINEAR": "unchanged",
+    "VOLT_SWEEP_NONLINEAR": "unchanged",
+    "VOLT_REPEATABILITY": "unchanged",
+    "VOLT_DRIFT": "unchanged",
+    "VOLT_INTEGRITY": "unchanged",
+    "CURR_SWEEP_AMBIENT": "unchanged",
+    "CURR_SWEEP_SELFHEAT": "unchanged",
+    "CURR_LOAD_STEPS": "unchanged",
+    "CURR_DRIFT": "unchanged",
+    "CURR_INTEGRITY": "unchanged",
+    "TEMP_PLATEAUS": "unchanged",
+    "TEMP_RAMPS": "unchanged",
+    "TEMP_DRIFT": "unchanged",
+    "TEMP_INTEGRITY": "unchanged",
+    "FD_VOLT_NONE": "unchanged",
+    "FD_VOLT_ISOLATED_SPIKE": "unchanged",
+    "FD_VOLT_OFFSET_SHIFT": "unchanged",
+    "FD_VOLT_GAIN_CHANGE": "unchanged",
+    "FD_VOLT_GRADUAL_DRIFT": "unchanged",
+    "FD_VOLT_ABRUPT_CHANGE": "unchanged",
+    "FD_VOLT_STUCK_SIGNAL": "unchanged",
+    "FD_VOLT_MISSING_SAMPLES": "unchanged",
+    "FD_VOLT_DUPLICATE_SEQUENCE": "unchanged",
+    "FD_VOLT_COMMUNICATION_GAP": "unchanged",
+    "FD_VOLT_INVALID_STATUS": "unchanged",
+    "FD_VOLT_NON_FINITE": "unchanged",
+    "FD_CURR_NONE": "unchanged",
+    "FD_CURR_ISOLATED_SPIKE": "unchanged",
+    "FD_CURR_OFFSET_SHIFT": "unchanged",
+    "FD_CURR_GAIN_CHANGE": "unchanged",
+    "FD_CURR_GRADUAL_DRIFT": "unchanged",
+    "FD_CURR_ABRUPT_CHANGE": "unchanged",
+    "FD_CURR_STUCK_SIGNAL": "unchanged",
+    "FD_CURR_MISSING_SAMPLES": "unchanged",
+    "FD_CURR_DUPLICATE_SEQUENCE": "unchanged",
+    "FD_CURR_COMMUNICATION_GAP": "unchanged",
+    "FD_CURR_INVALID_STATUS": "unchanged",
+    "FD_CURR_NON_FINITE": "unchanged",
+    "FD_TEMP_NONE": "unchanged",
+    "FD_TEMP_ISOLATED_SPIKE": "unchanged",
+    "FD_TEMP_OFFSET_SHIFT": "unchanged",
+    "FD_TEMP_GAIN_CHANGE": "unchanged",
+    "FD_TEMP_GRADUAL_DRIFT": "unchanged",
+    "FD_TEMP_ABRUPT_CHANGE": "unchanged",
+    "FD_TEMP_STUCK_SIGNAL": "unchanged",
+    "FD_TEMP_MISSING_SAMPLES": "unchanged",
+    "FD_TEMP_DUPLICATE_SEQUENCE": "unchanged",
+    "FD_TEMP_COMMUNICATION_GAP": "unchanged",
+    "FD_TEMP_INVALID_STATUS": "unchanged",
+    "FD_TEMP_NON_FINITE": "unchanged"
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings. Parameters are documented simulation assumptions and are not verified specifications of the INA219, DS18B20 or any other physical device."
+}

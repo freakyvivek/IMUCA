@@ -1,0 +1,147 @@
+{
+  "imuca_framework_version": "1.0.0",
+  "experiment_id": "EXP_01_VOLTAGE",
+  "timestamp_utc": "2026-10-25T06:49:02.205581+00:00",
+  "disclaimer": "SYNTHETIC EXPERIMENT: For algorithm validation only.",
+  "configuration": {
+    "scenario_name": "nominal_voltage_baseline",
+    "description": "Nominal clean 10-point voltage calibration sweep (0.5V - 5.0V) with 1mV repeatability noise.",
+    "measurand": "voltage_V",
+    "num_samples": 100,
+    "sampling_period_s": 1.0,
+    "random_seed": 101,
+    "profile_type": "stepped",
+    "nominal_min": 0.5,
+    "nominal_max": 5.0,
+    "num_steps": 10,
+    "dwell_per_step": 10,
+    "offset": 0.005,
+    "gain_error": 0.002,
+    "quantization_step": 0.001,
+    "noise_std": 0.001,
+    "drift_rate_per_s": 0.0,
+    "temp_coefficient": 0.0,
+    "nominal_env_temp_c": 23.0,
+    "outlier_indices": [],
+    "outlier_magnitudes": [],
+    "missing_sample_indices": [],
+    "duplicate_seq_indices": [],
+    "gap_after_indices": [],
+    "gap_sizes": [],
+    "sensor_fault_indices": [],
+    "fault_status_value": "ERROR_COMM_TIMEOUT"
+  },
+  "data_quality": {
+    "total_records": 100,
+    "clean_records": 100,
+    "error_records": 0,
+    "warning_records": 0,
+    "issue_summary_by_type": {}
+  },
+  "uncalibrated_metrics": {
+    "n": 100,
+    "mean_bias": 0.010404015385710232,
+    "mae": 0.010404015385710232,
+    "rmse": 0.010826517974521074,
+    "max_absolute_error": 0.016139221528437275,
+    "mean_percentage_error": 0.49035975552932703
+  },
+  "uncertainty_budget": {
+    "measurand_name": "DC Voltage",
+    "measurand_unit": "V",
+    "nominal_value": 5.0,
+    "combined_standard_uncertainty": 0.003022875746334568,
+    "effective_degrees_of_freedom": 39588.162330909094,
+    "coverage_factor_k": 2.0,
+    "confidence_level": 0.95,
+    "expanded_uncertainty": 0.006045751492669136,
+    "reported_result": "(5.0000 +/- 0.0061) V (k=2.00, 95% confidence)",
+    "dominant_component": {
+      "name": "DUT Specification Tolerance",
+      "share_percent": 91.19649805447477,
+      "type": "B"
+    },
+    "components": [
+      {
+        "name": "Repeatability (Type A)",
+        "type": "A",
+        "distribution": "NORMAL",
+        "standard_uncertainty": 0.00037118429085532576,
+        "sensitivity_coefficient": 1.0,
+        "uncertainty_contribution": 0.00037118429085532576,
+        "variance_share_percent": 1.507782101167243,
+        "unit": "V",
+        "notes": "Calculated from n=10 repeated observations (s=0.00117379 V)"
+      },
+      {
+        "name": "Display Resolution",
+        "type": "B",
+        "distribution": "RECTANGULAR",
+        "standard_uncertainty": 0.0005773502691896258,
+        "sensitivity_coefficient": 1.0,
+        "uncertainty_contribution": 0.0005773502691896258,
+        "variance_share_percent": 3.6478599221789914,
+        "unit": "V",
+        "notes": ""
+      },
+      {
+        "name": "DUT Specification Tolerance",
+        "type": "B",
+        "distribution": "RECTANGULAR",
+        "standard_uncertainty": 0.002886751345948129,
+        "sensitivity_coefficient": 1.0,
+        "uncertainty_contribution": 0.002886751345948129,
+        "variance_share_percent": 91.19649805447477,
+        "unit": "V",
+        "notes": ""
+      },
+      {
+        "name": "Reference Standard (Calibrated)",
+        "type": "B",
+        "distribution": "NORMAL",
+        "standard_uncertainty": 0.0005,
+        "sensitivity_coefficient": 1.0,
+        "uncertainty_contribution": 0.0005,
+        "variance_share_percent": 2.735894941634243,
+        "unit": "V",
+        "notes": ""
+      },
+      {
+        "name": "Ambient Temperature Effect",
+        "type": "B",
+        "distribution": "RECTANGULAR",
+        "standard_uncertainty": 0.0002886751345948129,
+        "sensitivity_coefficient": 1.0,
+        "uncertainty_contribution": 0.0002886751345948129,
+        "variance_share_percent": 0.9119649805447478,
+        "unit": "V",
+        "notes": ""
+      }
+    ]
+  },
+  "calibrated_metrics": {
+    "n": 100,
+    "mean_bias": -8.471378150031017e-05,
+    "mae": 0.0008666536183713419,
+    "rmse": 0.0010574450005431263,
+    "max_absolute_error": 0.0022624094651524373,
+    "mean_percentage_error": 0.002770885014201286
+  },
+  "calibration_evaluation": {
+    "model_type": "linear",
+    "degree": 1,
+    "coefficients": [
+      -0.004769236273669861,
+      0.9979280202530283
+    ],
+    "r_squared": 0.9999994954571327,
+    "residual_std_dev": 0.0010886604323642468,
+    "formula": "y_cal = -0.00476924 + 0.997928 * x",
+    "train_sample_count": 60,
+    "validation_sample_count": 40,
+    "mae_reduction_percent": 91.34302316663025,
+    "rmse_reduction_percent": 89.89943457227064,
+    "performance_improved": true,
+    "domain_extrapolation_warnings": []
+  }
+}

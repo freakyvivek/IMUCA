@@ -1,0 +1,2098 @@
+{
+  "suite_id": "IMUCA_SYNTH_SUITE_V3_HYBRID",
+  "generator_version": "2.0.0",
+  "config_file": "config/synthetic_suite_v3_config.json",
+  "description": "Fresh independent suite for the hybrid fault-detector milestone. New seed roots for all partitions, device/noise/lag variants, varied operating transitions and smaller fault magnitudes. All parameters are simulation assumptions, not sensor specifications.",
+  "seed_roots": {
+    "calibration": 31012027,
+    "validation": 41022027,
+    "test": 59033027
+  },
+  "reference_realization_seed": 27182,
+  "epoch_utc": "2026-12-07T08:00:00+00:00",
+  "sampling_period_s": 1.0,
+  "fault_margin_fraction": 0.1,
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings. Parameters are documented simulation assumptions and are not verified specifications of the INA219, DS18B20 or any other physical device.",
+  "measurands": {
+    "voltage_V": {
+      "unit": "V",
+      "full_scale": 26.0,
+      "range": [
+        0.0,
+        26.0
+      ]
+    },
+    "current_mA": {
+      "unit": "mA",
+      "full_scale": 3200.0,
+      "range": [
+        0.0,
+        3200.0
+      ]
+    },
+    "temperature_C": {
+      "unit": "degC",
+      "full_scale": 125.0,
+      "range": [
+        -55.0,
+        125.0
+      ]
+    }
+  },
+  "ambient_model": {
+    "default_mean_C": 23.0,
+    "sinusoid_amplitude_C": 0.2,
+    "sinusoid_period_s": 3600.0,
+    "sensor_noise_std_C": 0.05,
+    "sensor_resolution_C": 0.01
+  },
+  "reference_instruments": {
+    "voltage_V": {
+      "instrument_id": "SIM_REF_VOLTMETER_01",
+      "enabled": true,
+      "offset_std": 0.0002,
+      "gain_std": 5e-05,
+      "noise_std": 0.0001,
+      "resolution": 1e-05,
+      "time_constant_s": 0.0,
+      "coverage_k": 2.0
+    },
+    "current_mA": {
+      "instrument_id": "SIM_REF_AMMETER_01",
+      "enabled": true,
+      "offset_std": 0.1,
+      "gain_std": 5e-05,
+      "noise_std": 0.05,
+      "resolution": 0.01,
+      "time_constant_s": 0.0,
+      "coverage_k": 2.0
+    },
+    "temperature_C": {
+      "instrument_id": "SIM_REF_THERMOMETER_01",
+      "enabled": true,
+      "offset_std": 0.01,
+      "gain_std": 0.0,
+      "noise_std": 0.005,
+      "resolution": 0.001,
+      "time_constant_s": 2.0,
+      "coverage_k": 2.0
+    }
+  },
+  "invalid_status_codes": [
+    "ERR_SENSOR_INVALID",
+    "ERR_OVERRANGE",
+    "ERR_CRC"
+  ],
+  "devices": {
+    "DUT_V11": {
+      "measurand": "voltage_V",
+      "model": "direct_adc",
+      "description": "Low-noise linear voltage channel.",
+      "offset": 0.006,
+      "gain_error": 0.002,
+      "inl_bow_amplitude": 0.0,
+      "noise_std": 0.001,
+      "quantization_step": 0.001,
+      "temp_coefficient_per_C": 0.0,
+      "temp_coefficient_reference_C": 23.0
+    },
+    "DUT_V12": {
+      "measurand": "voltage_V",
+      "model": "direct_adc",
+      "description": "Voltage channel with mild INL bow.",
+      "offset": -0.01,
+      "gain_error": -0.003,
+      "inl_bow_amplitude": 0.008,
+      "noise_std": 0.0015,
+      "quantization_step": 0.001,
+      "temp_coefficient_per_C": 0.0,
+      "temp_coefficient_reference_C": 23.0
+    },
+    "DUT_V13": {
+      "measurand": "voltage_V",
+      "model": "direct_adc",
+      "description": "Noisier voltage channel with coarser quantisation.",
+      "offset": 0.015,
+      "gain_error": 0.004,
+      "inl_bow_amplitude": 0.0,
+      "noise_std": 0.0025,
+      "quantization_step": 0.002,
+      "temp_coefficient_per_C": 0.0,
+      "temp_coefficient_reference_C": 23.0
+    },
+    "DUT_I11": {
+      "measurand": "current_mA",
+      "model": "shunt",
+      "description": "Low-noise shunt channel, no self-heating.",
+      "r_shunt_nominal_ohm": 0.1,
+      "r_shunt_actual_deviation": 0.002,
+      "r_shunt_tcr_per_C": 0.0001,
+      "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 0.0,
+      "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": 0.04,
+      "adc_gain_error": 0.0015,
+      "adc_noise_std_mV": 0.015,
+      "adc_quantization_mV": 0.01
+    },
+    "DUT_I12": {
+      "measurand": "current_mA",
+      "model": "shunt",
+      "description": "Shunt channel, no self-heating.",
+      "r_shunt_nominal_ohm": 0.1,
+      "r_shunt_actual_deviation": -0.003,
+      "r_shunt_tcr_per_C": 0.0001,
+      "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 0.0,
+      "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": -0.02,
+      "adc_gain_error": 0.002,
+      "adc_noise_std_mV": 0.02,
+      "adc_quantization_mV": 0.01
+    },
+    "DUT_I13": {
+      "measurand": "current_mA",
+      "model": "shunt",
+      "description": "Noisier shunt channel with modelled self-heating.",
+      "r_shunt_nominal_ohm": 0.1,
+      "r_shunt_actual_deviation": 0.001,
+      "r_shunt_tcr_per_C": 0.0001,
+      "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 40.0,
+      "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": 0.03,
+      "adc_gain_error": 0.001,
+      "adc_noise_std_mV": 0.03,
+      "adc_quantization_mV": 0.01
+    },
+    "DUT_T11": {
+      "measurand": "temperature_C",
+      "model": "first_order_lag",
+      "description": "Fast probe (tau 10 s, assumed).",
+      "offset": 0.2,
+      "gain_error": 0.002,
+      "noise_std": 0.025,
+      "quantization_step": 0.0625,
+      "time_constant_s": 10.0
+    },
+    "DUT_T12": {
+      "measurand": "temperature_C",
+      "model": "first_order_lag",
+      "description": "Medium probe (tau 20 s, assumed).",
+      "offset": 0.3,
+      "gain_error": 0.004,
+      "noise_std": 0.03,
+      "quantization_step": 0.0625,
+      "time_constant_s": 20.0
+    },
+    "DUT_T13": {
+      "measurand": "temperature_C",
+      "model": "first_order_lag",
+      "description": "Slow probe (tau 35 s, assumed).",
+      "offset": -0.15,
+      "gain_error": 0.003,
+      "noise_std": 0.04,
+      "quantization_step": 0.0625,
+      "time_constant_s": 35.0
+    }
+  },
+  "scenarios": [
+    {
+      "scenario_id": "SWEEP_DUT_V11",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V11",
+      "description": "Static calibration sweep for DUT_V11 (used to calibrate the CUSUM error series).",
+      "analysis": {
+        "type": "calibration"
+      },
+      "profile": {
+        "type": "sweep",
+        "dwell_samples": 20,
+        "order": "ascending",
+        "setpoint_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              0.5,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              16,
+              18,
+              20
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "SWEEP_DUT_V12",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V12",
+      "description": "Static calibration sweep for DUT_V12 (used to calibrate the CUSUM error series).",
+      "analysis": {
+        "type": "calibration"
+      },
+      "profile": {
+        "type": "sweep",
+        "dwell_samples": 20,
+        "order": "ascending",
+        "setpoint_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              0.5,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              16,
+              18,
+              20
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "SWEEP_DUT_V13",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V13",
+      "description": "Static calibration sweep for DUT_V13 (used to calibrate the CUSUM error series).",
+      "analysis": {
+        "type": "calibration"
+      },
+      "profile": {
+        "type": "sweep",
+        "dwell_samples": 20,
+        "order": "ascending",
+        "setpoint_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              0.5,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              16,
+              18,
+              20
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "SWEEP_DUT_I11",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I11",
+      "description": "Static calibration sweep for DUT_I11.",
+      "analysis": {
+        "type": "calibration"
+      },
+      "profile": {
+        "type": "sweep",
+        "dwell_samples": 20,
+        "order": "ascending",
+        "setpoint_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              100,
+              400,
+              700,
+              1000,
+              1300,
+              1600,
+              1900,
+              2200,
+              2500,
+              2800
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "SWEEP_DUT_I12",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I12",
+      "description": "Static calibration sweep for DUT_I12.",
+      "analysis": {
+        "type": "calibration"
+      },
+      "profile": {
+        "type": "sweep",
+        "dwell_samples": 20,
+        "order": "ascending",
+        "setpoint_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              100,
+              400,
+              700,
+              1000,
+              1300,
+              1600,
+              1900,
+              2200,
+              2500,
+              2800
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "SWEEP_DUT_I13",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I13",
+      "description": "Static calibration sweep for DUT_I13.",
+      "analysis": {
+        "type": "calibration"
+      },
+      "profile": {
+        "type": "sweep",
+        "dwell_samples": 60,
+        "order": "ascending",
+        "setpoint_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              100,
+              400,
+              700,
+              1000,
+              1300,
+              1600,
+              1900,
+              2200,
+              2500,
+              2800
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "PLATEAUS_DUT_T11",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T11",
+      "description": "Static plateau calibration for DUT_T11; settling length about 6 tau.",
+      "analysis": {
+        "type": "calibration",
+        "stable_phase_only": true
+      },
+      "profile": {
+        "type": "plateaus",
+        "dwell_samples": 300,
+        "settle_samples": 60,
+        "ramp_rate_per_s": 0.1,
+        "plateau_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              10,
+              25,
+              40,
+              55,
+              70
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "PLATEAUS_DUT_T12",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T12",
+      "description": "Static plateau calibration for DUT_T12; settling length about 6 tau.",
+      "analysis": {
+        "type": "calibration",
+        "stable_phase_only": true
+      },
+      "profile": {
+        "type": "plateaus",
+        "dwell_samples": 300,
+        "settle_samples": 120,
+        "ramp_rate_per_s": 0.1,
+        "plateau_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              10,
+              25,
+              40,
+              55,
+              70
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "PLATEAUS_DUT_T13",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T13",
+      "description": "Static plateau calibration for DUT_T13; settling length about 6 tau.",
+      "analysis": {
+        "type": "calibration",
+        "stable_phase_only": true
+      },
+      "profile": {
+        "type": "plateaus",
+        "dwell_samples": 300,
+        "settle_samples": 210,
+        "ramp_rate_per_s": 0.1,
+        "plateau_groups": [
+          {
+            "condition": "grid_A",
+            "values": [
+              10,
+              25,
+              40,
+              55,
+              70
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "scenario_id": "VOLT_LONG_TRANSITIONS",
+      "group": "voltage",
+      "measurand": "voltage_V",
+      "device_id": "DUT_V12",
+      "description": "Fault-free long run with random set-point changes (operating transitions).",
+      "analysis": {
+        "type": "fault_free_transitions"
+      },
+      "profile": {
+        "type": "random_levels",
+        "levels": [
+          2,
+          6,
+          10,
+          14,
+          18
+        ],
+        "dwell_range": [
+          60,
+          300
+        ],
+        "num_samples": 1800,
+        "condition": "random_setpoints"
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "scenario_id": "CURR_LONG_TRANSITIONS",
+      "group": "current",
+      "measurand": "current_mA",
+      "device_id": "DUT_I13",
+      "description": "Fault-free long run with random load steps and shunt self-heating transients.",
+      "analysis": {
+        "type": "fault_free_transitions"
+      },
+      "profile": {
+        "type": "random_levels",
+        "levels": [
+          200,
+          800,
+          1500,
+          2500
+        ],
+        "dwell_range": [
+          60,
+          240
+        ],
+        "num_samples": 1800,
+        "condition": "random_loads"
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "scenario_id": "TEMP_LONG_TRANSITIONS",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T13",
+      "description": "Fault-free long run: plateaus, 0.1 degC/s ramps and long settling (tau 35 s).",
+      "analysis": {
+        "type": "fault_free_transitions"
+      },
+      "profile": {
+        "type": "plateaus",
+        "dwell_samples": 300,
+        "settle_samples": 210,
+        "ramp_rate_per_s": 0.1,
+        "plateau_groups": [
+          {
+            "condition": "plateaus_15_60C",
+            "values": [
+              15,
+              30,
+              45,
+              60
+            ]
+          }
+        ]
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "scenario_id": "TEMP_RAMPS_FAST_PROBE",
+      "group": "temperature",
+      "measurand": "temperature_C",
+      "device_id": "DUT_T11",
+      "description": "Fault-free heating/cooling ramps at 0.06 degC/s with a fast probe.",
+      "analysis": {
+        "type": "fault_free_transitions"
+      },
+      "profile": {
+        "type": "ramp_cycle",
+        "start": 25.0,
+        "peak": 70.0,
+        "end": 35.0,
+        "heat_rate_per_s": 0.06,
+        "cool_rate_per_s": 0.06,
+        "pre_hold_samples": 120,
+        "hold_samples": 200,
+        "post_hold_samples": 120,
+        "condition": "ramp_0p06"
+      },
+      "faults": [],
+      "runs": [
+        {
+          "partition": "calibration",
+          "count": 1
+        },
+        {
+          "partition": "validation",
+          "count": 1
+        },
+        {
+          "partition": "test",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "fault_benchmark": {
+    "group": "fault_detection",
+    "classes": [
+      "none",
+      "isolated_spike",
+      "offset_shift",
+      "gain_change",
+      "gradual_drift",
+      "abrupt_change",
+      "stuck_signal",
+      "integrity_mix",
+      "mixed"
+    ],
+    "runs": [
+      {
+        "partition": "calibration",
+        "count": 1
+      },
+      {
+        "partition": "validation",
+        "count": 1
+      },
+      {
+        "partition": "test",
+        "count": 2
+      }
+    ],
+    "measurands": {
+      "voltage_V": {
+        "variants": [
+          {
+            "prefix": "FD3_VA",
+            "device_id": "DUT_V11",
+            "profile": {
+              "type": "levels",
+              "condition": "levels_3_7_11V",
+              "levels": [
+                {
+                  "value": 3.0,
+                  "samples": 200
+                },
+                {
+                  "value": 7.0,
+                  "samples": 200
+                },
+                {
+                  "value": 11.0,
+                  "samples": 200
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  0.005,
+                  0.04
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  0.005,
+                  0.03
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.001,
+                  0.006
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  8e-06,
+                  4e-05
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  0.008,
+                  0.04
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    0.005,
+                    0.04
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    0.008,
+                    0.04
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    0.005,
+                    0.03
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "prefix": "FD3_VB",
+            "device_id": "DUT_V12",
+            "profile": {
+              "type": "levels",
+              "condition": "levels_2_9_15_6V",
+              "levels": [
+                {
+                  "value": 2.0,
+                  "samples": 150
+                },
+                {
+                  "value": 9.0,
+                  "samples": 150
+                },
+                {
+                  "value": 15.0,
+                  "samples": 150
+                },
+                {
+                  "value": 6.0,
+                  "samples": 150
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  0.008,
+                  0.06
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  0.008,
+                  0.04
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.0015,
+                  0.008
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  1e-05,
+                  5e-05
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  0.012,
+                  0.05
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    0.008,
+                    0.06
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    0.012,
+                    0.05
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    0.008,
+                    0.04
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "prefix": "FD3_VC",
+            "device_id": "DUT_V13",
+            "profile": {
+              "type": "plateaus",
+              "dwell_samples": 250,
+              "settle_samples": 20,
+              "ramp_rate_per_s": 0.08,
+              "plateau_groups": [
+                {
+                  "condition": "ramped_4_12V",
+                  "values": [
+                    4,
+                    12
+                  ]
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  0.0125,
+                  0.08
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  0.0125,
+                  0.05
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.002,
+                  0.01
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  1.5e-05,
+                  6e-05
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  0.02,
+                  0.08
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    0.0125,
+                    0.08
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    0.02,
+                    0.08
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    0.0125,
+                    0.05
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "current_mA": {
+        "variants": [
+          {
+            "prefix": "FD3_IA",
+            "device_id": "DUT_I11",
+            "profile": {
+              "type": "levels",
+              "condition": "levels_400_1200_2000mA",
+              "levels": [
+                {
+                  "value": 400.0,
+                  "samples": 200
+                },
+                {
+                  "value": 1200.0,
+                  "samples": 200
+                },
+                {
+                  "value": 2000.0,
+                  "samples": 200
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  0.8,
+                  8.0
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  0.8,
+                  5.0
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.0015,
+                  0.006
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  0.004,
+                  0.02
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  1.2,
+                  6.0
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    0.8,
+                    8.0
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    1.2,
+                    6.0
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    0.8,
+                    5.0
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "prefix": "FD3_IB",
+            "device_id": "DUT_I12",
+            "profile": {
+              "type": "levels",
+              "condition": "levels_300_1800_900_2600mA",
+              "levels": [
+                {
+                  "value": 300.0,
+                  "samples": 150
+                },
+                {
+                  "value": 1800.0,
+                  "samples": 150
+                },
+                {
+                  "value": 900.0,
+                  "samples": 150
+                },
+                {
+                  "value": 2600.0,
+                  "samples": 150
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  1.0,
+                  10.0
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  1.0,
+                  6.0
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.002,
+                  0.008
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  0.005,
+                  0.025
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  1.5,
+                  8.0
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    1.0,
+                    10.0
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    1.5,
+                    8.0
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    1.0,
+                    6.0
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "prefix": "FD3_IC",
+            "device_id": "DUT_I13",
+            "profile": {
+              "type": "levels",
+              "condition": "levels_500_2500_1500mA_selfheat",
+              "levels": [
+                {
+                  "value": 500.0,
+                  "samples": 200
+                },
+                {
+                  "value": 2500.0,
+                  "samples": 200
+                },
+                {
+                  "value": 1500.0,
+                  "samples": 200
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  1.5,
+                  15.0
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  1.5,
+                  9.0
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.002,
+                  0.01
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  0.008,
+                  0.04
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  2.5,
+                  12.0
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    1.5,
+                    15.0
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    2.5,
+                    12.0
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    1.5,
+                    9.0
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "temperature_C": {
+        "variants": [
+          {
+            "prefix": "FD3_TA",
+            "device_id": "DUT_T11",
+            "profile": {
+              "type": "plateaus",
+              "dwell_samples": 225,
+              "settle_samples": 60,
+              "ramp_rate_per_s": 0.1,
+              "plateau_groups": [
+                {
+                  "condition": "plateaus_30_45C",
+                  "values": [
+                    30,
+                    45
+                  ]
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  0.15,
+                  1.5
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  0.15,
+                  0.8
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.004,
+                  0.02
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  0.0003,
+                  0.0015
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  0.25,
+                  1.2
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    0.15,
+                    1.5
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    0.25,
+                    1.2
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    0.15,
+                    0.8
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "prefix": "FD3_TB",
+            "device_id": "DUT_T12",
+            "profile": {
+              "type": "levels",
+              "condition": "bath_transfers_25_40_32C",
+              "levels": [
+                {
+                  "value": 25.0,
+                  "samples": 200
+                },
+                {
+                  "value": 40.0,
+                  "samples": 200
+                },
+                {
+                  "value": 32.0,
+                  "samples": 200
+                }
+              ],
+              "event_label": "true_step"
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  0.2,
+                  2.0
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  0.2,
+                  0.9
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.004,
+                  0.02
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  0.0003,
+                  0.0015
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  0.3,
+                  1.2
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    0.2,
+                    2.0
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    0.3,
+                    1.2
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    0.2,
+                    0.9
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "prefix": "FD3_TC",
+            "device_id": "DUT_T13",
+            "profile": {
+              "type": "plateaus",
+              "dwell_samples": 225,
+              "settle_samples": 210,
+              "ramp_rate_per_s": 0.2,
+              "plateau_groups": [
+                {
+                  "condition": "plateaus_20_50C_slow_probe",
+                  "values": [
+                    20,
+                    50
+                  ]
+                }
+              ]
+            },
+            "fault_specs": {
+              "isolated_spike": {
+                "count": 5,
+                "magnitude": [
+                  0.25,
+                  2.5
+                ]
+              },
+              "offset_shift": {
+                "count": 1,
+                "magnitude": [
+                  0.25,
+                  1.0
+                ]
+              },
+              "gain_change": {
+                "count": 1,
+                "magnitude": [
+                  0.005,
+                  0.025
+                ]
+              },
+              "gradual_drift": {
+                "count": 1,
+                "magnitude": [
+                  0.0004,
+                  0.002
+                ]
+              },
+              "abrupt_change": {
+                "count": 2,
+                "magnitude": [
+                  0.4,
+                  1.5
+                ],
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "stuck_signal": {
+                "count": 2,
+                "duration": [
+                  10,
+                  45
+                ]
+              },
+              "integrity_mix": [
+                {
+                  "type": "missing_samples",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    5
+                  ]
+                },
+                {
+                  "type": "duplicate_sequence",
+                  "count": 2
+                },
+                {
+                  "type": "communication_gap",
+                  "count": 2,
+                  "duration": [
+                    3,
+                    20
+                  ]
+                },
+                {
+                  "type": "invalid_status",
+                  "count": 2,
+                  "duration": [
+                    1,
+                    3
+                  ]
+                },
+                {
+                  "type": "non_finite",
+                  "count": 2
+                }
+              ],
+              "mixed": [
+                {
+                  "type": "isolated_spike",
+                  "count": 3,
+                  "magnitude": [
+                    0.25,
+                    2.5
+                  ]
+                },
+                {
+                  "type": "stuck_signal",
+                  "count": 1,
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "abrupt_change",
+                  "count": 1,
+                  "magnitude": [
+                    0.4,
+                    1.5
+                  ],
+                  "duration": [
+                    10,
+                    40
+                  ]
+                },
+                {
+                  "type": "offset_shift",
+                  "count": 1,
+                  "magnitude": [
+                    0.25,
+                    1.0
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

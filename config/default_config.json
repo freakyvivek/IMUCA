@@ -1,0 +1,77 @@
+{
+  "system": {
+    "project_name": "IMUCA",
+    "version": "1.0.0",
+    "description": "Intelligent Measurement, Uncertainty, Calibration and Analysis",
+    "default_random_seed": 42
+  },
+  "measurands": {
+    "voltage_V": {
+      "name": "DC Voltage",
+      "unit": "V",
+      "si_unit": "V",
+      "display_symbol": "V",
+      "min_range": 0.0,
+      "max_range": 26.0,
+      "nominal_resolution": 0.001,
+      "default_tolerance_percent": 1.0,
+      "mfg_accuracy_percent": 0.5,
+      "reference_uncertainty": 0.001,
+      "reference_coverage_k": 2.0,
+      "max_rate_of_change_per_sec": 5.0
+    },
+    "current_mA": {
+      "name": "DC Current",
+      "unit": "mA",
+      "si_unit": "A",
+      "si_conversion_factor": 0.001,
+      "display_symbol": "mA",
+      "min_range": 0.0,
+      "max_range": 3200.0,
+      "nominal_resolution": 0.1,
+      "default_tolerance_percent": 1.0,
+      "mfg_accuracy_percent": 1.0,
+      "reference_uncertainty": 0.5,
+      "reference_coverage_k": 2.0,
+      "max_rate_of_change_per_sec": 500.0,
+      "shunt_model": {
+        "r_shunt_nominal_ohm": 0.100,
+        "r_shunt_tolerance_percent": 0.5,
+        "v_shunt_resolution_mv": 0.01
+      }
+    },
+    "temperature_C": {
+      "name": "Temperature",
+      "unit": "degC",
+      "si_unit": "K",
+      "si_offset": 273.15,
+      "display_symbol": "°C",
+      "min_range": -55.0,
+      "max_range": 125.0,
+      "nominal_resolution": 0.0625,
+      "default_tolerance_percent": 2.0,
+      "mfg_accuracy_percent": 1.0,
+      "reference_uncertainty": 0.05,
+      "reference_coverage_k": 2.0,
+      "max_rate_of_change_per_sec": 2.0
+    }
+  },
+  "quality": {
+    "mad_threshold": 3.5,
+    "max_acceptable_gap_ms": 2500,
+    "nominal_sampling_rate_hz": 1.0,
+    "require_monotonic_sequence": true,
+    "require_monotonic_timestamp": true
+  },
+  "calibration": {
+    "default_train_ratio": 0.6,
+    "max_polynomial_degree": 3,
+    "f_test_alpha": 0.05
+  },
+  "uncertainty": {
+    "confidence_level": 0.95,
+    "default_coverage_k": 2.0,
+    "use_welch_satterthwaite": true,
+    "monte_carlo_trials": 10000
+  }
+}

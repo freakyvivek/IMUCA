@@ -1,0 +1,683 @@
+{
+  "dataset_id": "FD3_VA_ABRUPT_CHANGE",
+  "suite_id": "IMUCA_SYNTH_SUITE_V3_HYBRID",
+  "group": "fault_detection",
+  "measurand": "voltage_V",
+  "measurand_unit": "V",
+  "description": "Fault-detection benchmark, voltage_V: individually labelled 'abrupt_change' faults.",
+  "analysis": {
+    "type": "fault_detection",
+    "fault_class": "abrupt_change"
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings. Parameters are documented simulation assumptions and are not verified specifications of the INA219, DS18B20 or any other physical device.",
+  "generator": {
+    "name": "IMUCA Synthetic Benchmark Suite Generator",
+    "module": "src/imuca/synthetic_suite.py",
+    "version": "2.0.0",
+    "config_file": "config/synthetic_suite_v3_config.json",
+    "config_sha256": "0fd8bd58a0980820a9be92b289557384ae76d041aee865930081a48a82576ebc",
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5"
+  },
+  "generation_timestamp_utc": "2026-10-26T05:34:47.409280+00:00",
+  "random_seeds": {
+    "seed_roots": {
+      "calibration": 31012027,
+      "validation": 41022027,
+      "test": 59033027
+    },
+    "derivation": "run_seed = SeedSequence(entropy=seed_roots[partition], spawn_key=(crc32(scenario_id), run_number)).generate_state(1)[0]; the run seed is spawned into 5 independent streams: profile, ambient, DUT noise, reference noise, fault placement.",
+    "reference_realization_seed": 27182,
+    "runs": {
+      "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01": 756203103,
+      "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01": 2428069488,
+      "SYN2-FD3_VA_ABRUPT_CHANGE-TST01": 215938015,
+      "SYN2-FD3_VA_ABRUPT_CHANGE-TST02": 3679334811
+    }
+  },
+  "record_count": 2400,
+  "run_count": 4,
+  "runs": [
+    {
+      "experiment_id": "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01",
+      "run_id": "CAL01",
+      "partition": "calibration",
+      "generation_seed": 756203103,
+      "seed_root": 31012027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_3_7_11V"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_3_7_11V",
+        "levels": [
+          {
+            "value": 3.0,
+            "samples": 200
+          },
+          {
+            "value": 7.0,
+            "samples": 200
+          },
+          {
+            "value": 11.0,
+            "samples": 200
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 2,
+          "magnitude": [
+            0.008,
+            0.04
+          ],
+          "duration": [
+            10,
+            45
+          ],
+          "type": "abrupt_change"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01-F01",
+        "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01-F02"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01",
+      "run_id": "VAL01",
+      "partition": "validation",
+      "generation_seed": 2428069488,
+      "seed_root": 41022027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_3_7_11V"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_3_7_11V",
+        "levels": [
+          {
+            "value": 3.0,
+            "samples": 200
+          },
+          {
+            "value": 7.0,
+            "samples": 200
+          },
+          {
+            "value": 11.0,
+            "samples": 200
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 2,
+          "magnitude": [
+            0.008,
+            0.04
+          ],
+          "duration": [
+            10,
+            45
+          ],
+          "type": "abrupt_change"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01-F01",
+        "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01-F02"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST01",
+      "run_id": "TST01",
+      "partition": "test",
+      "generation_seed": 215938015,
+      "seed_root": 59033027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_3_7_11V"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_3_7_11V",
+        "levels": [
+          {
+            "value": 3.0,
+            "samples": 200
+          },
+          {
+            "value": 7.0,
+            "samples": 200
+          },
+          {
+            "value": 11.0,
+            "samples": 200
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 2,
+          "magnitude": [
+            0.008,
+            0.04
+          ],
+          "duration": [
+            10,
+            45
+          ],
+          "type": "abrupt_change"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_VA_ABRUPT_CHANGE-TST01-F01",
+        "SYN2-FD3_VA_ABRUPT_CHANGE-TST01-F02"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST02",
+      "run_id": "TST02",
+      "partition": "test",
+      "generation_seed": 3679334811,
+      "seed_root": 59033027,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_3_7_11V"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_3_7_11V",
+        "levels": [
+          {
+            "value": 3.0,
+            "samples": 200
+          },
+          {
+            "value": 7.0,
+            "samples": 200
+          },
+          {
+            "value": 11.0,
+            "samples": 200
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "count": 2,
+          "magnitude": [
+            0.008,
+            0.04
+          ],
+          "duration": [
+            10,
+            45
+          ],
+          "type": "abrupt_change"
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD3_VA_ABRUPT_CHANGE-TST02-F01",
+        "SYN2-FD3_VA_ABRUPT_CHANGE-TST02-F02"
+      ]
+    }
+  ],
+  "partitions": {
+    "calibration": {
+      "experiment_ids": [
+        "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01"
+      ],
+      "record_count": 600
+    },
+    "validation": {
+      "experiment_ids": [
+        "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01"
+      ],
+      "record_count": 600
+    },
+    "test": {
+      "experiment_ids": [
+        "SYN2-FD3_VA_ABRUPT_CHANGE-TST01",
+        "SYN2-FD3_VA_ABRUPT_CHANGE-TST02"
+      ],
+      "record_count": 1200
+    }
+  },
+  "columns": [
+    {
+      "name": "scenario_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Scenario (dataset) identifier; spans partitions."
+    },
+    {
+      "name": "experiment_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Unique acquisition session (run); the unit of partitioning."
+    },
+    {
+      "name": "run_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Run label within the scenario (CALnn / VALnn / TSTnn)."
+    },
+    {
+      "name": "partition",
+      "unit": "",
+      "dtype": "string",
+      "role": "partition",
+      "description": "calibration | validation | test (assigned per run)."
+    },
+    {
+      "name": "generation_seed",
+      "unit": "",
+      "dtype": "int",
+      "role": "provenance",
+      "description": "Integer seed of the run's random streams."
+    },
+    {
+      "name": "device_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Simulated device-under-test instance."
+    },
+    {
+      "name": "data_source",
+      "unit": "",
+      "dtype": "string",
+      "role": "provenance",
+      "description": "Provenance tag (synthetic_suite_v2)."
+    },
+    {
+      "name": "operating_condition_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned operating-condition group (e.g. grid_A, grid_B_interleaved, extrapolation_above_cal_range). Never encodes fault presence."
+    },
+    {
+      "name": "setpoint_index",
+      "unit": "",
+      "dtype": "int",
+      "role": "protocol",
+      "description": "Index of the planned set-point/plateau in run order (-1 during ramps)."
+    },
+    {
+      "name": "protocol_phase",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned protocol phase (dwell, steady, ramp, plateau_settling, plateau_stable, ...)."
+    },
+    {
+      "name": "timestamp_utc",
+      "unit": "ISO 8601",
+      "dtype": "string",
+      "role": "time",
+      "description": "Simulated acquisition timestamp (UTC)."
+    },
+    {
+      "name": "sequence_number",
+      "unit": "count",
+      "dtype": "int",
+      "role": "time",
+      "description": "Record counter as transmitted (duplicates/gaps reflect injected record faults)."
+    },
+    {
+      "name": "elapsed_ms",
+      "unit": "ms",
+      "dtype": "float",
+      "role": "time",
+      "description": "Milliseconds since run start."
+    },
+    {
+      "name": "voltage_V",
+      "unit": "V",
+      "dtype": "float",
+      "role": "observation",
+      "description": "DUT observed (digitised) reading. May be NaN (missing) or +/-inf (non-finite fault)."
+    },
+    {
+      "name": "status",
+      "unit": "",
+      "dtype": "string",
+      "role": "observation",
+      "description": "Sensor status code (OK or injected invalid-status code)."
+    },
+    {
+      "name": "environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "observation",
+      "description": "Simulated ambient-temperature sensor reading."
+    },
+    {
+      "name": "reference_voltage_V",
+      "unit": "V",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Simulated independent reference-instrument reading (has its own error model)."
+    },
+    {
+      "name": "reference_expanded_uncertainty_k2",
+      "unit": "V",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Stated expanded uncertainty (k=2) of the reference reading."
+    },
+    {
+      "name": "true_voltage_V",
+      "unit": "V",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated measurand value (not a measurement)."
+    },
+    {
+      "name": "true_environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated ambient temperature."
+    },
+    {
+      "name": "true_drift_component",
+      "unit": "V",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Injected gradual-drift contribution to the DUT reading (pre-quantisation)."
+    },
+    {
+      "name": "true_injected_error_component",
+      "unit": "V",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Sum of all injected value-domain fault contributions (spike, offset, gain, drift, abrupt)."
+    },
+    {
+      "name": "error_vs_true",
+      "unit": "V",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus ground truth."
+    },
+    {
+      "name": "error_vs_reference",
+      "unit": "V",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus reference reading."
+    },
+    {
+      "name": "is_injected_fault",
+      "unit": "",
+      "dtype": "bool",
+      "role": "label",
+      "description": "True when any injected fault affects this record (compatible with DataQualityAssessor ground_truth_fault_col)."
+    },
+    {
+      "name": "label_fault_type",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined injected fault types active on this record, or 'none'."
+    },
+    {
+      "name": "label_fault_event_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined fault event ids (see metadata fault_events), or 'none'."
+    },
+    {
+      "name": "label_process_event",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "Genuine (non-fault) process events: setpoint_change, load_step, true_step, ramp_start, or 'none'."
+    },
+    {
+      "name": "dq_flags",
+      "unit": "",
+      "dtype": "string",
+      "role": "quality_flag",
+      "description": "Flags derivable from observable fields only: MISSING_VALUE, NON_FINITE, STATUS_<code>, DUPLICATE_SEQ, SEQ_GAP_<n>, or NONE."
+    }
+  ],
+  "ground_truth_definitions": {
+    "true_voltage_V": "Value of the measurand imposed by the simulation (e.g. calibrator set-point or bath temperature). It is a simulation construct and is never presented as an instrument reading.",
+    "reference_voltage_V": "Reading of a simulated reference instrument with its own offset, gain, noise, resolution and (temperature only) lag. Use it as a laboratory reference, not as truth.",
+    "error_vs_true": "Total DUT error including all modelled effects and injected faults.",
+    "error_vs_reference": "Observable calibration error; differs from error_vs_true by the reference error."
+  },
+  "sensor_error_model": {
+    "device_id": "DUT_V11",
+    "measurand": "voltage_V",
+    "parameters": {
+      "measurand": "voltage_V",
+      "model": "direct_adc",
+      "description": "Low-noise linear voltage channel.",
+      "offset": 0.006,
+      "gain_error": 0.002,
+      "inl_bow_amplitude": 0.0,
+      "noise_std": 0.001,
+      "quantization_step": 0.001,
+      "temp_coefficient_per_C": 0.0,
+      "temp_coefficient_reference_C": 23.0
+    },
+    "equation": "obs = Q( offset + (1+gain_error)*x + inl_bow_amplitude*4*(x/FS)*(1-x/FS) + temp_coefficient_per_C*(T_amb - T_ref) + faults + N(0, noise_std) ; quantization_step )",
+    "noise_distribution": "independent Gaussian, zero mean",
+    "quantisation": "round-to-nearest",
+    "fault_magnitude_semantics": {
+      "isolated_spike": "additive value in measurand units, applied to one sample",
+      "offset_shift": "additive value in measurand units, persistent from onset",
+      "gain_change": "relative gain change (dimensionless), persistent from onset",
+      "gradual_drift": "drift rate in measurand units per second, persistent from onset",
+      "abrupt_change": "additive value in measurand units, applied for 'duration' samples",
+      "stuck_signal": "no magnitude; the digitised reading is frozen at the last value before onset",
+      "missing_samples": "no magnitude; value field is empty (NaN)",
+      "duplicate_sequence": "no magnitude; an exact copy of the record is inserted after it",
+      "communication_gap": "no magnitude; 'duration' records are dropped",
+      "invalid_status": "no magnitude; status field set to a non-OK code",
+      "non_finite": "value replaced by +inf or -inf"
+    },
+    "parameter_status": "Simulation assumptions chosen for benchmark coverage. Not verified specifications of any physical sensor."
+  },
+  "reference_error_model": {
+    "instrument_id": "SIM_REF_VOLTMETER_01",
+    "enabled": true,
+    "offset_std": 0.0002,
+    "gain_std": 5e-05,
+    "noise_std": 0.0001,
+    "resolution": 1e-05,
+    "time_constant_s": 0.0,
+    "coverage_k": 2.0,
+    "realized_offset": 9.98255430566289e-05,
+    "realized_gain_error": -5.6618687218594455e-05,
+    "unit": "V",
+    "equation": "reference = realized_offset + (1 + realized_gain_error) * lag(true, time_constant_s) + N(0, noise_std), quantised to resolution",
+    "stated_uncertainty": "reference_expanded_uncertainty_k2 = coverage_k * sqrt(offset_std^2 + (gain_std*|reading|)^2 + noise_std^2 + resolution^2/12); steady-state only, excludes dynamic (lag) error",
+    "note": "The reference is a simulated instrument with its own errors; it is NOT ground truth. realized_* values are simulation ground truth about the reference and would be unknown in a real laboratory."
+  },
+  "ambient_model": {
+    "default_mean_C": 23.0,
+    "sinusoid_amplitude_C": 0.2,
+    "sinusoid_period_s": 3600.0,
+    "sensor_noise_std_C": 0.05,
+    "sensor_resolution_C": 0.01
+  },
+  "fault_events": [
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01-F01",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01",
+      "fault_type": "abrupt_change",
+      "onset_index": 195,
+      "duration_samples": 38,
+      "magnitude": 0.018793114751120443,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 196,
+      "onset_elapsed_ms": 195000.0,
+      "labelled_row_count": 38,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01-F02",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-CAL01",
+      "fault_type": "abrupt_change",
+      "onset_index": 453,
+      "duration_samples": 27,
+      "magnitude": 0.03544171428221891,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 454,
+      "onset_elapsed_ms": 453000.0,
+      "labelled_row_count": 27,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01-F01",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01",
+      "fault_type": "abrupt_change",
+      "onset_index": 396,
+      "duration_samples": 41,
+      "magnitude": -0.027323153858131048,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 397,
+      "onset_elapsed_ms": 396000.0,
+      "labelled_row_count": 41,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01-F02",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-VAL01",
+      "fault_type": "abrupt_change",
+      "onset_index": 166,
+      "duration_samples": 38,
+      "magnitude": 0.025229764086679964,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 167,
+      "onset_elapsed_ms": 166000.0,
+      "labelled_row_count": 38,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST01-F01",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST01",
+      "fault_type": "abrupt_change",
+      "onset_index": 378,
+      "duration_samples": 10,
+      "magnitude": -0.021380308147606733,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 379,
+      "onset_elapsed_ms": 378000.0,
+      "labelled_row_count": 10,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST01-F02",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST01",
+      "fault_type": "abrupt_change",
+      "onset_index": 500,
+      "duration_samples": 32,
+      "magnitude": -0.02143071498349937,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 501,
+      "onset_elapsed_ms": 500000.0,
+      "labelled_row_count": 32,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST02-F01",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST02",
+      "fault_type": "abrupt_change",
+      "onset_index": 308,
+      "duration_samples": 14,
+      "magnitude": 0.018518582933412228,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 309,
+      "onset_elapsed_ms": 308000.0,
+      "labelled_row_count": 14,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST02-F02",
+      "run_id": "SYN2-FD3_VA_ABRUPT_CHANGE-TST02",
+      "fault_type": "abrupt_change",
+      "onset_index": 136,
+      "duration_samples": 34,
+      "magnitude": -0.027047765840772144,
+      "magnitude_unit": "V",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 137,
+      "onset_elapsed_ms": 136000.0,
+      "labelled_row_count": 34,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    }
+  ],
+  "fault_prevalence": {
+    "fault_row_count": 234,
+    "fault_row_fraction": 0.0975,
+    "rows_by_fault_type": {
+      "abrupt_change": 234
+    },
+    "events_by_fault_type": {
+      "abrupt_change": 8
+    }
+  },
+  "missing_data": {
+    "nan_observation_rows": 0,
+    "non_finite_observation_rows": 0,
+    "missing_rate": 0.0,
+    "dropped_records_communication_gap": 0,
+    "dropped_rate": 0.0
+  },
+  "process_events": {
+    "setpoint_change": 8
+  },
+  "split_strategy": {
+    "unit_of_partitioning": "experiment run (experiment_id); every run belongs to exactly one partition",
+    "calibration": "fit calibration / tune detector thresholds / train ML models",
+    "validation": "model selection and hyper-parameter choice",
+    "test": "final evaluation only; generated from an independent seed root and, where configured, held-out operating conditions",
+    "chronology": "run start times are ordered calibration -> validation -> test (one simulated day apart)",
+    "within_run_split": "not permitted: adjacent samples are correlated (dwell, lag, thermal state)"
+  },
+  "known_limitations": [
+    "Synthetic data only; no physical sensor behaviour is claimed.",
+    "Noise is white Gaussian; no 1/f noise, interference, or correlated noise between DUT and reference.",
+    "Sampling is perfectly periodic (no clock jitter); only injected record faults perturb timing.",
+    "The calibrator/source is ideal: the true value equals the planned set-point exactly.",
+    "Reference stated uncertainty covers steady-state errors only.",
+    "Fault magnitudes and placements are drawn from documented ranges and may not reflect real fault statistics.",
+    "INL is a single parabolic bow; real ADC INL can be irregular."
+  ],
+  "csv_file": "fault_detection/FD3_VA_ABRUPT_CHANGE.csv",
+  "csv_sha256": "c1c199204b39062bcfbf07ef0c1d26e3b03d778e22f421c941fe95328f911824"
+}

@@ -1,0 +1,11 @@
+Point,Reference_V,DUT_V,Notes
+1,0.500,0.51,Valid point
+2,1.000,INVALID_VOLTAGE,Non-numeric corruption
+3,1.500,,Missing value
+4,2.000,-5.00,Out of range (negative)
+5,2.500,25.00,Out of range (exceeds 20V max)
+6,3.000,3.02,Valid point
+7,3.500,3.52,Valid point
+8,4.000,4.02,Valid point
+9,4.500,4.52,Valid point
+10,5.000,9.99,Extreme outlier for MAD test

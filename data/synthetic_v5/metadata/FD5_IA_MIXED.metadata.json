@@ -1,0 +1,904 @@
+{
+  "dataset_id": "FD5_IA_MIXED",
+  "suite_id": "IMUCA_SYNTH_SUITE_V5_FINAL_TEST",
+  "group": "fault_detection",
+  "measurand": "current_mA",
+  "measurand_unit": "mA",
+  "description": "Fault-detection benchmark, current_mA: 'mixed' runs with faults of types ['abrupt_change', 'isolated_spike', 'offset_shift', 'stuck_signal'].",
+  "analysis": {
+    "type": "fault_detection",
+    "fault_class": "mixed"
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings. Parameters are documented simulation assumptions and are not verified specifications of the INA219, DS18B20 or any other physical device.",
+  "generator": {
+    "name": "IMUCA Synthetic Benchmark Suite Generator",
+    "module": "src/imuca/synthetic_suite.py",
+    "version": "2.0.0",
+    "config_file": "config/synthetic_suite_v5_config.json",
+    "config_sha256": "7591165bb92b2fa3371100242c477dea23e8f1d98200a83bc43a3a108f760449",
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5"
+  },
+  "generation_timestamp_utc": "2026-10-27T15:34:20.637620+00:00",
+  "random_seeds": {
+    "seed_roots": {
+      "calibration": 62015028,
+      "validation": 72025028,
+      "test": 84055028
+    },
+    "derivation": "run_seed = SeedSequence(entropy=seed_roots[partition], spawn_key=(crc32(scenario_id), run_number)).generate_state(1)[0]; the run seed is spawned into 5 independent streams: profile, ambient, DUT noise, reference noise, fault placement.",
+    "reference_realization_seed": 27182,
+    "runs": {
+      "SYN2-FD5_IA_MIXED-TST01": 2835305108,
+      "SYN2-FD5_IA_MIXED-TST02": 2546090084,
+      "SYN2-FD5_IA_MIXED-TST03": 2476487551
+    }
+  },
+  "record_count": 1800,
+  "run_count": 3,
+  "runs": [
+    {
+      "experiment_id": "SYN2-FD5_IA_MIXED-TST01",
+      "run_id": "TST01",
+      "partition": "test",
+      "generation_seed": 2835305108,
+      "seed_root": 84055028,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_400_1200_2000mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_400_1200_2000mA",
+        "levels": [
+          {
+            "value": 400.0,
+            "samples": 200
+          },
+          {
+            "value": 1200.0,
+            "samples": 200
+          },
+          {
+            "value": 2000.0,
+            "samples": 200
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "type": "isolated_spike",
+          "count": 3,
+          "magnitude": [
+            0.8,
+            8.0
+          ]
+        },
+        {
+          "type": "stuck_signal",
+          "count": 1,
+          "duration": [
+            10,
+            40
+          ]
+        },
+        {
+          "type": "abrupt_change",
+          "count": 1,
+          "magnitude": [
+            1.2,
+            6.0
+          ],
+          "duration": [
+            10,
+            40
+          ]
+        },
+        {
+          "type": "offset_shift",
+          "count": 1,
+          "magnitude": [
+            0.8,
+            5.0
+          ]
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD5_IA_MIXED-TST01-F01",
+        "SYN2-FD5_IA_MIXED-TST01-F02",
+        "SYN2-FD5_IA_MIXED-TST01-F03",
+        "SYN2-FD5_IA_MIXED-TST01-F04",
+        "SYN2-FD5_IA_MIXED-TST01-F05",
+        "SYN2-FD5_IA_MIXED-TST01-F06"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD5_IA_MIXED-TST02",
+      "run_id": "TST02",
+      "partition": "test",
+      "generation_seed": 2546090084,
+      "seed_root": 84055028,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_400_1200_2000mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_400_1200_2000mA",
+        "levels": [
+          {
+            "value": 400.0,
+            "samples": 200
+          },
+          {
+            "value": 1200.0,
+            "samples": 200
+          },
+          {
+            "value": 2000.0,
+            "samples": 200
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "type": "isolated_spike",
+          "count": 3,
+          "magnitude": [
+            0.8,
+            8.0
+          ]
+        },
+        {
+          "type": "stuck_signal",
+          "count": 1,
+          "duration": [
+            10,
+            40
+          ]
+        },
+        {
+          "type": "abrupt_change",
+          "count": 1,
+          "magnitude": [
+            1.2,
+            6.0
+          ],
+          "duration": [
+            10,
+            40
+          ]
+        },
+        {
+          "type": "offset_shift",
+          "count": 1,
+          "magnitude": [
+            0.8,
+            5.0
+          ]
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD5_IA_MIXED-TST02-F01",
+        "SYN2-FD5_IA_MIXED-TST02-F02",
+        "SYN2-FD5_IA_MIXED-TST02-F03",
+        "SYN2-FD5_IA_MIXED-TST02-F04",
+        "SYN2-FD5_IA_MIXED-TST02-F05",
+        "SYN2-FD5_IA_MIXED-TST02-F06"
+      ]
+    },
+    {
+      "experiment_id": "SYN2-FD5_IA_MIXED-TST03",
+      "run_id": "TST03",
+      "partition": "test",
+      "generation_seed": 2476487551,
+      "seed_root": 84055028,
+      "record_count": 600,
+      "operating_conditions": [
+        "levels_400_1200_2000mA"
+      ],
+      "ambient_mean_C": 23.0,
+      "profile": {
+        "type": "levels",
+        "condition": "levels_400_1200_2000mA",
+        "levels": [
+          {
+            "value": 400.0,
+            "samples": 200
+          },
+          {
+            "value": 1200.0,
+            "samples": 200
+          },
+          {
+            "value": 2000.0,
+            "samples": 200
+          }
+        ]
+      },
+      "fault_specifications": [
+        {
+          "type": "isolated_spike",
+          "count": 3,
+          "magnitude": [
+            0.8,
+            8.0
+          ]
+        },
+        {
+          "type": "stuck_signal",
+          "count": 1,
+          "duration": [
+            10,
+            40
+          ]
+        },
+        {
+          "type": "abrupt_change",
+          "count": 1,
+          "magnitude": [
+            1.2,
+            6.0
+          ],
+          "duration": [
+            10,
+            40
+          ]
+        },
+        {
+          "type": "offset_shift",
+          "count": 1,
+          "magnitude": [
+            0.8,
+            5.0
+          ]
+        }
+      ],
+      "fault_event_ids": [
+        "SYN2-FD5_IA_MIXED-TST03-F01",
+        "SYN2-FD5_IA_MIXED-TST03-F02",
+        "SYN2-FD5_IA_MIXED-TST03-F03",
+        "SYN2-FD5_IA_MIXED-TST03-F04",
+        "SYN2-FD5_IA_MIXED-TST03-F05",
+        "SYN2-FD5_IA_MIXED-TST03-F06"
+      ]
+    }
+  ],
+  "partitions": {
+    "calibration": {
+      "experiment_ids": [],
+      "record_count": 0
+    },
+    "validation": {
+      "experiment_ids": [],
+      "record_count": 0
+    },
+    "test": {
+      "experiment_ids": [
+        "SYN2-FD5_IA_MIXED-TST01",
+        "SYN2-FD5_IA_MIXED-TST02",
+        "SYN2-FD5_IA_MIXED-TST03"
+      ],
+      "record_count": 1800
+    }
+  },
+  "columns": [
+    {
+      "name": "scenario_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Scenario (dataset) identifier; spans partitions."
+    },
+    {
+      "name": "experiment_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Unique acquisition session (run); the unit of partitioning."
+    },
+    {
+      "name": "run_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Run label within the scenario (CALnn / VALnn / TSTnn)."
+    },
+    {
+      "name": "partition",
+      "unit": "",
+      "dtype": "string",
+      "role": "partition",
+      "description": "calibration | validation | test (assigned per run)."
+    },
+    {
+      "name": "generation_seed",
+      "unit": "",
+      "dtype": "int",
+      "role": "provenance",
+      "description": "Integer seed of the run's random streams."
+    },
+    {
+      "name": "device_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "identifier",
+      "description": "Simulated device-under-test instance."
+    },
+    {
+      "name": "data_source",
+      "unit": "",
+      "dtype": "string",
+      "role": "provenance",
+      "description": "Provenance tag (synthetic_suite_v2)."
+    },
+    {
+      "name": "operating_condition_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned operating-condition group (e.g. grid_A, grid_B_interleaved, extrapolation_above_cal_range). Never encodes fault presence."
+    },
+    {
+      "name": "setpoint_index",
+      "unit": "",
+      "dtype": "int",
+      "role": "protocol",
+      "description": "Index of the planned set-point/plateau in run order (-1 during ramps)."
+    },
+    {
+      "name": "protocol_phase",
+      "unit": "",
+      "dtype": "string",
+      "role": "protocol",
+      "description": "Planned protocol phase (dwell, steady, ramp, plateau_settling, plateau_stable, ...)."
+    },
+    {
+      "name": "timestamp_utc",
+      "unit": "ISO 8601",
+      "dtype": "string",
+      "role": "time",
+      "description": "Simulated acquisition timestamp (UTC)."
+    },
+    {
+      "name": "sequence_number",
+      "unit": "count",
+      "dtype": "int",
+      "role": "time",
+      "description": "Record counter as transmitted (duplicates/gaps reflect injected record faults)."
+    },
+    {
+      "name": "elapsed_ms",
+      "unit": "ms",
+      "dtype": "float",
+      "role": "time",
+      "description": "Milliseconds since run start."
+    },
+    {
+      "name": "current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "observation",
+      "description": "DUT observed (digitised) reading. May be NaN (missing) or +/-inf (non-finite fault)."
+    },
+    {
+      "name": "shunt_voltage_mV",
+      "unit": "mV",
+      "dtype": "float",
+      "role": "observation",
+      "description": "DUT digitised shunt voltage; current_mA = shunt_voltage_mV / r_shunt_nominal_ohm."
+    },
+    {
+      "name": "status",
+      "unit": "",
+      "dtype": "string",
+      "role": "observation",
+      "description": "Sensor status code (OK or injected invalid-status code)."
+    },
+    {
+      "name": "environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "observation",
+      "description": "Simulated ambient-temperature sensor reading."
+    },
+    {
+      "name": "reference_current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Simulated independent reference-instrument reading (has its own error model)."
+    },
+    {
+      "name": "reference_expanded_uncertainty_k2",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "reference_observation",
+      "description": "Stated expanded uncertainty (k=2) of the reference reading."
+    },
+    {
+      "name": "true_current_mA",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated measurand value (not a measurement)."
+    },
+    {
+      "name": "true_environmental_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "True simulated ambient temperature."
+    },
+    {
+      "name": "true_shunt_temperature_C",
+      "unit": "degC",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent shunt-resistor temperature."
+    },
+    {
+      "name": "true_shunt_resistance_ohm",
+      "unit": "Ohm",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent actual shunt resistance."
+    },
+    {
+      "name": "true_shunt_voltage_mV",
+      "unit": "mV",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Latent true shunt voltage = true_current_mA * true_shunt_resistance_ohm."
+    },
+    {
+      "name": "true_drift_component",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Injected gradual-drift contribution to the DUT reading (pre-quantisation)."
+    },
+    {
+      "name": "true_injected_error_component",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "ground_truth",
+      "description": "Sum of all injected value-domain fault contributions (spike, offset, gain, drift, abrupt)."
+    },
+    {
+      "name": "error_vs_true",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus ground truth."
+    },
+    {
+      "name": "error_vs_reference",
+      "unit": "mA",
+      "dtype": "float",
+      "role": "derived_error",
+      "description": "DUT reading minus reference reading."
+    },
+    {
+      "name": "is_injected_fault",
+      "unit": "",
+      "dtype": "bool",
+      "role": "label",
+      "description": "True when any injected fault affects this record (compatible with DataQualityAssessor ground_truth_fault_col)."
+    },
+    {
+      "name": "label_fault_type",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined injected fault types active on this record, or 'none'."
+    },
+    {
+      "name": "label_fault_event_id",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "';'-joined fault event ids (see metadata fault_events), or 'none'."
+    },
+    {
+      "name": "label_process_event",
+      "unit": "",
+      "dtype": "string",
+      "role": "label",
+      "description": "Genuine (non-fault) process events: setpoint_change, load_step, true_step, ramp_start, or 'none'."
+    },
+    {
+      "name": "dq_flags",
+      "unit": "",
+      "dtype": "string",
+      "role": "quality_flag",
+      "description": "Flags derivable from observable fields only: MISSING_VALUE, NON_FINITE, STATUS_<code>, DUPLICATE_SEQ, SEQ_GAP_<n>, or NONE."
+    }
+  ],
+  "ground_truth_definitions": {
+    "true_current_mA": "Value of the measurand imposed by the simulation (e.g. calibrator set-point or bath temperature). It is a simulation construct and is never presented as an instrument reading.",
+    "reference_current_mA": "Reading of a simulated reference instrument with its own offset, gain, noise, resolution and (temperature only) lag. Use it as a laboratory reference, not as truth.",
+    "error_vs_true": "Total DUT error including all modelled effects and injected faults.",
+    "error_vs_reference": "Observable calibration error; differs from error_vs_true by the reference error.",
+    "true_shunt_resistance_ohm": "Actual shunt resistance including tolerance, TCR and (if modelled) self-heating; the instrument always divides by the nominal value."
+  },
+  "sensor_error_model": {
+    "device_id": "DUT_I11",
+    "measurand": "current_mA",
+    "parameters": {
+      "measurand": "current_mA",
+      "model": "shunt",
+      "description": "Low-noise shunt channel, no self-heating.",
+      "r_shunt_nominal_ohm": 0.1,
+      "r_shunt_actual_deviation": 0.002,
+      "r_shunt_tcr_per_C": 0.0001,
+      "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 0.0,
+      "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": 0.04,
+      "adc_gain_error": 0.0015,
+      "adc_noise_std_mV": 0.015,
+      "adc_quantization_mV": 0.01
+    },
+    "equation": "R(t) = R_nom*(1+r_shunt_actual_deviation)*(1 + tcr*(T_sh(t) - T_ref)); T_sh[k] = T_sh[k-1] + (1-exp(-dt/tau_th))*(T_amb[k] + R_th*I[k]^2*R[k-1] - T_sh[k-1]), T_sh[0]=T_amb[0] (cold start); V_true = I*R; V_obs = Q( adc_offset_mV + (1+adc_gain_error)*V_true + R_nom*faults + N(0, adc_noise_std_mV) ; adc_quantization_mV ); I_obs = V_obs / R_nom  (mV / Ohm = mA)",
+    "noise_distribution": "independent Gaussian, zero mean",
+    "quantisation": "round-to-nearest",
+    "fault_magnitude_semantics": {
+      "isolated_spike": "additive value in measurand units, applied to one sample",
+      "offset_shift": "additive value in measurand units, persistent from onset",
+      "gain_change": "relative gain change (dimensionless), persistent from onset",
+      "gradual_drift": "drift rate in measurand units per second, persistent from onset",
+      "abrupt_change": "additive value in measurand units, applied for 'duration' samples",
+      "stuck_signal": "no magnitude; the digitised reading is frozen at the last value before onset",
+      "missing_samples": "no magnitude; value field is empty (NaN)",
+      "duplicate_sequence": "no magnitude; an exact copy of the record is inserted after it",
+      "communication_gap": "no magnitude; 'duration' records are dropped",
+      "invalid_status": "no magnitude; status field set to a non-OK code",
+      "non_finite": "value replaced by +inf or -inf"
+    },
+    "parameter_status": "Simulation assumptions chosen for benchmark coverage. Not verified specifications of any physical sensor."
+  },
+  "reference_error_model": {
+    "instrument_id": "SIM_REF_AMMETER_01",
+    "enabled": true,
+    "offset_std": 0.1,
+    "gain_std": 5e-05,
+    "noise_std": 0.05,
+    "resolution": 0.01,
+    "time_constant_s": 0.0,
+    "coverage_k": 2.0,
+    "realized_offset": -0.003049695750888941,
+    "realized_gain_error": 4.8614754902141536e-05,
+    "unit": "mA",
+    "equation": "reference = realized_offset + (1 + realized_gain_error) * lag(true, time_constant_s) + N(0, noise_std), quantised to resolution",
+    "stated_uncertainty": "reference_expanded_uncertainty_k2 = coverage_k * sqrt(offset_std^2 + (gain_std*|reading|)^2 + noise_std^2 + resolution^2/12); steady-state only, excludes dynamic (lag) error",
+    "note": "The reference is a simulated instrument with its own errors; it is NOT ground truth. realized_* values are simulation ground truth about the reference and would be unknown in a real laboratory."
+  },
+  "ambient_model": {
+    "default_mean_C": 23.0,
+    "sinusoid_amplitude_C": 0.2,
+    "sinusoid_period_s": 3600.0,
+    "sensor_noise_std_C": 0.05,
+    "sensor_resolution_C": 0.01
+  },
+  "fault_events": [
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST01-F01",
+      "run_id": "SYN2-FD5_IA_MIXED-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 155,
+      "duration_samples": 1,
+      "magnitude": -7.186252935313866,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 156,
+      "onset_elapsed_ms": 155000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST01-F02",
+      "run_id": "SYN2-FD5_IA_MIXED-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 297,
+      "duration_samples": 1,
+      "magnitude": 5.290240454998495,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 298,
+      "onset_elapsed_ms": 297000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST01-F03",
+      "run_id": "SYN2-FD5_IA_MIXED-TST01",
+      "fault_type": "isolated_spike",
+      "onset_index": 472,
+      "duration_samples": 1,
+      "magnitude": 1.2528852693334454,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 473,
+      "onset_elapsed_ms": 472000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST01-F04",
+      "run_id": "SYN2-FD5_IA_MIXED-TST01",
+      "fault_type": "stuck_signal",
+      "onset_index": 336,
+      "duration_samples": 20,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 337,
+      "onset_elapsed_ms": 336000.0,
+      "labelled_row_count": 20,
+      "observability": "Observable only when the expected noise exceeds the quantisation step; for coarse quantisation on a stable input, repeated identical readings are normal behaviour."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST01-F05",
+      "run_id": "SYN2-FD5_IA_MIXED-TST01",
+      "fault_type": "abrupt_change",
+      "onset_index": 491,
+      "duration_samples": 36,
+      "magnitude": -5.746767003070979,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 492,
+      "onset_elapsed_ms": 491000.0,
+      "labelled_row_count": 36,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST01-F06",
+      "run_id": "SYN2-FD5_IA_MIXED-TST01",
+      "fault_type": "offset_shift",
+      "onset_index": 342,
+      "duration_samples": null,
+      "magnitude": -2.276327589855587,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 343,
+      "onset_elapsed_ms": 342000.0,
+      "labelled_row_count": 258,
+      "observability": "AMBIGUOUS from the DUT signal alone: indistinguishable from a genuine process step unless a reference or redundant sensor is available."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST02-F01",
+      "run_id": "SYN2-FD5_IA_MIXED-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 515,
+      "duration_samples": 1,
+      "magnitude": 5.548838196438573,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 516,
+      "onset_elapsed_ms": 515000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST02-F02",
+      "run_id": "SYN2-FD5_IA_MIXED-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 487,
+      "duration_samples": 1,
+      "magnitude": 7.287020014266644,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 488,
+      "onset_elapsed_ms": 487000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST02-F03",
+      "run_id": "SYN2-FD5_IA_MIXED-TST02",
+      "fault_type": "isolated_spike",
+      "onset_index": 461,
+      "duration_samples": 1,
+      "magnitude": 1.1880530210852671,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 462,
+      "onset_elapsed_ms": 461000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST02-F04",
+      "run_id": "SYN2-FD5_IA_MIXED-TST02",
+      "fault_type": "stuck_signal",
+      "onset_index": 211,
+      "duration_samples": 20,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 212,
+      "onset_elapsed_ms": 211000.0,
+      "labelled_row_count": 20,
+      "observability": "Observable only when the expected noise exceeds the quantisation step; for coarse quantisation on a stable input, repeated identical readings are normal behaviour."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST02-F05",
+      "run_id": "SYN2-FD5_IA_MIXED-TST02",
+      "fault_type": "abrupt_change",
+      "onset_index": 245,
+      "duration_samples": 16,
+      "magnitude": -2.5522990004077255,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 246,
+      "onset_elapsed_ms": 245000.0,
+      "labelled_row_count": 16,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST02-F06",
+      "run_id": "SYN2-FD5_IA_MIXED-TST02",
+      "fault_type": "offset_shift",
+      "onset_index": 205,
+      "duration_samples": null,
+      "magnitude": 0.9954546504206505,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 206,
+      "onset_elapsed_ms": 205000.0,
+      "labelled_row_count": 395,
+      "observability": "AMBIGUOUS from the DUT signal alone: indistinguishable from a genuine process step unless a reference or redundant sensor is available."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST03-F01",
+      "run_id": "SYN2-FD5_IA_MIXED-TST03",
+      "fault_type": "isolated_spike",
+      "onset_index": 102,
+      "duration_samples": 1,
+      "magnitude": 5.120754859620067,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 103,
+      "onset_elapsed_ms": 102000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST03-F02",
+      "run_id": "SYN2-FD5_IA_MIXED-TST03",
+      "fault_type": "isolated_spike",
+      "onset_index": 319,
+      "duration_samples": 1,
+      "magnitude": -5.349271007570117,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 320,
+      "onset_elapsed_ms": 319000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST03-F03",
+      "run_id": "SYN2-FD5_IA_MIXED-TST03",
+      "fault_type": "isolated_spike",
+      "onset_index": 238,
+      "duration_samples": 1,
+      "magnitude": 5.918419775843968,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 239,
+      "onset_elapsed_ms": 238000.0,
+      "labelled_row_count": 1,
+      "observability": "Usually observable from the DUT signal alone when the magnitude is large relative to noise; spikes near the noise floor are not reliably separable."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST03-F04",
+      "run_id": "SYN2-FD5_IA_MIXED-TST03",
+      "fault_type": "stuck_signal",
+      "onset_index": 346,
+      "duration_samples": 38,
+      "magnitude": null,
+      "magnitude_unit": "",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 347,
+      "onset_elapsed_ms": 346000.0,
+      "labelled_row_count": 38,
+      "observability": "Observable only when the expected noise exceeds the quantisation step; for coarse quantisation on a stable input, repeated identical readings are normal behaviour."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST03-F05",
+      "run_id": "SYN2-FD5_IA_MIXED-TST03",
+      "fault_type": "abrupt_change",
+      "onset_index": 137,
+      "duration_samples": 18,
+      "magnitude": 3.2686003123513414,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 138,
+      "onset_elapsed_ms": 137000.0,
+      "labelled_row_count": 18,
+      "observability": "AMBIGUOUS from the DUT signal alone: a transient sensor level shift resembles a short genuine process step."
+    },
+    {
+      "event_id": "SYN2-FD5_IA_MIXED-TST03-F06",
+      "run_id": "SYN2-FD5_IA_MIXED-TST03",
+      "fault_type": "offset_shift",
+      "onset_index": 440,
+      "duration_samples": null,
+      "magnitude": -1.2032267234932386,
+      "magnitude_unit": "mA",
+      "status_code": null,
+      "non_finite_value": null,
+      "onset_sequence_number": 441,
+      "onset_elapsed_ms": 440000.0,
+      "labelled_row_count": 160,
+      "observability": "AMBIGUOUS from the DUT signal alone: indistinguishable from a genuine process step unless a reference or redundant sensor is available."
+    }
+  ],
+  "fault_prevalence": {
+    "fault_row_count": 880,
+    "fault_row_fraction": 0.4888888888888889,
+    "rows_by_fault_type": {
+      "isolated_spike": 9,
+      "stuck_signal": 78,
+      "offset_shift": 813,
+      "abrupt_change": 70
+    },
+    "events_by_fault_type": {
+      "abrupt_change": 3,
+      "isolated_spike": 9,
+      "offset_shift": 3,
+      "stuck_signal": 3
+    }
+  },
+  "missing_data": {
+    "nan_observation_rows": 0,
+    "non_finite_observation_rows": 0,
+    "missing_rate": 0.0,
+    "dropped_records_communication_gap": 0,
+    "dropped_rate": 0.0
+  },
+  "process_events": {
+    "setpoint_change": 6
+  },
+  "split_strategy": {
+    "unit_of_partitioning": "experiment run (experiment_id); every run belongs to exactly one partition",
+    "calibration": "fit calibration / tune detector thresholds / train ML models",
+    "validation": "model selection and hyper-parameter choice",
+    "test": "final evaluation only; generated from an independent seed root and, where configured, held-out operating conditions",
+    "chronology": "run start times are ordered calibration -> validation -> test (one simulated day apart)",
+    "within_run_split": "not permitted: adjacent samples are correlated (dwell, lag, thermal state)"
+  },
+  "known_limitations": [
+    "Synthetic data only; no physical sensor behaviour is claimed.",
+    "Noise is white Gaussian; no 1/f noise, interference, or correlated noise between DUT and reference.",
+    "Sampling is perfectly periodic (no clock jitter); only injected record faults perturb timing.",
+    "The calibrator/source is ideal: the true value equals the planned set-point exactly.",
+    "Reference stated uncertainty covers steady-state errors only.",
+    "Fault magnitudes and placements are drawn from documented ranges and may not reflect real fault statistics.",
+    "Shunt TCR and thermal resistance/time constant are assumed scenario parameters, not measured values.",
+    "Self-heating model is first-order and lumped; no PCB heat spreading or airflow effects."
+  ],
+  "csv_file": "fault_detection/FD5_IA_MIXED.csv",
+  "csv_sha256": "52cc94e40041b1984cfc5966e4f3ab5f35966d37b14b87855cda68d1db1cfe0e"
+}

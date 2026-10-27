@@ -1,0 +1,421 @@
+{
+  "suite_id": "IMUCA_SYNTH_SUITE_V2",
+  "generator_version": "2.0.0",
+  "description": "Synthetic benchmark suite for IMUCA conventional-pipeline validation and future ML research. All parameters are simulation assumptions, not specifications of any physical sensor.",
+  "seed_roots": {
+    "calibration": 20261101,
+    "validation": 20261102,
+    "test": 77031119
+  },
+  "reference_realization_seed": 31415,
+  "epoch_utc": "2026-11-02T08:00:00+00:00",
+  "sampling_period_s": 1.0,
+  "fault_margin_fraction": 0.1,
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings. Parameters are documented simulation assumptions and are not verified specifications of the INA219, DS18B20 or any other physical device.",
+
+  "measurands": {
+    "voltage_V": {"unit": "V", "full_scale": 26.0, "range": [0.0, 26.0]},
+    "current_mA": {"unit": "mA", "full_scale": 3200.0, "range": [0.0, 3200.0]},
+    "temperature_C": {"unit": "degC", "full_scale": 125.0, "range": [-55.0, 125.0]}
+  },
+
+  "ambient_model": {
+    "default_mean_C": 23.0,
+    "sinusoid_amplitude_C": 0.2,
+    "sinusoid_period_s": 3600.0,
+    "sensor_noise_std_C": 0.05,
+    "sensor_resolution_C": 0.01
+  },
+
+  "reference_instruments": {
+    "voltage_V": {
+      "instrument_id": "SIM_REF_VOLTMETER_01",
+      "enabled": true,
+      "offset_std": 0.0002,
+      "gain_std": 0.00005,
+      "noise_std": 0.0001,
+      "resolution": 0.00001,
+      "time_constant_s": 0.0,
+      "coverage_k": 2.0
+    },
+    "current_mA": {
+      "instrument_id": "SIM_REF_AMMETER_01",
+      "enabled": true,
+      "offset_std": 0.1,
+      "gain_std": 0.00005,
+      "noise_std": 0.05,
+      "resolution": 0.01,
+      "time_constant_s": 0.0,
+      "coverage_k": 2.0
+    },
+    "temperature_C": {
+      "instrument_id": "SIM_REF_THERMOMETER_01",
+      "enabled": true,
+      "offset_std": 0.01,
+      "gain_std": 0.0,
+      "noise_std": 0.005,
+      "resolution": 0.001,
+      "time_constant_s": 2.0,
+      "coverage_k": 2.0
+    }
+  },
+
+  "devices": {
+    "DUT_V01": {
+      "measurand": "voltage_V", "model": "direct_adc",
+      "description": "Simulated linear voltage channel (offset + gain + noise + quantisation).",
+      "offset": 0.008, "gain_error": 0.0025, "inl_bow_amplitude": 0.0,
+      "noise_std": 0.0015, "quantization_step": 0.001,
+      "temp_coefficient_per_C": 0.0, "temp_coefficient_reference_C": 23.0
+    },
+    "DUT_V02": {
+      "measurand": "voltage_V", "model": "direct_adc",
+      "description": "Simulated voltage channel with parabolic integral-nonlinearity bow (zero at 0 and full scale, maximum at mid-scale).",
+      "offset": -0.012, "gain_error": -0.004, "inl_bow_amplitude": 0.015,
+      "noise_std": 0.0015, "quantization_step": 0.001,
+      "temp_coefficient_per_C": 0.0, "temp_coefficient_reference_C": 23.0
+    },
+    "DUT_I01": {
+      "measurand": "current_mA", "model": "shunt",
+      "description": "Simulated shunt current channel; self-heating NOT modelled (thermal resistance 0).",
+      "r_shunt_nominal_ohm": 0.1, "r_shunt_actual_deviation": 0.003,
+      "r_shunt_tcr_per_C": 0.0001, "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 0.0, "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": 0.05, "adc_gain_error": 0.002,
+      "adc_noise_std_mV": 0.02, "adc_quantization_mV": 0.01
+    },
+    "DUT_I02": {
+      "measurand": "current_mA", "model": "shunt",
+      "description": "Simulated shunt current channel with explicitly modelled first-order shunt self-heating.",
+      "r_shunt_nominal_ohm": 0.1, "r_shunt_actual_deviation": -0.004,
+      "r_shunt_tcr_per_C": 0.0001, "r_shunt_reference_temp_C": 23.0,
+      "thermal_resistance_C_per_W": 40.0, "thermal_time_constant_s": 45.0,
+      "adc_offset_mV": -0.03, "adc_gain_error": 0.001,
+      "adc_noise_std_mV": 0.02, "adc_quantization_mV": 0.01
+    },
+    "DUT_T01": {
+      "measurand": "temperature_C", "model": "first_order_lag",
+      "description": "Simulated temperature probe with first-order thermal lag, offset, gain, noise and quantisation.",
+      "offset": 0.25, "gain_error": 0.003,
+      "noise_std": 0.03, "quantization_step": 0.0625,
+      "time_constant_s": 20.0
+    }
+  },
+
+  "scenarios": [
+    {
+      "scenario_id": "VOLT_SWEEP_LINEAR",
+      "group": "voltage", "measurand": "voltage_V", "device_id": "DUT_V01",
+      "description": "Multi-point DC voltage calibration sweep, linear device (offset, gain, repeatability noise, quantisation). Test partition adds held-out interleaved and extrapolated set-points.",
+      "analysis": {"type": "calibration"},
+      "profile": {"type": "sweep", "dwell_samples": 20, "order": "ascending",
+                  "setpoint_groups": [{"condition": "grid_A", "values": [0.5, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20]}]},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 3},
+        {"partition": "validation", "count": 2},
+        {"partition": "test", "count": 1},
+        {"partition": "test", "count": 2,
+         "profile": {"type": "sweep", "dwell_samples": 20, "order": "ascending",
+                     "setpoint_groups": [{"condition": "grid_B_interleaved", "values": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]},
+                                         {"condition": "extrapolation_above_cal_range", "values": [22, 24]}]}}
+      ]
+    },
+    {
+      "scenario_id": "VOLT_SWEEP_NONLINEAR",
+      "group": "voltage", "measurand": "voltage_V", "device_id": "DUT_V02",
+      "description": "Multi-point DC voltage calibration sweep for a device with an explicitly modelled parabolic INL bow (justifies a polynomial-calibration comparison).",
+      "analysis": {"type": "calibration"},
+      "profile": {"type": "sweep", "dwell_samples": 20, "order": "ascending",
+                  "setpoint_groups": [{"condition": "grid_A", "values": [0.5, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20]}]},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 3},
+        {"partition": "validation", "count": 2},
+        {"partition": "test", "count": 1},
+        {"partition": "test", "count": 2,
+         "profile": {"type": "sweep", "dwell_samples": 20, "order": "ascending",
+                     "setpoint_groups": [{"condition": "grid_B_interleaved", "values": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]},
+                                         {"condition": "extrapolation_above_cal_range", "values": [22, 24]}]}}
+      ]
+    },
+    {
+      "scenario_id": "VOLT_REPEATABILITY",
+      "group": "voltage", "measurand": "voltage_V", "device_id": "DUT_V01",
+      "description": "Repeated observations at a constant 5 V input for Type A repeatability evaluation.",
+      "analysis": {"type": "repeatability"},
+      "profile": {"type": "constant", "value": 5.0, "num_samples": 300, "condition": "constant_5V"},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1}
+      ]
+    },
+    {
+      "scenario_id": "VOLT_DRIFT",
+      "group": "voltage", "measurand": "voltage_V", "device_id": "DUT_V01",
+      "description": "Constant 12 V input; some runs contain a gradual sensor drift with known onset and rate, others are drift-free controls.",
+      "analysis": {"type": "drift", "tolerance": 0.12},
+      "profile": {"type": "constant", "value": 12.0, "num_samples": 1200, "condition": "constant_12V"},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1, "faults": [{"type": "gradual_drift", "onset_index": 400, "magnitude": 5e-6}]},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1, "faults": [{"type": "gradual_drift", "onset_index": 500, "magnitude": -8e-6}]},
+        {"partition": "test", "count": 1}
+      ]
+    },
+    {
+      "scenario_id": "VOLT_INTEGRITY",
+      "group": "voltage", "measurand": "voltage_V", "device_id": "DUT_V01",
+      "description": "Stepped voltage levels with isolated outliers, an abrupt transient level shift, missing samples and invalid sensor states.",
+      "analysis": {"type": "integrity"},
+      "profile": {"type": "levels", "condition": "levels_4_8_12V",
+                  "levels": [{"value": 4.0, "samples": 300}, {"value": 8.0, "samples": 300}, {"value": 12.0, "samples": 300}]},
+      "faults": [
+        {"type": "isolated_spike", "count": 4, "magnitude": [0.02, 0.08]},
+        {"type": "abrupt_change", "count": 1, "magnitude": [0.03, 0.08], "duration": [20, 40]},
+        {"type": "missing_samples", "count": 2, "duration": [1, 4]},
+        {"type": "invalid_status", "count": 2, "duration": [1, 3]}
+      ],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1}
+      ]
+    },
+
+    {
+      "scenario_id": "CURR_SWEEP_AMBIENT",
+      "group": "current", "measurand": "current_mA", "device_id": "DUT_I01",
+      "description": "Multi-point DC current calibration sweep through a shunt model (tolerance + assumed TCR, no self-heating). Test adds held-out set-points and a held-out ambient temperature.",
+      "analysis": {"type": "calibration"},
+      "profile": {"type": "sweep", "dwell_samples": 20, "order": "ascending",
+                  "setpoint_groups": [{"condition": "grid_A", "values": [100, 400, 700, 1000, 1300, 1600, 1900, 2200, 2500, 2800]}]},
+      "ambient": {"mean_C": 23.0},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 3},
+        {"partition": "validation", "count": 2},
+        {"partition": "test", "count": 1},
+        {"partition": "test", "count": 1,
+         "profile": {"type": "sweep", "dwell_samples": 20, "order": "ascending",
+                     "setpoint_groups": [{"condition": "grid_B_interleaved", "values": [250, 550, 850, 1150, 1450, 1750, 2050, 2350, 2650]},
+                                         {"condition": "extrapolation_above_cal_range", "values": [3100]}]}},
+        {"partition": "test", "count": 1, "ambient": {"mean_C": 30.0}, "condition_suffix": "_ambient30C"}
+      ]
+    },
+    {
+      "scenario_id": "CURR_SWEEP_SELFHEAT",
+      "group": "current", "measurand": "current_mA", "device_id": "DUT_I02",
+      "description": "DC current sweep with explicitly modelled shunt self-heating (load-dependent resistance via TCR). Test adds held-out set-points and a descending sweep (different thermal history).",
+      "analysis": {"type": "calibration"},
+      "profile": {"type": "sweep", "dwell_samples": 60, "order": "ascending",
+                  "setpoint_groups": [{"condition": "grid_A", "values": [100, 400, 700, 1000, 1300, 1600, 1900, 2200, 2500, 2800]}]},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 3},
+        {"partition": "validation", "count": 2},
+        {"partition": "test", "count": 1},
+        {"partition": "test", "count": 1,
+         "profile": {"type": "sweep", "dwell_samples": 60, "order": "ascending",
+                     "setpoint_groups": [{"condition": "grid_B_interleaved", "values": [250, 550, 850, 1150, 1450, 1750, 2050, 2350, 2650]},
+                                         {"condition": "extrapolation_above_cal_range", "values": [3100]}]}},
+        {"partition": "test", "count": 1,
+         "profile": {"type": "sweep", "dwell_samples": 60, "order": "descending",
+                     "setpoint_groups": [{"condition": "grid_A", "values": [100, 400, 700, 1000, 1300, 1600, 1900, 2200, 2500, 2800]}]},
+         "condition_suffix": "_descending"}
+      ]
+    },
+    {
+      "scenario_id": "CURR_LOAD_STEPS",
+      "group": "current", "measurand": "current_mA", "device_id": "DUT_I02",
+      "description": "Random load steps between 200 mA and 2500 mA with shunt self-heating transients (load-history-dependent error).",
+      "analysis": {"type": "dynamic", "calibration_source": "CURR_SWEEP_SELFHEAT"},
+      "profile": {"type": "random_levels", "levels": [200, 800, 1500, 2500], "dwell_range": [60, 240], "num_samples": 1800, "condition": "load_steps"},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1}
+      ]
+    },
+    {
+      "scenario_id": "CURR_DRIFT",
+      "group": "current", "measurand": "current_mA", "device_id": "DUT_I01",
+      "description": "Constant 1500 mA load; drift runs contain a gradual sensor drift with known onset and rate, others are drift-free controls.",
+      "analysis": {"type": "drift", "tolerance": 15.0},
+      "profile": {"type": "constant", "value": 1500.0, "num_samples": 1200, "condition": "constant_1500mA"},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1, "faults": [{"type": "gradual_drift", "onset_index": 400, "magnitude": 0.003}]},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1, "faults": [{"type": "gradual_drift", "onset_index": 500, "magnitude": -0.004}]},
+        {"partition": "test", "count": 1}
+      ]
+    },
+    {
+      "scenario_id": "CURR_INTEGRITY",
+      "group": "current", "measurand": "current_mA", "device_id": "DUT_I01",
+      "description": "Stepped current levels with outliers, an abrupt transient shift, missing observations, invalid sensor states and communication gaps.",
+      "analysis": {"type": "integrity"},
+      "profile": {"type": "levels", "condition": "levels_500_1500_2500mA",
+                  "levels": [{"value": 500.0, "samples": 300}, {"value": 1500.0, "samples": 300}, {"value": 2500.0, "samples": 300}]},
+      "faults": [
+        {"type": "isolated_spike", "count": 4, "magnitude": [5.0, 30.0]},
+        {"type": "abrupt_change", "count": 1, "magnitude": [10.0, 40.0], "duration": [20, 40]},
+        {"type": "missing_samples", "count": 2, "duration": [1, 4]},
+        {"type": "invalid_status", "count": 2, "duration": [1, 3]},
+        {"type": "communication_gap", "count": 2, "duration": [3, 15]}
+      ],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1}
+      ]
+    },
+
+    {
+      "scenario_id": "TEMP_PLATEAUS",
+      "group": "temperature", "measurand": "temperature_C", "device_id": "DUT_T01",
+      "description": "Stable temperature plateaus joined by 0.1 degC/s ramps; calibration uses only the protocol-stable part of each plateau. Test adds held-out and extrapolated plateaus.",
+      "analysis": {"type": "calibration", "stable_phase_only": true},
+      "profile": {"type": "plateaus", "dwell_samples": 240, "settle_samples": 120, "ramp_rate_per_s": 0.1,
+                  "plateau_groups": [{"condition": "grid_A", "values": [10, 25, 40, 55, 70]}]},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 2},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1},
+        {"partition": "test", "count": 1,
+         "profile": {"type": "plateaus", "dwell_samples": 240, "settle_samples": 120, "ramp_rate_per_s": 0.1,
+                     "plateau_groups": [{"condition": "grid_B_interleaved", "values": [17.5, 32.5, 47.5, 62.5]},
+                                        {"condition": "extrapolation_above_cal_range", "values": [80]}]}}
+      ]
+    },
+    {
+      "scenario_id": "TEMP_RAMPS",
+      "group": "temperature", "measurand": "temperature_C", "device_id": "DUT_T01",
+      "description": "Heating and cooling ramps (25 -> 75 -> 30 degC) exposing first-order sensor lag; test uses a held-out faster ramp rate.",
+      "analysis": {"type": "dynamic", "calibration_source": "TEMP_PLATEAUS"},
+      "profile": {"type": "ramp_cycle", "start": 25.0, "peak": 75.0, "end": 30.0,
+                  "heat_rate_per_s": 0.05, "cool_rate_per_s": 0.05,
+                  "pre_hold_samples": 120, "hold_samples": 300, "post_hold_samples": 120, "condition": "ramp_0p05"},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1,
+         "profile": {"type": "ramp_cycle", "start": 25.0, "peak": 75.0, "end": 30.0,
+                     "heat_rate_per_s": 0.08, "cool_rate_per_s": 0.08,
+                     "pre_hold_samples": 120, "hold_samples": 300, "post_hold_samples": 120, "condition": "ramp_0p08_heldout"}}
+      ]
+    },
+    {
+      "scenario_id": "TEMP_DRIFT",
+      "group": "temperature", "measurand": "temperature_C", "device_id": "DUT_T01",
+      "description": "Stable 45 degC plateau; drift runs contain slow sensor drift (+0.5 degC/h validation, -0.8 degC/h test) with known onset; others are controls.",
+      "analysis": {"type": "drift", "tolerance": 0.9},
+      "profile": {"type": "constant", "value": 45.0, "num_samples": 1800, "condition": "plateau_45C"},
+      "faults": [],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1, "faults": [{"type": "gradual_drift", "onset_index": 600, "magnitude": 1.388888889e-4}]},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1, "faults": [{"type": "gradual_drift", "onset_index": 600, "magnitude": -2.222222222e-4}]},
+        {"partition": "test", "count": 1}
+      ]
+    },
+    {
+      "scenario_id": "TEMP_INTEGRITY",
+      "group": "temperature", "measurand": "temperature_C", "device_id": "DUT_T01",
+      "description": "Abrupt true temperature changes (bath transfers, labelled as process events, not faults) with outliers, missing observations, invalid status and communication gaps.",
+      "analysis": {"type": "integrity"},
+      "profile": {"type": "levels", "condition": "bath_transfers", "event_label": "true_step",
+                  "levels": [{"value": 25.0, "samples": 400}, {"value": 50.0, "samples": 400}, {"value": 35.0, "samples": 400}]},
+      "faults": [
+        {"type": "isolated_spike", "count": 4, "magnitude": [0.5, 3.0]},
+        {"type": "missing_samples", "count": 2, "duration": [1, 5]},
+        {"type": "invalid_status", "count": 2, "duration": [1, 3]},
+        {"type": "communication_gap", "count": 2, "duration": [5, 30]}
+      ],
+      "runs": [
+        {"partition": "calibration", "count": 1},
+        {"partition": "validation", "count": 1},
+        {"partition": "test", "count": 1}
+      ]
+    }
+  ],
+
+  "fault_benchmark": {
+    "group": "fault_detection",
+    "classes": ["none", "isolated_spike", "offset_shift", "gain_change", "gradual_drift", "abrupt_change",
+                "stuck_signal", "missing_samples", "duplicate_sequence", "communication_gap", "invalid_status", "non_finite"],
+    "runs": [
+      {"partition": "calibration", "count": 1},
+      {"partition": "validation", "count": 1},
+      {"partition": "test", "count": 2}
+    ],
+    "measurands": {
+      "voltage_V": {
+        "prefix": "FD_VOLT", "device_id": "DUT_V01",
+        "profile": {"type": "levels", "condition": "levels_4_8_12V",
+                    "levels": [{"value": 4.0, "samples": 200}, {"value": 8.0, "samples": 200}, {"value": 12.0, "samples": 200}]},
+        "fault_specs": {
+          "isolated_spike": {"count": 5, "magnitude": [0.01, 0.06]},
+          "offset_shift": {"count": 1, "magnitude": [0.01, 0.04]},
+          "gain_change": {"count": 1, "magnitude": [0.002, 0.008]},
+          "gradual_drift": {"count": 1, "magnitude": [1e-5, 5e-5]},
+          "abrupt_change": {"count": 2, "magnitude": [0.015, 0.06], "duration": [15, 45]},
+          "stuck_signal": {"count": 2, "duration": [15, 45]},
+          "missing_samples": {"count": 3, "duration": [1, 5]},
+          "duplicate_sequence": {"count": 4},
+          "communication_gap": {"count": 3, "duration": [3, 20]},
+          "invalid_status": {"count": 3, "duration": [1, 3]},
+          "non_finite": {"count": 3}
+        }
+      },
+      "current_mA": {
+        "prefix": "FD_CURR", "device_id": "DUT_I01",
+        "profile": {"type": "levels", "condition": "levels_500_1500_2500mA",
+                    "levels": [{"value": 500.0, "samples": 200}, {"value": 1500.0, "samples": 200}, {"value": 2500.0, "samples": 200}]},
+        "fault_specs": {
+          "isolated_spike": {"count": 5, "magnitude": [2.0, 12.0]},
+          "offset_shift": {"count": 1, "magnitude": [2.0, 8.0]},
+          "gain_change": {"count": 1, "magnitude": [0.002, 0.008]},
+          "gradual_drift": {"count": 1, "magnitude": [0.005, 0.03]},
+          "abrupt_change": {"count": 2, "magnitude": [3.0, 12.0], "duration": [15, 45]},
+          "stuck_signal": {"count": 2, "duration": [15, 45]},
+          "missing_samples": {"count": 3, "duration": [1, 5]},
+          "duplicate_sequence": {"count": 4},
+          "communication_gap": {"count": 3, "duration": [3, 20]},
+          "invalid_status": {"count": 3, "duration": [1, 3]},
+          "non_finite": {"count": 3}
+        }
+      },
+      "temperature_C": {
+        "prefix": "FD_TEMP", "device_id": "DUT_T01",
+        "profile": {"type": "plateaus", "dwell_samples": 225, "settle_samples": 100, "ramp_rate_per_s": 0.1,
+                    "plateau_groups": [{"condition": "plateaus_30_45C", "values": [30, 45]}]},
+        "fault_specs": {
+          "isolated_spike": {"count": 5, "magnitude": [0.3, 2.0]},
+          "offset_shift": {"count": 1, "magnitude": [0.2, 0.8]},
+          "gain_change": {"count": 1, "magnitude": [0.005, 0.02]},
+          "gradual_drift": {"count": 1, "magnitude": [3e-4, 1.5e-3]},
+          "abrupt_change": {"count": 2, "magnitude": [0.3, 1.2], "duration": [15, 45]},
+          "stuck_signal": {"count": 2, "duration": [15, 45]},
+          "missing_samples": {"count": 3, "duration": [1, 5]},
+          "duplicate_sequence": {"count": 4},
+          "communication_gap": {"count": 3, "duration": [3, 20]},
+          "invalid_status": {"count": 3, "duration": [1, 3]},
+          "non_finite": {"count": 3}
+        }
+      }
+    }
+  },
+
+  "invalid_status_codes": ["ERR_SENSOR_INVALID", "ERR_OVERRANGE", "ERR_CRC"]
+}

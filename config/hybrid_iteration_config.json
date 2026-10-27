@@ -1,0 +1,728 @@
+{
+  "experiment_id": "IMUCA_HYBRID_ITERATION_M6",
+  "description": "Milestone 6 development loop: alarm lifecycle and attribution (WS1), temperature transients (WS2), threshold / current-drift tuning (WS3). Development uses v3 calibration and validation runs only; the final evaluation uses a fresh suite scored once.",
+  "dev_dataset_root": "data/synthetic_v3",
+  "dev_dataset_config": "config/synthetic_suite_v3_config.json",
+  "m5_bundle_dir": "results/hybrid_fault_detection_20261026_113043",
+  "m6_bundle_dir": "results/hybrid_frozen_20261026_123033",
+  "random_seed": 20261209,
+  "measurands": [
+    "voltage_V",
+    "current_mA",
+    "temperature_C"
+  ],
+  "transient_tolerance_samples": 2,
+  "persistent_event_window_samples": 60,
+  "episode_gap_samples": 2,
+  "true_alarm_tolerance_samples": 2,
+  "post_event_transient_samples": {
+    "voltage_V": 5,
+    "current_mA": 135,
+    "temperature_C": 210
+  },
+  "post_fault_aftermath_samples": 30,
+  "individual_far_target": 0.005,
+  "gbt_all_grid": [
+    {
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "max_iter": 300,
+      "l2_regularization": 1.0
+    }
+  ],
+  "iforest_grid": [
+    {
+      "n_estimators": 300,
+      "max_samples": 256,
+      "max_features": 1.0
+    },
+    {
+      "n_estimators": 300,
+      "max_samples": 2048,
+      "max_features": 1.0
+    }
+  ],
+  "gbt_persistent": {
+    "grid": [
+      {
+        "max_depth": 3,
+        "learning_rate": 0.1,
+        "max_iter": 300,
+        "l2_regularization": 1.0
+      },
+      {
+        "max_depth": 6,
+        "learning_rate": 0.05,
+        "max_iter": 300,
+        "l2_regularization": 1.0
+      }
+    ],
+    "target_types": [
+      "offset_shift",
+      "gain_change",
+      "stuck_signal"
+    ],
+    "excluded_types": [
+      "isolated_spike",
+      "abrupt_change",
+      "gradual_drift"
+    ],
+    "persistent_types": [
+      "offset_shift",
+      "gain_change"
+    ],
+    "onset_window_samples": 30,
+    "monotone_increasing": [
+      "f_identical_run"
+    ],
+    "far_targets": [
+      0.001,
+      0.002,
+      0.005
+    ]
+  },
+  "stuck_rule_alpha": 0.0001,
+  "bootstrap_resamples": 2000,
+  "selection_rules": {
+    "cusum": "calibration+validation runs: ARL0 (Siegmund) >= 10 x longest error series; then fewest false alarms (control runs + pre-onset alarms), most detected drift runs, lowest median delay, largest ARL0",
+    "transient": "validation: maximise transient event F1 = harmonic mean of macro timely recall over {isolated_spike, abrupt_change} and the transient component's episode precision; ties -> fewer false alarms per hour",
+    "persistent_stuck": "validation: maximise event F1 over {offset_shift, gain_change, stuck_signal} for the persistent+stuck components; ties -> fewer false alarms per hour",
+    "lifecycle": "validation: among lifecycle options within 0.01 event F1 of the best, choose the fewest post-fault alarm records (overhang), then fewer false alarms per hour",
+    "attribution": "validation: maximise fault-classification accuracy (alarms are unchanged by attribution); ties -> shorter confirmation delay",
+    "joint": "validation: the top-6 transient and top-4 persistent/stuck configurations (by their component objectives) are combined and re-ranked by full hybrid event F1 (latched drift, first-alarm attribution); ties -> fewer false alarms per hour"
+  },
+  "profiles": {
+    "cycle1_lifecycle_attribution": {
+      "segment_modes": [
+        "setpoint_blocks",
+        "phase_blocks",
+        "phase_blocks_stationary_only"
+      ],
+      "mad_grid": [
+        3.5,
+        5.0,
+        7.0
+      ],
+      "transient_extra": [
+        {
+          "transient_extra": "none"
+        }
+      ],
+      "stuck_modes": [
+        "gbt",
+        "rule",
+        "gbt_or_rule"
+      ],
+      "cusum": {
+        "modes": [
+          "run",
+          "segment"
+        ],
+        "windows": {
+          "voltage_V": [
+            5
+          ],
+          "current_mA": [
+            45,
+            135
+          ],
+          "temperature_C": [
+            60,
+            120,
+            210
+          ]
+        },
+        "min_baseline": [
+          30
+        ],
+        "min_series": [
+          60
+        ],
+        "baseline_fraction": 0.1,
+        "k": [
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "h": [
+          4,
+          5,
+          6,
+          8,
+          10,
+          12,
+          15,
+          20
+        ],
+        "min_arl0_multiple_of_longest_series": 10
+      },
+      "lifecycle": [
+        {
+          "drift_lifecycle": "latched"
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 30,
+          "clear_z": 2.0
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_z": 2.0
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 30,
+          "clear_sigma": 1.0
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_sigma": 0.5
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_sigma": 1.0
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 120,
+          "clear_sigma": 0.5
+        },
+        {
+          "drift_lifecycle": "latched",
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 30,
+          "clear_z": 2.0,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_z": 2.0,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 30,
+          "clear_sigma": 1.0,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_sigma": 0.5,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_sigma": 1.0,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 120,
+          "clear_sigma": 0.5,
+          "explain_before": 15
+        }
+      ],
+      "attribution": [
+        {
+          "attribution": "first_alarm"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 0
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 30
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 3.0,
+          "confirm_delay": 45
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 45
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 6.0,
+          "confirm_delay": 45
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 30,
+          "confirm_k": 4.0,
+          "confirm_delay": 45
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 60
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 0,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 30,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 3.0,
+          "confirm_delay": 45,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 45,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 6.0,
+          "confirm_delay": 45,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 30,
+          "confirm_k": 4.0,
+          "confirm_delay": 45,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 60,
+          "attribution_source": "error"
+        }
+      ]
+    },
+    "cycle2_temperature_transients": {
+      "extends": "cycle1_lifecycle_attribution",
+      "transient_extra": [
+        {
+          "transient_extra": "none"
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 6.0
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 8.0
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 10.0
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 12.0
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 15.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 8.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 10.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 12.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 15.0
+        }
+      ],
+      "transient_transition_windows": [
+        0,
+        60,
+        120,
+        210
+      ],
+      "suppress_persistent_nonstationary": [
+        false,
+        true
+      ]
+    },
+    "cycle3_thresholds_drift": {
+      "extends": "cycle2_temperature_transients",
+      "mad_grid": [
+        3.5,
+        5.0,
+        7.0,
+        9.0,
+        12.0,
+        15.0,
+        20.0
+      ],
+      "cusum": {
+        "modes": [
+          "run",
+          "segment"
+        ],
+        "windows": {
+          "voltage_V": [
+            0,
+            5,
+            20
+          ],
+          "current_mA": [
+            0,
+            10,
+            20,
+            45,
+            90,
+            135
+          ],
+          "temperature_C": [
+            0,
+            30,
+            60,
+            120,
+            210
+          ]
+        },
+        "min_baseline": [
+          15,
+          30,
+          60
+        ],
+        "min_series": [
+          30,
+          60
+        ],
+        "baseline_fraction": 0.1,
+        "k": [
+          0.25,
+          0.5,
+          0.75,
+          1.0,
+          1.5
+        ],
+        "h": [
+          4,
+          5,
+          6,
+          8,
+          10,
+          12,
+          15,
+          20,
+          25,
+          30
+        ],
+        "min_arl0_multiple_of_longest_series": 10
+      }
+    },
+    "cycle4_edges_resolved": {
+      "extends": "cycle3_thresholds_drift",
+      "mad_grid": [
+        2.5,
+        3.0,
+        3.5,
+        5.0,
+        7.0,
+        9.0,
+        12.0,
+        15.0,
+        20.0
+      ],
+      "cusum": {
+        "modes": [
+          "run",
+          "segment"
+        ],
+        "windows": {
+          "voltage_V": [
+            0,
+            5,
+            20
+          ],
+          "current_mA": [
+            0,
+            10,
+            20,
+            45,
+            90,
+            135
+          ],
+          "temperature_C": [
+            0,
+            30,
+            60,
+            120,
+            210
+          ]
+        },
+        "min_baseline": [
+          10,
+          15,
+          30,
+          60,
+          90,
+          120,
+          150,
+          180
+        ],
+        "min_series": [
+          30,
+          60
+        ],
+        "baseline_fraction": 0.1,
+        "k": [
+          0.25,
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0,
+          3.0
+        ],
+        "h": [
+          4,
+          5,
+          6,
+          8,
+          10,
+          12,
+          15,
+          20,
+          25,
+          30
+        ],
+        "min_arl0_multiple_of_longest_series": 10
+      }
+    },
+    "m7_cycle1_current_curvature": {
+      "extends": "cycle4_edges_resolved",
+      "settling_suppression": [
+        false,
+        true
+      ],
+      "transient_extra": [
+        {
+          "transient_extra": "none"
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 6.0
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 8.0
+        },
+        {
+          "transient_extra": "curvature_nonstationary",
+          "curvature_threshold": 10.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 6.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 8.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 10.0
+        },
+        {
+          "transient_extra": "curvature_all",
+          "curvature_threshold": 12.0
+        }
+      ],
+      "mad_grid": [
+        3.5,
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        12.0,
+        15.0
+      ]
+    },
+    "m7_cycle2_temperature_lifecycle": {
+      "extends": "m7_cycle1_current_curvature",
+      "lifecycle": [
+        {
+          "drift_lifecycle": "latched"
+        },
+        {
+          "drift_lifecycle": "latched",
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_sigma": 0.5,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_sigma": 0.75,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 90,
+          "clear_sigma": 0.5,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 120,
+          "clear_sigma": 0.5,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 60,
+          "clear_z": 2.0,
+          "explain_before": 15
+        },
+        {
+          "drift_lifecycle": "hysteresis",
+          "clear_window": 90,
+          "clear_z": 2.0,
+          "explain_before": 15
+        }
+      ]
+    },
+    "m7_cycle3_settling_attribution": {
+      "extends": "m7_cycle2_temperature_lifecycle",
+      "attribution": [
+        {
+          "attribution": "first_alarm"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 0,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 15,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 3.0,
+          "confirm_delay": 30,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 30,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 45,
+          "attribution_source": "error"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 30,
+          "attribution_source": "signal"
+        },
+        {
+          "attribution": "confirmed",
+          "confirm_window": 20,
+          "confirm_k": 4.0,
+          "confirm_delay": 45,
+          "attribution_source": "signal"
+        }
+      ]
+    },
+    "m7_final_freeze": {
+      "extends": "m7_cycle3_settling_attribution"
+    }
+  },
+  "plot_palette": {
+    "hybrid_m7": "#2a78d6",
+    "hybrid_m6": "#009688",
+    "hybrid_m5": "#eb6834",
+    "segment_setpoint": "#1baf7a",
+    "gbt_all": "#eda100",
+    "surface": "#fcfcfb",
+    "text": "#0b0b0b",
+    "muted": "#52514e",
+    "grid": "#e4e3df"
+  },
+  "joint_top_k": {
+    "transient": 6,
+    "persistent": 4
+  },
+  "lifecycle_f1_tolerance": 0.01
+}

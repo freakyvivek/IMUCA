@@ -1,0 +1,41 @@
+{
+  "generator": "IMUCA Synthetic Data Generator",
+  "version": "1.0.0",
+  "generated_at_utc": "2026-10-25T06:49:02.208003+00:00",
+  "scenario": {
+    "scenario_name": "current_calibration_sweep",
+    "description": "DC Current calibration sweep with pronounced +15mA offset and +1.5% gain error.",
+    "measurand": "current_mA",
+    "num_samples": 120,
+    "sampling_period_s": 1.0,
+    "random_seed": 102,
+    "profile_type": "stepped",
+    "nominal_min": 100.0,
+    "nominal_max": 2000.0,
+    "num_steps": 12,
+    "dwell_per_step": 10,
+    "offset": 15.0,
+    "gain_error": 0.015,
+    "quantization_step": 0.1,
+    "noise_std": 0.5,
+    "drift_rate_per_s": 0.0,
+    "temp_coefficient": 0.0,
+    "nominal_env_temp_c": 23.0,
+    "outlier_indices": [],
+    "outlier_magnitudes": [],
+    "missing_sample_indices": [],
+    "duplicate_seq_indices": [],
+    "gap_after_indices": [],
+    "gap_sizes": [],
+    "sensor_fault_indices": [],
+    "fault_status_value": "ERROR_COMM_TIMEOUT"
+  },
+  "summary_statistics": {
+    "sample_count": 120,
+    "injected_fault_count": 0,
+    "true_mean": 1050.0,
+    "observed_mean": 1080.6783333333335,
+    "reference_mean": 1049.997224145833
+  },
+  "disclaimer": "SYNTHETIC SIMULATED DATASET. Not physical hardware readings."
+}
